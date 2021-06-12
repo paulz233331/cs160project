@@ -1,0 +1,20 @@
+<html>
+<head>
+    <script type="text/javascript">
+    function showResult() {
+        console.log(document.getElementById("resume").value);
+        var result = document.getElementById("result")
+        result.innerHTML = document.getElementById("resume").value;
+    }
+
+</script>
+</head>
+<body topmargin="40" leftmargin="40">
+     <form action="http://localhost:3000/test" method="POST">
+         <label for="resume">Enter a resume:</label>
+         <textarea id="resume" class="resume-area" name="resume" rows="4" cols="50"></textarea>
+         <button type="submit" onClick="showResult(); return false;">Submit</button>
+     </form>
+     <br/>Result: <p id="result"></p>
+ </body>
+</html>
