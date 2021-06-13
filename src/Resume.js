@@ -22,20 +22,6 @@ Resume.prototype.addKey = function(key, value) {
   }
 };
 
-Resume.prototype.addObject = function(key, options) {
-  var self = this;
-
-  if (!_.has(this.parts, key)) {
-    this.parts[key] = {};
-  }
-
-  _.forEach(options, function(optionVal, optionName) {
-    if (optionVal) {
-      self.parts[key][optionName] = optionVal;
-    }
-  });
-};
-
 /**
  *
  * @returns {String}

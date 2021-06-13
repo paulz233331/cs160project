@@ -1,5 +1,6 @@
 var path = require('path');
 var SomeHR = require('./src/SomeHR')();
+var ParseBoy = require('./src/ParseBoy');
 require('colors');
 
 setTimeout(main, 2000);

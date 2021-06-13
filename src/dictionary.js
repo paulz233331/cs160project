@@ -37,14 +37,3 @@ module.exports = {
     ]
   }
 };
-
-// helper method
-function download(url, callback) {
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      callback(body);
-    } else {
-      callback(null, error)
-    }
-  });
-}

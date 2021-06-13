@@ -1,4 +1,3 @@
-var Speakable = require('./Speakable');
 var _ = require('underscore');
 var path = require('path');
 var processing = require('./libs/processing');
@@ -9,9 +8,6 @@ var parser = require('./libs/parser');
  * @constructor
  */
 function ParseBoy() {
-	Speakable.call(this);
-  this.name = 'Parse Boy';
-	this.color = 'green';
 }
 
 /**

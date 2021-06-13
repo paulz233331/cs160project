@@ -1,16 +1,12 @@
 var fs = require('fs');
 var _ = require('underscore');
 var ParseBoy = require('./ParseBoy');
-var Speakable = require('./Speakable');
 
 /**
  *
  * @constructor
  */
 function SomeHR() {
-	Speakable.call(this);
-  this.name = 'HR manager';
-  this.color = 'magenta';
 }
 
 /**

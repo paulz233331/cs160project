@@ -4,7 +4,6 @@ var fs = require('fs');
 var dictionary = require('./../dictionary.js');
 
 var profilesWatcher = {
-  // for change value by reference
   inProgress: 0
 };
 
@@ -108,14 +107,6 @@ function restoreTextByRows(rowNum, allRows) {
   return rows.join("\n");
 }
 
-/**
- * Count words in string
- * @param str
- * @returns {Number}
- */
-function countWords(str) {
-  return str.split(' ').length;
-}
 
 /**
  *
@@ -168,8 +159,7 @@ function parseDictionaryTitles(Resume, rows, rowIdx) {
 
   _.forEach(dictionary.titles, function(expressions, key) {
     expressions = expressions || [];
-    // means, that titled row is less than 5 words
-    if (countWords(row) <= 5) {
+    if (row.split(' ').length <= 5) {
       _.forEach(expressions, function(expression) {
         ruleExpression = new RegExp(expression);
         isRuleFound = ruleExpression.test(row);
@@ -177,7 +167,6 @@ function parseDictionaryTitles(Resume, rows, rowIdx) {
         if (isRuleFound) {
           allTitles = _.without(allTitles.split('|'), key).join('|');
           searchExpression = '(?:' + expression + ')((.*\n)+?)(?:'+allTitles+'|{end})';
-          // restore remaining text to search in relevant part of text
           result = new RegExp(searchExpression, 'gm').exec(restoreTextByRows(rowIdx, rows));
 
           if (result) {
