@@ -1,9 +1,0 @@
-git clone https://likerRr@github.com/likerRr/code4goal-resume-parser.git
-
-remove .gitkeep from public and compiled folders.
-
-download Xpdf command line tools > copy pdftotext.exe to folder with app.js
-
-change util.print(...) to console.log(...) in Speakable.js
-
-comment out profile in dictionary.js lines 19, 26-126 (before "inline: { "
