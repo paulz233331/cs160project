@@ -292,15 +292,15 @@ PreparedFile.prototype.addResume = function(Resume) {
   this.resume = Resume;
 };
 
-PreparedFile.prototype.saveResume = function(path, cbSavedResume) {
-  path = path || __dirname;
+PreparedFile.prototype.saveResume = function(filePath, cbSavedResume) {
+  filePath = filePath || __dirname;
 
   if (!_.isFunction(cbSavedResume)) {
     return console.error('cbSavedResume should be a function');
   }
 
-  if (fs.statSync(path).isDirectory() && this.resume) {
-    fs.writeFile(path + '/' + this.name + '.json', JSON.stringify(this.resume), cbSavedResume);
+  if (fs.statSync(filePath).isDirectory() && this.resume) {
+    fs.writeFile(filePath + '/' + path.parse(this.name).name + '.json', JSON.stringify(this.resume), cbSavedResume);
   }
 };
 
@@ -320,7 +320,7 @@ var processFile = function (file, cbAfterProcessing) {
         } else {
           return console.error('cbAfterProcessing should be a function');
         }
-      });
+      } );
 }
 
 var extractText = function(file, cbAfterExtract) {
@@ -348,28 +348,6 @@ var extractText = function(file, cbAfterExtract) {
         }
       });
 }
-
-/**
- *s
- * @param data
- * @returns {string}
-
-var cleanTextByRows = function(data) {
-      var rows,
-        clearRow,
-        clearRows = [];
-
-      rows = data.split("\n");
-      for (var i = 0; i < rows.length; i++) {
-        clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
-        if (clearRow) {
-          clearRows.push(clearRow);
-        }
-      }
-
-      return clearRows.join("\n") + "\n{end}";
-}
-*/
 
 var willHelpWithPleasure = function(files, cbPreparedFile) {
     var type;
