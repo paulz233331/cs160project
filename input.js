@@ -14,9 +14,9 @@ expr.post('/test', function(req, res) {
   var resm = req.body.resume;
   //console.log(resm);
 
-  fs.writeFile('public/resumeUpload.txt', resm, function (err) {
+  fs.writeFile('public/resumeInput.txt', resm, function (err) {
     if (err) return console.log(err);
-    console.log('Resume > public/resumeUpload.txt');
+    console.log('Resume > public/resumeInput.txt');
   });
 
     app.main();
