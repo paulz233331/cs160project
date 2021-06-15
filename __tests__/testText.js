@@ -13,7 +13,7 @@ describe("Testing with Jest", () => {
 
   test("Resume field", () => {
 
-    let rawdata = fs.readFileSync('compiled/resume.json');
+    let rawdata = fs.readFileSync('compiled/resumeText.json');
     let applicant = JSON.parse(rawdata);
     var expectedName = "Alex Dubinchyk";
     var expectedEmail = "alexs.dbk@gmail.com";
