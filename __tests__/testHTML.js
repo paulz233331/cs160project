@@ -2,18 +2,11 @@
 'use strict';
 const fs = require('fs');
 
-//var app = require('./../app');
-
-/*beforeAll(async () => {
-    return await app.main();
-});
-*/
-
 describe("Testing with Jest", () => {
 
-  test("Resume field", () => {
+  test("Test resume fields of JSON file", () => {
 
-    let rawdata = fs.readFileSync('compiled/resume.json');
+    let rawdata = fs.readFileSync('compiled/resumeHTML.json');
     let applicant = JSON.parse(rawdata);
     var expectedName = "Alex Dubinchyk";
     var expectedEmail = "alexs.dbk@gmail.com";
