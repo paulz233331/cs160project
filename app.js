@@ -6,6 +6,8 @@ var mime = require('mime');
 var request = require("request");
 var cheerio = require("cheerio");
 
+module.exports = {main, iHaveCVPack, extractText};
+
 setTimeout(main, 2000);
 
 function PreparedFile(file, raw) {
@@ -322,12 +324,23 @@ var processFile = function (file, cbAfterProcessing) {
 }
 
 var extractText = function(file, cbAfterExtract) {
-      textract(file, {preserveLineBreaks: true}, function(err, data) {
+      textract(file, {preserveLineBreaks: true}, async function(err, data) {
         if (err) {
           return console.log(err);
         }
         if (_.isFunction(cbAfterExtract)) {
-          data = cleanTextByRows(data);
+          var rows,
+              clearRow,
+              clearRows = [];
+          rows = data.split("\n");
+          for (var i = 0; i < rows.length; i++) {
+              clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
+              if (clearRow) {
+                clearRows.push(clearRow);
+              }
+          }
+          data = clearRows.join("\n") + "\n{end}";
+
           var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
           cbAfterExtract(File);
         } else {
@@ -337,10 +350,10 @@ var extractText = function(file, cbAfterExtract) {
 }
 
 /**
-     *
-     * @param data
-     * @returns {string}
-     */
+ *s
+ * @param data
+ * @returns {string}
+
 var cleanTextByRows = function(data) {
       var rows,
         clearRow,
@@ -356,6 +369,7 @@ var cleanTextByRows = function(data) {
 
       return clearRows.join("\n") + "\n{end}";
 }
+*/
 
 var willHelpWithPleasure = function(files, cbPreparedFile) {
     var type;
