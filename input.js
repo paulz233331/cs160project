@@ -1,13 +1,27 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = exports.module = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+    'use strict';
 
-app.post('/test', function(req, res) {
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const expr = exports.module = express();
+
+var app = require('./app');
+
+expr.use(bodyParser.urlencoded({ extended: true }));
+
+expr.post('/test', function(req, res) {
   var resm = req.body.resume;
-  console.log(resm);
+  //console.log(resm);
+
+  fs.writeFile('public/resumeUpload.txt', resm, function (err) {
+    if (err) return console.log(err);
+    console.log('Resume > public/resumeUpload.txt');
+  });
+
+    app.main();
 })
 
-app.listen(3000, function() {
+expr.listen(3000, function() {
   console.log('App is running on 3000');
 })
