@@ -6,7 +6,7 @@ var mime = require('mime');
 var request = require("request");
 var cheerio = require("cheerio");
 
-module.exports = {main, iHaveCVPack, extractText};
+module.exports = {main, readResumes, extractText};
 
 setTimeout(main, 2000);
 
@@ -207,7 +207,7 @@ var restoreTextByRows = function(rowNum, allRows) {
       return rows.join("\n");
     }
 
-var parse = function (PreparedFile, cbReturnResume) {
+var parse = function (PreparedFile, returnResume) {
       var rawFileData = PreparedFile.raw,
         Resume = new resume(),
         rows = rawFileData.split("\n"),
@@ -227,42 +227,42 @@ var parse = function (PreparedFile, cbReturnResume) {
         parseDictionaryInline(Resume, row);
       }
 
-      if (_.isFunction(cbReturnResume)) {
+      if (_.isFunction(returnResume)) {
         // wait until download and handle internet profile
         var checkTimer = setInterval(function() {
           if (profilesWatcher.inProgress === 0) {
-            cbReturnResume(Resume);
+            returnResume(Resume);
             clearInterval(checkTimer);
           }
         }, 200);
       } else {
-        return console.error('cbReturnResume should be a function');
+        return console.error('returnResume should be a function');
       }
 }
 
-var iHaveCVPack = function(path, cbAcceptedFiles) {
+var readResumes = function(path, processResumes) {
   var self = this;
 
-  if (!_.isFunction(cbAcceptedFiles)) {
-    return console.error('cbAcceptedFiles should be a function');
+  if (!_.isFunction(processResumes)) {
+    return console.error('processResumes should be a function');
   }
 
     if (!fs.existsSync(path)) {
-        return cbAcceptedFiles.call(this, 'no one wants to work with us :(');
+        return processResumes.call(this, 'no resume directory');
     }
   fs.readdir(path, function(err, files) {
     files = files.map(function(file) {
       return path + '/' + file;
     });
-    cbAcceptedFiles.call(self, err, files);
+    processResumes.call(self, err, files);
   });
 }
 
 var nothingToDo = function() {
-      return this.say('I haven\'t work! Should I have a date today?');
+      return this.say('No resumes');
     };
 
-var cbAcceptedFiles = function (err, files) {
+var processResumes = function (err, files) {
     var savedFiles = 0;
 
     if (err) {
@@ -272,8 +272,8 @@ var cbAcceptedFiles = function (err, files) {
       return nothingToDo();
     }
 
-    willHelpWithPleasure(files, function (PreparedFile) {
-      workingHardOn(PreparedFile, function (Resume) {
+    processResume(files, function (PreparedFile) {
+      readResume(PreparedFile, function (Resume) {
         storeResume(PreparedFile, Resume, __dirname + '/compiled', function (err) {
           if (err) {
             return this.explainError(err);
@@ -292,43 +292,43 @@ PreparedFile.prototype.addResume = function(Resume) {
   this.resume = Resume;
 };
 
-PreparedFile.prototype.saveResume = function(filePath, cbSavedResume) {
+PreparedFile.prototype.saveResume = function(filePath, savedResume) {
   filePath = filePath || __dirname;
 
-  if (!_.isFunction(cbSavedResume)) {
-    return console.error('cbSavedResume should be a function');
+  if (!_.isFunction(savedResume)) {
+    return console.error('savedResume should be a function');
   }
 
   if (fs.statSync(filePath).isDirectory() && this.resume) {
-    fs.writeFile(filePath + '/' + path.parse(this.name).name + '.json', JSON.stringify(this.resume), cbSavedResume);
+    fs.writeFile(filePath + '/' + path.parse(this.name).name + '.json', JSON.stringify(this.resume), savedResume);
   }
 };
 
-var storeResume = function(PreparedFile, Resume, path, cbOnSaved) {
+var storeResume = function(PreparedFile, Resume, path, onSaved) {
       PreparedFile.addResume(Resume);
 
-      if (!_.isFunction(cbOnSaved)) {
-        return console.error('cbOnSaved should be a function');
+      if (!_.isFunction(onSaved)) {
+        return console.error('onSaved should be a function');
       }
-      PreparedFile.saveResume(path, cbOnSaved);
+      PreparedFile.saveResume(path, onSaved);
 };
 
-var processFile = function (file, cbAfterProcessing) {
+var processFile = function (file, afterProcessing) {
       extractText(file, function(PreparedFile) {
-        if (_.isFunction(cbAfterProcessing)) {
-          cbAfterProcessing(PreparedFile);
+        if (_.isFunction(afterProcessing)) {
+          afterProcessing(PreparedFile);
         } else {
-          return console.error('cbAfterProcessing should be a function');
+          return console.error('afterProcessing should be a function');
         }
       } );
 }
 
-var extractText = function(file, cbAfterExtract) {
+var extractText = function(file, afterExtract) {
       textract(file, {preserveLineBreaks: true}, async function(err, data) {
         if (err) {
           return console.log(err);
         }
-        if (_.isFunction(cbAfterExtract)) {
+        if (_.isFunction(afterExtract)) {
           var rows,
               clearRow,
               clearRows = [];
@@ -342,32 +342,32 @@ var extractText = function(file, cbAfterExtract) {
           data = clearRows.join("\n") + "\n{end}";
 
           var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
-          cbAfterExtract(File);
+          afterExtract(File);
         } else {
-          return console.error('cbAfterExtract should be a function');
+          return console.error('afterExtract should be a function');
         }
       });
 }
 
-var willHelpWithPleasure = function(files, cbPreparedFile) {
+var processResume = function(files, preparedFile) {
     var type;
     _.forEach(files, function(file) {
       processFile(file, function (PreparedFile) {
-        if (_.isFunction(cbPreparedFile)) {
-          cbPreparedFile(PreparedFile);
+        if (_.isFunction(preparedFile)) {
+          preparedFile(PreparedFile);
         } else {
-          return console.error('cbPreparedFile should be a function');
+          return console.error('preparedFile should be a function');
         }
       }, type);
     });
 };
 
-var workingHardOn = function(PreparedFile, cbGetResume) {
+var readResume = function(PreparedFile, getResume) {
   parse(PreparedFile, function(Resume) {
-    if (_.isFunction(cbGetResume)) {
-      cbGetResume(Resume);
+    if (_.isFunction(getResume)) {
+      getResume(Resume);
     } else {
-      console.error('cbGetResume should be a function');
+      console.error('getResume should be a function');
     }
   });
 };
@@ -380,5 +380,5 @@ function main() {
   };
 
   var pack = __dirname + '/public';
-  iHaveCVPack(pack, cbAcceptedFiles);
+  readResumes(pack, processResumes);
 }
