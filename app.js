@@ -275,7 +275,7 @@ var processFile = async function(file, afterProcessing) {
 var extractText = async function(file, afterExtract) {
   await textract(file, {
     preserveLineBreaks: true
-  }, async function(err, data) {
+  }, function(err, data) {
     if (err) {
       return console.log(err);
     }
@@ -293,7 +293,7 @@ var extractText = async function(file, afterExtract) {
       data = clearRows.join("\n") + "\n{end}";
 
       var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
-      await afterExtract(File);
+      afterExtract(File);
     } else {
       return console.error('afterExtract should be a function');
     }
@@ -304,7 +304,12 @@ var extractText = async function(file, afterExtract) {
 
 
 
-async function main() {
+function main() {
+
+
+  return new Promise( () => {
+
+
   var getFileNames = function(filePaths) {
     return filePaths.map(function(file) {
       return path.basename(file);
@@ -318,7 +323,7 @@ async function main() {
     return console.error('no resume directory');
   }
 
-  await fs.readdir(pack, function(err, files) {
+  fs.readdir(pack, function(err, files) {
       files = files.map(function(file) {
         return pack + '/' + file;
       });
@@ -369,4 +374,7 @@ async function main() {
         }, type);
      });
   });
+
+
+    });
 }
