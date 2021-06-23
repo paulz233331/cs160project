@@ -6,7 +6,9 @@ var mime = require('mime');
 var request = require("request");
 var cheerio = require("cheerio");
 
-module.exports = {main, readResumes, extractText};
+module.exports = {
+  main
+};
 
 setTimeout(main, 2000);
 
@@ -22,40 +24,40 @@ var profilesWatcher = {
   inProgress: 0
 };
 
-var dictionary =  {
-             titles: {
-               objective: ['objective', 'objectives'],
-               summary: ['summary'],
-               technology: ['technology', 'technologies'],
-               experience: ['experience'],
-               education: ['education', 'academic'],
-               skills: ['skills', 'Skills & Expertise', 'technology', 'technologies'],
-               languages: ['languages'],
-               courses: ['courses'],
-               projects: ['projects'],
-               links: ['links'],
-               contacts: ['contacts'],
-               positions: ['positions', 'position'],
-               awards: ['awards'],
-               honors: ['honors'],
-               additional: ['additional'],
-               certification: ['certification', 'certifications'],
-               interests: ['interests']
-             },
-             inline: {
-               skype: 'skype'
-             },
-             regular: {
-               name: [
-                 /([A-Z][a-z]*)(\s[A-Z][a-z]*)/
-               ],
-               email: [
-                 /([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})/
-               ],
-               phone: [
-                 /((?:\+?\d{1,3}[\s-])?\(?\d{2,3}\)?[\s.-]?\d{3}[\s.-]\d{4,5})/
-               ]
-             }
+var dictionary = {
+  titles: {
+    objective: ['objective', 'objectives'],
+    summary: ['summary'],
+    technology: ['technology', 'technologies'],
+    experience: ['experience'],
+    education: ['education', 'academic'],
+    skills: ['skills', 'Skills & Expertise', 'technology', 'technologies'],
+    languages: ['languages'],
+    courses: ['courses'],
+    projects: ['projects'],
+    links: ['links'],
+    contacts: ['contacts'],
+    positions: ['positions', 'position'],
+    awards: ['awards'],
+    honors: ['honors'],
+    additional: ['additional'],
+    certification: ['certification', 'certifications'],
+    interests: ['interests']
+  },
+  inline: {
+    skype: 'skype'
+  },
+  regular: {
+    name: [
+      /([A-Z][a-z]*)(\s[A-Z][a-z]*)/
+    ],
+    email: [
+      /([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})/
+    ],
+    phone: [
+      /((?:\+?\d{1,3}[\s-])?\(?\d{2,3}\)?[\s.-]?\d{3}[\s.-]\d{4,5})/
+    ]
+  }
 }
 
 function makeRegExpFromDictionary() {
@@ -83,7 +85,7 @@ function makeRegExpFromDictionary() {
       }
       profile = profile[0];
     }
-    profileExpr = "((?:https?:\/\/)?(?:www\\.)?"+profile.replace('.', "\\.")+"[\/\\w \\.-]*)";
+    profileExpr = "((?:https?:\/\/)?(?:www\\.)?" + profile.replace('.', "\\.") + "[\/\\w \\.-]*)";
     if (_.isFunction(profileHandler)) {
       regularRules.profiles.push([profileExpr, profileHandler]);
     } else {
@@ -92,7 +94,7 @@ function makeRegExpFromDictionary() {
   });
 
   _.forEach(dictionary.inline, function(expr, name) {
-    regularRules.inline[name] = expr+":?[\\s]*(.*)";
+    regularRules.inline[name] = expr + ":?[\\s]*(.*)";
   });
 
   return _.extend(dictionary, regularRules);
@@ -104,13 +106,11 @@ var resume = function() {
   return new Resume();
 };
 
-function Resume() {
-}
+function Resume() {}
 
 Resume.prototype.addKey = function(key, value) {
   value = value || '';
   value = value.trim();
-  // reject falsy values
   if (value) {
     if (_.has(this, key)) {
       value = this[key] + value;
@@ -161,32 +161,32 @@ var parseDictionaryRegular = function(data, Resume) {
  * @param rowIdx
  */
 var parseDictionaryTitles = function(Resume, rows, rowIdx) {
-      var allTitles = _.flatten(_.toArray(dictionary.titles)).join('|'),
-        searchExpression = '',
-        row = rows[rowIdx],
-        ruleExpression,
-        isRuleFound,
-        result;
+  var allTitles = _.flatten(_.toArray(dictionary.titles)).join('|'),
+    searchExpression = '',
+    row = rows[rowIdx],
+    ruleExpression,
+    isRuleFound,
+    result;
 
-      _.forEach(dictionary.titles, function(expressions, key) {
-        expressions = expressions || [];
-        if (row.split(' ').length <= 5) {
-          _.forEach(expressions, function(expression) {
-            ruleExpression = new RegExp(expression);
-            isRuleFound = ruleExpression.test(row);
+  _.forEach(dictionary.titles, function(expressions, key) {
+    expressions = expressions || [];
+    if (row.split(' ').length <= 5) {
+      _.forEach(expressions, function(expression) {
+        ruleExpression = new RegExp(expression);
+        isRuleFound = ruleExpression.test(row);
 
-            if (isRuleFound) {
-              allTitles = _.without(allTitles.split('|'), key).join('|');
-              searchExpression = '(?:' + expression + ')((.*\n)+?)(?:'+allTitles+'|{end})';
-              result = new RegExp(searchExpression, 'gm').exec(restoreTextByRows(rowIdx, rows));
+        if (isRuleFound) {
+          allTitles = _.without(allTitles.split('|'), key).join('|');
+          searchExpression = '(?:' + expression + ')((.*\n)+?)(?:' + allTitles + '|{end})';
+          result = new RegExp(searchExpression, 'gm').exec(restoreTextByRows(rowIdx, rows));
 
-              if (result) {
-                Resume.addKey(key, result[1]);
-              }
-            }
-          });
+          if (result) {
+            Resume.addKey(key, result[1]);
+          }
         }
       });
+    }
+  });
 }
 
 /**
@@ -196,92 +196,48 @@ var parseDictionaryTitles = function(Resume, rows, rowIdx) {
  * @returns {string}
  */
 var restoreTextByRows = function(rowNum, allRows) {
-      rowNum = rowNum - 1;
-      var rows = [];
+  rowNum = rowNum - 1;
+  var rows = [];
 
-      do {
-        rows.push(allRows[rowNum]);
-        rowNum++;
-      } while(rowNum < allRows.length);
+  do {
+    rows.push(allRows[rowNum]);
+    rowNum++;
+  } while (rowNum < allRows.length);
 
-      return rows.join("\n");
-    }
-
-var parse = function (PreparedFile, returnResume) {
-      var rawFileData = PreparedFile.raw,
-        Resume = new resume(),
-        rows = rawFileData.split("\n"),
-        row;
-
-      // save prepared file text (for debug)
-      //fs.writeFileSync('./parsed/'+PreparedFile.name + '.txt', rawFileData);
-
-      // 1 parse regulars
-      parseDictionaryRegular(rawFileData, Resume);
-
-      for (var i = 0; i < rows.length; i++) {
-        row = rows[i];
-
-        // 3 parse titles
-        parseDictionaryTitles(Resume, rows, i);
-        parseDictionaryInline(Resume, row);
-      }
-
-      if (_.isFunction(returnResume)) {
-        // wait until download and handle internet profile
-        var checkTimer = setInterval(function() {
-          if (profilesWatcher.inProgress === 0) {
-            returnResume(Resume);
-            clearInterval(checkTimer);
-          }
-        }, 200);
-      } else {
-        return console.error('returnResume should be a function');
-      }
+  return rows.join("\n");
 }
 
-var readResumes = function(path, processResumes) {
-  var self = this;
+var parse = async function(PreparedFile, returnResume) {
+  var rawFileData = PreparedFile.raw,
+    Resume = new resume(),
+    rows = rawFileData.split("\n"),
+    row;
 
-  if (!_.isFunction(processResumes)) {
-    return console.error('processResumes should be a function');
+  // save prepared file text (for debug)
+  //fs.writeFileSync('./parsed/'+PreparedFile.name + '.txt', rawFileData);
+
+  // 1 parse regulars
+  await parseDictionaryRegular(rawFileData, Resume);
+
+  for (var i = 0; i < rows.length; i++) {
+    row = rows[i];
+
+    // 3 parse titles
+    await parseDictionaryTitles(Resume, rows, i);
+    await parseDictionaryInline(Resume, row);
   }
 
-    if (!fs.existsSync(path)) {
-        return processResumes.call(this, 'no resume directory');
-    }
-  fs.readdir(path, function(err, files) {
-    files = files.map(function(file) {
-      return path + '/' + file;
-    });
-    processResumes.call(self, err, files);
-  });
-}
-
-var nothingToDo = function() {
-      return this.say('No resumes');
-    };
-
-var processResumes = function (err, files) {
-    var savedFiles = 0;
-
-    if (err) {
-      return this.explainError(err);
-    }
-    if (!files.length) {
-      return nothingToDo();
-    }
-
-    processResume(files, function (PreparedFile) {
-      readResume(PreparedFile, function (Resume) {
-        storeResume(PreparedFile, Resume, __dirname + '/compiled', function (err) {
-          if (err) {
-            return this.explainError(err);
-          }
-          savedFiles += 1;
-        })
-      });
-    });
+  if (_.isFunction(returnResume)) {
+    // wait until download and handle internet profile
+    var checkTimer = setInterval(async function() {
+      if (profilesWatcher.inProgress === 0) {
+        await returnResume(Resume);
+        await clearInterval(checkTimer);
+      }
+    }, 200);
+  } else {
+    return console.error('returnResume should be a function');
+  }
 }
 
 /**
@@ -292,7 +248,7 @@ PreparedFile.prototype.addResume = function(Resume) {
   this.resume = Resume;
 };
 
-PreparedFile.prototype.saveResume = function(filePath, savedResume) {
+PreparedFile.prototype.saveResume = async function(filePath, savedResume) {
   filePath = filePath || __dirname;
 
   if (!_.isFunction(savedResume)) {
@@ -300,85 +256,117 @@ PreparedFile.prototype.saveResume = function(filePath, savedResume) {
   }
 
   if (fs.statSync(filePath).isDirectory() && this.resume) {
-    fs.writeFile(filePath + '/' + path.parse(this.name).name + '.json', JSON.stringify(this.resume), savedResume);
+    await fs.writeFile(filePath + '/' + path.parse(this.name).name + '.json', JSON.stringify(this.resume), savedResume);
   }
 };
 
-var storeResume = function(PreparedFile, Resume, path, onSaved) {
-      PreparedFile.addResume(Resume);
 
-      if (!_.isFunction(onSaved)) {
-        return console.error('onSaved should be a function');
-      }
-      PreparedFile.saveResume(path, onSaved);
-};
 
-var processFile = function (file, afterProcessing) {
-      extractText(file, function(PreparedFile) {
-        if (_.isFunction(afterProcessing)) {
-          afterProcessing(PreparedFile);
-        } else {
-          return console.error('afterProcessing should be a function');
-        }
-      } );
-}
-
-var extractText = function(file, afterExtract) {
-      textract(file, {preserveLineBreaks: true}, async function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        if (_.isFunction(afterExtract)) {
-          var rows,
-              clearRow,
-              clearRows = [];
-          rows = data.split("\n");
-          for (var i = 0; i < rows.length; i++) {
-              clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
-              if (clearRow) {
-                clearRows.push(clearRow);
-              }
-          }
-          data = clearRows.join("\n") + "\n{end}";
-
-          var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
-          afterExtract(File);
-        } else {
-          return console.error('afterExtract should be a function');
-        }
-      });
-}
-
-var processResume = function(files, preparedFile) {
-    var type;
-    _.forEach(files, function(file) {
-      processFile(file, function (PreparedFile) {
-        if (_.isFunction(preparedFile)) {
-          preparedFile(PreparedFile);
-        } else {
-          return console.error('preparedFile should be a function');
-        }
-      }, type);
-    });
-};
-
-var readResume = function(PreparedFile, getResume) {
-  parse(PreparedFile, function(Resume) {
-    if (_.isFunction(getResume)) {
-      getResume(Resume);
+var processFile = async function(file, afterProcessing) {
+  await extractText(file, async function(PreparedFile) {
+    if (_.isFunction(afterProcessing)) {
+      await afterProcessing(PreparedFile);
     } else {
-      console.error('getResume should be a function');
+      return console.error('afterProcessing should be a function');
     }
   });
-};
+}
 
-function main() {
-  var getFileNames = function (filePaths) {
-    return filePaths.map(function (file) {
+var extractText = async function(file, afterExtract) {
+  await textract(file, {
+    preserveLineBreaks: true
+  }, async function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    if (_.isFunction(afterExtract)) {
+      var rows,
+        clearRow,
+        clearRows = [];
+      rows = data.split("\n");
+      for (var i = 0; i < rows.length; i++) {
+        clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
+        if (clearRow) {
+          clearRows.push(clearRow);
+        }
+      }
+      data = clearRows.join("\n") + "\n{end}";
+
+      var File = new PreparedFile(file, data.replace(/^\s/gm, ''));
+      await afterExtract(File);
+    } else {
+      return console.error('afterExtract should be a function');
+    }
+  });
+}
+
+
+
+
+
+async function main() {
+  var getFileNames = function(filePaths) {
+    return filePaths.map(function(file) {
       return path.basename(file);
     }).join(', ');
   };
 
   var pack = __dirname + '/public';
-  readResumes(pack, processResumes);
+  var self = this;
+
+  if (!fs.existsSync(pack)) {
+    return console.error('no resume directory');
+  }
+
+  await fs.readdir(pack, function(err, files) {
+      files = files.map(function(file) {
+        return pack + '/' + file;
+      });
+
+      var savedFiles = 0;
+
+      if (err) {
+        return this.explainError(err);
+      }
+
+      if (!files.length) {
+        return console.error('No resumes');
+      }
+
+      var preparedFile = function(PreparedFile) {
+        var getResume = function(Resume) {
+            PreparedFile.addResume(Resume);
+            var onSaved = function(err) {
+                              if (err) {
+                                return this.explainError(err);
+                              }
+                              savedFiles += 1;
+                          };
+            if (!_.isFunction(onSaved)) {
+              return console.error('onSaved should be a function');
+            }
+            PreparedFile.saveResume(__dirname + '/compiled', onSaved);
+        };
+
+        parse(PreparedFile, function(Resume) {
+          if (_.isFunction(getResume)) {
+            getResume(Resume);
+          } else {
+            console.error('getResume should be a function');
+          }
+        });
+      };
+
+
+    var type;
+    _.forEach(files, async function(file) {
+        processFile(file, function(PreparedFile) {
+          if (_.isFunction(preparedFile)) {
+            preparedFile(PreparedFile);
+          } else {
+            return console.error('preparedFile should be a function');
+          }
+        }, type);
+     });
+  });
 }
