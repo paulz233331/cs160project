@@ -27,7 +27,7 @@ describe("Testing with Jest", () => {
   //app.main(async function() {
     let rawdata = fs.readFileSync('compiled/resume.json');
     let applicant = JSON.parse(rawdata);
-    console.log("Hello");
+    //console.log("Hello");
     var expectedName = "Alex Dubinchyk";
     var expectedEmail = "alexs.dbk@gmail.com";
     var expectedObjective = "Seeking a challenging position to use my software Web development and process" +
