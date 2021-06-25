@@ -3,6 +3,8 @@ const app = express();
 require('dotenv').config();
 const { auth, requiresAuth } = require('express-openid-connect'); // middleware
 
+module.exports = app;
+
 app.use(
   auth({
     authRequired: false,
