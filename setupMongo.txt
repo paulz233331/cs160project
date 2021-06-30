@@ -13,3 +13,7 @@ use collectionname
 To use the mongoDB AWS instance.
 
 1. node dbApp.js
+2. PuTTY ssh ec2-user@ec2-100-25-33-136.compute-1.amazonaws.com
+3. SSH > Auth > dbApp.ppk
+4. mongod --dbpath /db/data --bind_ip_all --port 27017
+5. open a new terminal mongo --port 27017
