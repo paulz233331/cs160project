@@ -1,6 +1,6 @@
 To create a mongoDB docker container instance.
 
-1. DockeronWindows.pdf
+1. Install docker and create a docker account.
 2. docker run -p 27017:27017 --name some-mongo --network-alias some-mongo -d mongo
 3. node dbApp2.js
 4. docker exec -it some-mongo bash
