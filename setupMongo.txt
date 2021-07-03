@@ -8,7 +8,10 @@ To create a mongoDB docker container instance.
 show databases
 use dbname
 show collections
-use collectionname
+use applicants, use employers
+db.applicants.findOne();
+db.applicants.find({_id:myId});
+
 
 To use the mongoDB AWS instance.
 
