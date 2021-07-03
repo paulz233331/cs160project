@@ -5,12 +5,17 @@ var textract = require('textract');
 var mime = require('mime');
 var request = require("request");
 var cheerio = require("cheerio");
+var mongo = require('mongodb');
 
 module.exports = {
   main
 };
 
 setTimeout(main, 2000);
+
+var MongoClient = mongo.MongoClient;
+var url = "mongodb://127.17.0.1:27017/mydb?authSource=admin"
+
 
 function PreparedFile(file, raw) {
   this.path = file;
@@ -351,7 +356,31 @@ function main() {
             if (!_.isFunction(onSaved)) {
               return console.error('onSaved should be a function');
             }
+            //save the resume output json.
             PreparedFile.saveResume(__dirname + '/compiled', onSaved);
+
+            //insert the json file to the database.
+            console.log(PreparedFile.resume);
+            MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+              if (err) throw err;
+              var dbo = db.db("mydb");
+
+                //insert myobj if its not already there.
+                var myobj = PreparedFile.resume;
+
+                dbo.collection("applicants").findOne(myobj, function(err, result) {
+                    if (err) throw err;
+                    //console.log(result);
+                    if (result == null){
+                        dbo.collection("applicants").insertOne(myobj, function(err, res) {
+                            if (err) throw err;
+                            //console.log("1 document inserted");
+                            //console.log(myobj._id);
+                            db.close();
+                          });
+                    }
+                });
+            }); //end MongoClient.connect
         };
 
         parse(PreparedFile, function(Resume) {
