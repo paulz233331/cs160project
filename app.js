@@ -360,7 +360,7 @@ function main() {
             PreparedFile.saveResume(__dirname + '/compiled', onSaved);
 
             //insert the json file to the database.
-            console.log(PreparedFile.resume);
+            //console.log(PreparedFile.resume);
             MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
               if (err) throw err;
               var dbo = db.db("mydb");
@@ -376,7 +376,14 @@ function main() {
                             if (err) throw err;
                             //console.log("1 document inserted");
                             //console.log(myobj._id);
-                            db.close();
+                            //db.close();
+                            var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
+                            dbo.collection("applicants").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                                                        if (err) throw err;
+                                                        //console.log("1 document inserted");
+                                                        //console.log(myobj._id);
+                                                        db.close();
+                                                      });
                           });
                     }
                 });
