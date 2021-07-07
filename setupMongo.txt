@@ -20,3 +20,29 @@ To use the mongoDB AWS instance.
 3. SSH > Auth > dbApp.ppk
 4. mongod --dbpath /db/data --bind_ip_all --port 27017
 5. open a new terminal mongo --port 27017
+
+To authenticate on the database
+docker run -p 27017:27017 --name some-mongo2 --network-alias some-mongo2 -d mongo --auth
+
+use admin
+db.createUser(
+  {
+    user: "myUserAdmin",
+    pwd: "netwitness", // or cleartext password
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "dbAdminAnyDatabase"]
+  }
+)
+
+default password netwitness
+
+use admin
+db.createUser(
+    {
+        user: "appt", 
+        pwd: "appt", 
+        roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "dbAdminAnyDatabase"]
+    }
+);
+
+use admin;
+db.grantRolesToUser('appt', [{ role: 'root', db: 'admin' }])
