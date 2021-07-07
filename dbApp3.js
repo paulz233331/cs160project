@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://127.17.0.1:27017/mydb?authSource=admin"
+var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   if (err) throw err;
