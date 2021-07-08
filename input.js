@@ -13,7 +13,7 @@ var MongoClient = mongo.MongoClient;
 var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 
-console.log(__dirname);
+//console.log(__dirname);
 expr.use(bodyParser.urlencoded({ extended: true }));
 
 expr.post('/test', function(req, res) {
@@ -37,7 +37,7 @@ expr.post('/test', function(req, res) {
             dbo.collection("applicants").findOne(applicant, function(err, result) {
                 if (err) throw err;
                 //console.log(result);
-                console.log(result.name);
+                //console.log(result.name);
                 var html = `
                         <html>
                                 <head>
@@ -49,48 +49,48 @@ expr.post('/test', function(req, res) {
                 `;
                 //html = html + JSON.stringify(result);
                 html = html +
-`
-<form action="/action_page.php">
-  <label for="fname">Name:</label>
-  <input type="text" id="name" name="name" value=` + result.name+ `><br><br>
-  <label for="email">Email:</label>
-  <input type="text" id="email" name="email" value=` + result.email + `><br><br>
+                `
+                <form action="http://localhost:3000/testCfm" method="POST">
+                  <label for="fname">Name:</label>
+                  <input type="text" id="name" name="name" value=` + result.name+ `><br><br>
+                  <label for="email">Email:</label>
+                  <input type="text" id="email" name="email" value=` + result.email + `><br><br>
 
-  <label for="objective">Objective:</label>
-    <textarea id="objective" name="objective" rows="4" cols="50">
-    ` + result.objective + `
-    </textarea>
-   <br><br>
-  <label for="summary">Summary:</label>
-    <textarea id="summary" name="summary" rows="4" cols="50">
-    ` + result.summary + `
-    </textarea>
-<br><br>
-  <label for="technology">Technology:</label>
-      <textarea id="technology" name="technology" rows="4" cols="50">
-      ` + result.technology + `
-      </textarea>
-<br><br>
-  <label for="skills">Skills:</label>
-        <textarea id="skills" name="skills" rows="4" cols="50">
-        ` + result.skills + `
-        </textarea>
-<br><br>
-  <label for="experience">Experience:</label>
-      <textarea id="experience" name="experience" rows="4" cols="50">
-      ` + result.experience + `
-      </textarea>
-      <br><br>
-  <label for="education">Education:</label>
-        <textarea id="education" name="education" rows="4" cols="50">
-        ` + result.education + `
-        </textarea>
-        <br><br>
-  <label for="skype">Skype:</label>
-  <input type="text" id="skype" name="skype" value=` + result.skype + `><br><br>
-  <input type="submit" value="Submit">
-</form>
-`;
+                  <label for="objective">Objective:</label>
+                    <textarea id="objective" name="objective" rows="4" cols="50">
+                    ` + result.objective + `
+                    </textarea>
+                   <br><br>
+                  <label for="summary">Summary:</label>
+                    <textarea id="summary" name="summary" rows="4" cols="50">
+                    ` + result.summary + `
+                    </textarea>
+                <br><br>
+                  <label for="technology">Technology:</label>
+                      <textarea id="technology" name="technology" rows="4" cols="50">
+                      ` + result.technology + `
+                      </textarea>
+                <br><br>
+                  <label for="skills">Skills:</label>
+                        <textarea id="skills" name="skills" rows="4" cols="50">
+                        ` + result.skills + `
+                        </textarea>
+                <br><br>
+                  <label for="experience">Experience:</label>
+                      <textarea id="experience" name="experience" rows="4" cols="50">
+                      ` + result.experience + `
+                      </textarea>
+                      <br><br>
+                  <label for="education">Education:</label>
+                        <textarea id="education" name="education" rows="4" cols="50">
+                        ` + result.education + `
+                        </textarea>
+                        <br><br>
+                  <label for="skype">Skype:</label>
+                  <input type="text" id="skype" name="skype" value=` + result.skype + `><br><br>
+                  <input type="submit" value="Submit">
+                </form>
+                `;
                 html = html + `
                                  </body>
                                 </html>
@@ -102,9 +102,31 @@ expr.post('/test', function(req, res) {
             });
         });
     },3000);
-
-
 })
+
+expr.post('/testCfm', function(req, res) {
+      //console.log(req.body);
+        setTimeout(function(){
+            let rawdata = fs.readFileSync('compiled/resumeInput.json');
+            let applicant = JSON.parse(rawdata);
+            MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+              if (err) throw err;
+              var dbo = db.db("mydb");
+                dbo.collection("applicants").updateOne(applicant, {$set : req.body }, {upsert: true}, function(err, result) {
+                    if (err) throw err;
+                    console.log("1 document updated");
+                    //console.log(result.name);
+                    var html = `<p>You submitted a resume</p>`
+                    res.status(200).send(html);
+                    db.close();
+                });
+            })
+        },3000);
+
+
+} )
+
+
 
 expr.listen(3000, function() {
   console.log('App is running on 3000');
