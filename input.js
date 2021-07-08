@@ -7,6 +7,11 @@ const bodyParser = require('body-parser');
 const expr = exports.module = express();
 
 var app = require('./app');
+var mongo = require('mongodb');
+
+var MongoClient = mongo.MongoClient;
+var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
+
 
 expr.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,6 +25,20 @@ expr.post('/test', function(req, res) {
   });
 
     app.main();
+
+    setTimeout(function(){
+        let rawdata = fs.readFileSync('compiled/resumeInput.json');
+        let applicant = JSON.parse(rawdata);
+        MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+          if (err) throw err;
+          var dbo = db.db("mydb");
+            dbo.collection("applicants").findOne(applicant, function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                db.close();
+            });
+        });
+    },3000);
 })
 
 expr.listen(3000, function() {

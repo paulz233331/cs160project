@@ -306,10 +306,6 @@ var extractText = async function(file, afterExtract) {
   });
 }
 
-
-
-
-
 function main() {
 
 
@@ -377,6 +373,7 @@ function main() {
                             //console.log("1 document inserted");
                             //console.log(myobj._id);
                             //db.close();
+
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
                             dbo.collection("applicants").updateOne({_id: myobj._id}, newValues , function(err, res) {
                                                         if (err) throw err;
@@ -385,6 +382,9 @@ function main() {
                                                         db.close();
                                                       });
                           });
+                    }
+                    else{
+                        db.close();
                     }
                 });
             }); //end MongoClient.connect
