@@ -13,6 +13,7 @@ var MongoClient = mongo.MongoClient;
 var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 
+console.log(__dirname);
 expr.use(bodyParser.urlencoded({ extended: true }));
 
 expr.post('/test', function(req, res) {
@@ -27,6 +28,7 @@ expr.post('/test', function(req, res) {
     app.main();
 
     setTimeout(function(){
+
         let rawdata = fs.readFileSync('compiled/resumeInput.json');
         let applicant = JSON.parse(rawdata);
         MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
@@ -35,10 +37,30 @@ expr.post('/test', function(req, res) {
             dbo.collection("applicants").findOne(applicant, function(err, result) {
                 if (err) throw err;
                 console.log(result);
+
+                var html = `
+                        <html>
+                                <head>
+                                    <script type="text/javascript">
+                                    </script>
+                                </head>
+                                <body topmargin="40" leftmargin="40">
+                                    You are redirected here after submitting text input.
+                `;
+                html = html + JSON.stringify(result);
+                html = html + `
+                                 </body>
+                                </html>
+                        `
+
+                res.status(200).send(html);
+
                 db.close();
             });
         });
     },3000);
+
+
 })
 
 expr.listen(3000, function() {
