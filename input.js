@@ -36,8 +36,8 @@ expr.post('/test', function(req, res) {
           var dbo = db.db("mydb");
             dbo.collection("applicants").findOne(applicant, function(err, result) {
                 if (err) throw err;
-                console.log(result);
-
+                //console.log(result);
+                console.log(result.name);
                 var html = `
                         <html>
                                 <head>
@@ -47,11 +47,54 @@ expr.post('/test', function(req, res) {
                                 <body topmargin="40" leftmargin="40">
                                     You are redirected here after submitting text input.
                 `;
-                html = html + JSON.stringify(result);
+                //html = html + JSON.stringify(result);
+                html = html +
+`
+<form action="/action_page.php">
+  <label for="fname">Name:</label>
+  <input type="text" id="name" name="name" value=` + result.name+ `><br><br>
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" value=` + result.email + `><br><br>
+
+  <label for="objective">Objective:</label>
+    <textarea id="objective" name="objective" rows="4" cols="50">
+    ` + result.objective + `
+    </textarea>
+   <br><br>
+  <label for="summary">Summary:</label>
+    <textarea id="summary" name="summary" rows="4" cols="50">
+    ` + result.summary + `
+    </textarea>
+<br><br>
+  <label for="technology">Technology:</label>
+      <textarea id="technology" name="technology" rows="4" cols="50">
+      ` + result.technology + `
+      </textarea>
+<br><br>
+  <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills" rows="4" cols="50">
+        ` + result.skills + `
+        </textarea>
+<br><br>
+  <label for="experience">Experience:</label>
+      <textarea id="experience" name="experience" rows="4" cols="50">
+      ` + result.experience + `
+      </textarea>
+      <br><br>
+  <label for="education">Education:</label>
+        <textarea id="education" name="education" rows="4" cols="50">
+        ` + result.education + `
+        </textarea>
+        <br><br>
+  <label for="skype">Skype:</label>
+  <input type="text" id="skype" name="skype" value=` + result.skype + `><br><br>
+  <input type="submit" value="Submit">
+</form>
+`;
                 html = html + `
                                  </body>
                                 </html>
-                        `
+                        `;
 
                 res.status(200).send(html);
 
