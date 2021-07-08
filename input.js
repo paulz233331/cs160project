@@ -36,7 +36,7 @@ expr.post('/test', function(req, res) {
           var dbo = db.db("mydb");
             dbo.collection("applicants").findOne(applicant, function(err, result) {
                 if (err) throw err;
-                //console.log(result);
+                //console.log(result.name);
                 //console.log(result.name);
                 var html = `
                         <html>
@@ -51,11 +51,10 @@ expr.post('/test', function(req, res) {
                 html = html +
                 `
                 <form action="http://localhost:3000/testCfm" method="POST">
-                  <label for="fname">Name:</label>
-                  <input type="text" id="name" name="name" value=` + result.name+ `><br><br>
+                  <label for="name">Name:</label>
+                  <textarea id="name" name="name" rows="2" cols="50">` + result.name + `</textarea><br><br>
                   <label for="email">Email:</label>
-                  <input type="text" id="email" name="email" value=` + result.email + `><br><br>
-
+                  <textarea id="email" name="email" rows="2" cols="50">` + result.email + `</textarea><br><br>
                   <label for="objective">Objective:</label>
                     <textarea id="objective" name="objective" rows="4" cols="50">
                     ` + result.objective + `
@@ -105,21 +104,39 @@ expr.post('/test', function(req, res) {
 })
 
 expr.post('/testCfm', function(req, res) {
-      //console.log(req.body);
+      var resm = req.body
         setTimeout(function(){
-            let rawdata = fs.readFileSync('compiled/resumeInput.json');
-            let applicant = JSON.parse(rawdata);
             MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
               if (err) throw err;
               var dbo = db.db("mydb");
-                dbo.collection("applicants").updateOne(applicant, {$set : req.body }, {upsert: true}, function(err, result) {
+                dbo.collection("applicants").findOne({name: resm.name, email: resm.email}, function(err, result) {
                     if (err) throw err;
-                    console.log("1 document updated");
-                    //console.log(result.name);
-                    var html = `<p>You submitted a resume</p>`
-                    res.status(200).send(html);
-                    db.close();
+                    if (result == null){
+                        dbo.collection("applicants").insertOne(resm, function(err, res) {
+                            if (err) throw err;
+                            var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
+                            console.log(resm);
+                            dbo.collection("applicants").updateOne({_id: resm._id}, newValues , function(err, res) {
+                                                        if (err) throw err;
+                                                      });
+                            console.log("1 document inserted");
+                            db.close();
+                        });
+                    }
+                    else{
+                        dbo.collection("applicants").updateOne(result, {$set : resm }, function(err, result) {
+                            if (err) throw err;
+                            console.log("1 document updated");
+                            db.close();
+                        });
+                    }
                 });
+
+            var html = `<p>You submitted a resume</p>`
+            res.status(200).send(html);
+
+
+
             })
         },3000);
 
