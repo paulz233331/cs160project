@@ -1,10 +1,9 @@
-
 var fs = require ('fs');
 var nodemailer = require('nodemailer');
 
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://127.17.0.1:27017/mydb?authSource=admin"
+var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://127.17.0.1:27017/mydb?authSource=admin"
 
 let rawdata = fs.readFileSync('compiled/resumeUpload.json');
 let applicant = JSON.parse(rawdata);
@@ -25,7 +24,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
         if (err) throw err;
         var email = { 
             from: 'lucentats@gmail.com',
-            to: applicant.email, // applicant.email
+            to: 'johannkwon01@gmail.com', // applicant.email
             subject: 'Confirmation Email',
             text: 'Dear ' + applicant.name + ', \n\nYour application for ' + 
             result.job_title + ' at ' + result.employer + ' has been submitted. ' + 
@@ -36,6 +35,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
         transport.sendMail(email, function(err, info) {
             if (err) throw err;
             if(info.response.slice(0, 3) == "250") { // add 550
+                let data = JSON.stringify(email);
+                fs.writeFileSync('sentEmail.json', data);
                 console.log('Email confirmation has been sent. ' + info.response);
             } else {
                 console.log('Email confirmation was not sent. ' + info.response);
