@@ -6,17 +6,6 @@ var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://dbApp:dbApp@54.205.24
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-
-  var fs = require ('fs');
-  let rawdata = fs.readFileSync('compiled/resumeUpload.json');
-let applicant = JSON.parse(rawdata);
-  var query = { "name" : applicant.name };
-  var projection = { projection : { _id : 0, "email" : 1 } };
-  dbo.collection("applicants").findOne(query, projection, function(err, result) {
-      if (err) throw err;
-      var len = JSON.stringify(result).length - 2;
-      console.log(JSON.stringify(result).slice(10, len));
-      });
   
 /*
   // Find in education (e.g. University, College)
