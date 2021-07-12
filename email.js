@@ -20,11 +20,16 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     if (err) throw err;
     var db1 = db.db("mydb");
 
-    db1.collection("employers").findOne(function(err, result) {
+    var query = { "name" : applicant.name };
+    var projection = { projection : { _id : 0, "email" : 1 } };
+    db1.collection("applicants").findOne(query, projection, function(err, result) {
         if (err) throw err;
+        var len = JSON.stringify(result).length - 2;
         var email = { 
             from: 'lucentats@gmail.com',
-            to: 'johannkwon01@gmail.com', // applicant.email
+            to: applicant.email, // applicant.email
+            // Instead of applicant.email we can use:
+            // JSON.stringify(result).slice(10, len), which takes the email from the database
             subject: 'Confirmation Email',
             text: 'Dear ' + applicant.name + ', \n\nYour application for ' + 
             result.job_title + ' at ' + result.employer + ' has been submitted. ' + 
