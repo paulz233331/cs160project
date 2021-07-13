@@ -1,22 +1,39 @@
 const { bold } = require('colors');
 var mongo = require('mongodb');
+jest.useFakeTimers();
 var MongoClient = mongo.MongoClient;
 var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://dbApp:dbApp@54.205.24.189:27017/mydb?authSource=admin" //"mongodb://54.205.24.189:27017/mydb";
 
-MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("mydb");
-  
+describe("Testing with Jest", () => {
+  test("Resume field", () => {
+    MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
 
+        var query1 = { "education" : { $regex : "university" , $options : "i" } };
+        dbo.collection("applicants").find(query1).toArray(function(err, result) {
+          if (err) throw err;
+          console.log("Query 1: Search in education complete");
+          console.log(result);
+          expect(result[0].name).toEqual('Alex Dubinchyk');
+          expect(result[0].email).toEqual('alexs.dbk@gmail.com');
+          expect(result[0].objective).toEqual('Seeking a challenging position to use my software Web development and process optimization\n' +
+                                                                  'skills.');
+          db.close();
+        });
+    }); //end connect
+  }); //end test
+}); //end describe
+  
+/*
   // Find in education (e.g. University, College)
   var query1 = { "education" : { $regex : "university" , $options : "i" } };
   dbo.collection("applicants").find(query1).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 1: Search in education complete");
-    console.log(result);
     db.close();
   });
-/*
+
   // Find in summary (e.g. work, opportunity)
   var query2 = { "summary" : { $regex : "software" , $options : "i" } };
   dbo.collection("applicants").find(query2).toArray(function(err, result) {
@@ -189,4 +206,3 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     console.log("Query 20: otherOffer status has been updated");
     db.close();
   });*/
-});
