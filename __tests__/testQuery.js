@@ -57,6 +57,17 @@ describe("Testing with Jest", () => {
                  });
             });
 
+      // Update otherOffer status (true/false)
+      var query20 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
+      var update = { $set : { "otherOffer" : true } }; // or false
+      dbo.collection("applicants").updateOne(query20, update, function(err, result) {
+            if (err) throw err;
+            console.log("Query 20: otherOffer status has been updated");
+            dbo.collection("applicants").findOne(query20, function(err, result) {
+                 //console.log(result);
+                 expect(result.otherOffer).toBeTruthy();
+             });
+      });
 
         setTimeout(function(){ db.close(); }, 3000);
     }); //end connect
