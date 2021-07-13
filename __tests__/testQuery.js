@@ -19,8 +19,19 @@ describe("Testing with Jest", () => {
           expect(result[0].email).toEqual('alexs.dbk@gmail.com');
           expect(result[0].objective).toEqual('Seeking a challenging position to use my software Web development and process optimization\n' +
                                                                   'skills.');
-          db.close();
         });
+
+            // Update interviewed status (true/false)
+            var query17 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
+            var update = { $set : { "interviewed" : true } }; // or false
+            dbo.collection("applicants").updateOne(query17, update, function(err, result) {
+              if (err) throw err;
+              console.log("Query 17: interviewed status has been updated");
+              dbo.collection("applicants").findOne(query17, function(err, result) {
+                  //console.log(result);
+                  expect(result.interviewed).toBeTruthy();
+              });
+            });
     }); //end connect
   }); //end test
 }); //end describe
