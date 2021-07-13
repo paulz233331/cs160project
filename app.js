@@ -1,5 +1,6 @@
 var path = require('path');
-var fs = require('fs');
+//var fs = require('fs');
+const fs = require('graceful-fs');
 var _ = require('underscore');
 var textract = require('textract');
 var mime = require('mime');
@@ -14,7 +15,7 @@ module.exports = {
 setTimeout(main, 2000);
 
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
+var url = "mongodb://54.205.24.189:27017/mydb" //"mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 
 function PreparedFile(file, raw) {
@@ -325,6 +326,9 @@ function main() {
     return console.error('no resume directory');
   }
 
+
+MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+
   fs.readdir(pack, function(err, files) {
       files = files.map(function(file) {
         return pack + '/' + file;
@@ -357,36 +361,34 @@ function main() {
 
             //insert the json file to the database.
             //console.log(PreparedFile.resume);
-            MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+
               if (err) throw err;
               var dbo = db.db("mydb");
 
                 //insert myobj if its not already there.
                 var myobj = PreparedFile.resume;
 
-                dbo.collection("applicants").findOne(myobj, function(err, result) {
+                dbo.collection("all").findOne(myobj, function(err, result) {
                     if (err) throw err;
                     //console.log(result);
                     if (result == null){
-                        dbo.collection("applicants").insertOne(myobj, function(err, res) {
+                        dbo.collection("all").insertOne(myobj, function(err, res) {
                             if (err) throw err;
                             //console.log("1 document inserted");
                             //console.log(myobj._id);
                             //db.close();
 
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
-                            dbo.collection("applicants").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                            dbo.collection("all").updateOne({_id: myobj._id}, newValues , function(err, res) {
                                                         if (err) throw err;
                                                         //console.log("1 document inserted");
                                                         //console.log(myobj._id);
-                                                        db.close();
                                                       });
                           });
                     }
                     else{
-                        db.close();
                     }
-                });
+
             }); //end MongoClient.connect
         };
 
@@ -409,9 +411,11 @@ function main() {
             return console.error('preparedFile should be a function');
           }
         }, type);
-     });
-  });
-
-
     });
-}
+
+  });//end readdir
+    //db.close();
+ }); //end connect
+
+    }); //end promise
+} //main
