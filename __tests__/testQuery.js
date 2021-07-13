@@ -32,6 +32,19 @@ describe("Testing with Jest", () => {
                   expect(result.interviewed).toBeTruthy();
               });
             });
+
+              // Update hired status (true/false)
+              var query18 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
+              var update = { $set : { "hired" : true } }; // or false
+              dbo.collection("applicants").updateOne(query18, update, function(err, result) {
+                if (err) throw err;
+                console.log("Query 18: hired status has been updated");
+                dbo.collection("applicants").findOne(query18, function(err, result) {
+                                   //console.log(result);
+                                   expect(result.hired).toBeTruthy();
+                               });
+              });
+        setTimeout(function(){ db.close(); }, 3000);
     }); //end connect
   }); //end test
 }); //end describe
