@@ -5,22 +5,80 @@ var MongoClient = mongo.MongoClient;
 var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://dbApp:dbApp@54.205.24.189:27017/mydb?authSource=admin" //"mongodb://54.205.24.189:27017/mydb";
 
 describe("Testing with Jest", () => {
-  test("Resume field", () => {
-    MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
-      if (err) throw err;
-      var dbo = db.db("mydb");
 
-        var query1 = { "education" : { $regex : "university" , $options : "i" } };
-        dbo.collection("applicants").find(query1).toArray(function(err, result) {
+        test("Query 1", () => {
+
+            MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+
+            var query1 = { "education" : { $regex : "university" , $options : "i" } };
+            dbo.collection("applicants").find(query1).toArray(function(err, result) {
+              if (err) throw err;
+              console.log("Query 1: Search in education complete");
+              //console.log(result);
+              expect(result[0].name).toEqual('Alex Dubinchyk');
+              expect(result[0].email).toEqual('alexs.dbk@gmail.com');
+              expect(result[0].objective).toEqual('Seeking a challenging position to use my software Web development and process optimization\n' +
+                                                                      'skills.');
+            });
+            db.close();
+
+            }); //end connect
+        }); //end test
+
+        test("Query 11b", () => {
+
+            MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+                // Find all emails
+                  var query11b = { projection : { _id : 0 , "email" : 1 } };
+                  dbo.collection("applicants").find({}, query11b).toArray(function(err, result) {
+                    if (err) throw err;
+                    console.log("The emails are:\n" + JSON.stringify(result));
+                    expect(result[0].email).toEqual("alexs.dbk@gmail.com");
+                  });
+                    db.close();
+
+            }); //end connect
+        }); //end test
+
+        test("Query 11a", () => {
+
+            MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+              // Find all names
+              var query11a = { projection : { _id : 0 , "name" : 1 } };
+              dbo.collection("applicants").find({}, query11a).toArray(function(err, result) {
+                if (err) throw err;
+                console.log("The names are:\n" + JSON.stringify(result));
+                expect(result[0].name).toEqual('Alex Dubinchyk');
+                db.close();
+              });
+            }); //end connect
+        }); //end test
+
+        test("Query 12", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+              // Find interviewed (true/false)
+              var query12 = { "interviewed" : true }; // or false
+              dbo.collection("applicants").find(query12).toArray(function(err, result) {
+                if (err) throw err;
+                console.log("Query 12: interviewed search complete");
+                expect(result[0].name).toEqual("M V");
+                db.close();
+              });
+          }); //end connect
+        }); //end test
+
+        test("Query 17", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
           if (err) throw err;
-          console.log("Query 1: Search in education complete");
-          console.log(result);
-          expect(result[0].name).toEqual('Alex Dubinchyk');
-          expect(result[0].email).toEqual('alexs.dbk@gmail.com');
-          expect(result[0].objective).toEqual('Seeking a challenging position to use my software Web development and process optimization\n' +
-                                                                  'skills.');
-        });
-
+          var dbo = db.db("mydb");
             // Update interviewed status (true/false)
             var query17 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
             var update = { $set : { "interviewed" : true } }; // or false
@@ -30,9 +88,16 @@ describe("Testing with Jest", () => {
               dbo.collection("applicants").findOne(query17, function(err, result) {
                   //console.log(result);
                   expect(result.interviewed).toBeTruthy();
+                db.close();
               });
             });
+          }); //end connect
+        }); //end test
 
+        test("Query 18", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+            if (err) throw err;
+            var dbo = db.db("mydb");
               // Update hired status (true/false)
               var query18 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
               var update = { $set : { "hired" : true } }; // or false
@@ -42,9 +107,16 @@ describe("Testing with Jest", () => {
                 dbo.collection("applicants").findOne(query18, function(err, result) {
                        //console.log(result);
                        expect(result.hired).toBeTruthy();
-                   });
+                      db.close();
+                });
               });
+          }); //end connect
+        }); //end test
 
+        test("Query 19", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+            if (err) throw err;
+            var dbo = db.db("mydb");
             // Update offered status (true/false)
             var query19 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
             var update = { $set : { "offered" : true } }; // or false
@@ -54,24 +126,33 @@ describe("Testing with Jest", () => {
               dbo.collection("applicants").findOne(query19, function(err, result) {
                      //console.log(result);
                      expect(result.offered).toBeTruthy();
-                 });
+                     db.close();
+              });
             });
+          }); //end connect
+        }); //end test
 
-      // Update otherOffer status (true/false)
-      var query20 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
-      var update = { $set : { "otherOffer" : true } }; // or false
-      dbo.collection("applicants").updateOne(query20, update, function(err, result) {
-            if (err) throw err;
-            console.log("Query 20: otherOffer status has been updated");
-            dbo.collection("applicants").findOne(query20, function(err, result) {
-                 //console.log(result);
-                 expect(result.otherOffer).toBeTruthy();
-             });
-      });
 
-        setTimeout(function(){ db.close(); }, 3000);
-    }); //end connect
-  }); //end test
+    test("Query 20", () => {
+      MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+        if (err) throw err;
+        var dbo = db.db("mydb");
+          // Update otherOffer status (true/false)
+          var query20 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
+          var update = { $set : { "otherOffer" : true } }; // or false
+          dbo.collection("applicants").updateOne(query20, update, function(err, result) {
+                if (err) throw err;
+                console.log("Query 20: otherOffer status has been updated");
+                dbo.collection("applicants").findOne(query20, function(err, result) {
+                     //console.log(result);
+                     expect(result.otherOffer).toBeTruthy();
+                         db.close();
+                });
+          });
+      }); //end connect
+    }); //end test
+
+       // setTimeout(function(){ db.close(); }, 4000);
 }); //end describe
   
 /*
