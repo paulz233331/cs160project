@@ -6,7 +6,7 @@ var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://dbApp:dbApp@54.205.24
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-  
+
 
   // Find in education (e.g. University, College)
   var query1 = { "education" : { $regex : "university" , $options : "i" } };
@@ -179,4 +179,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     if (err) throw err;
     console.log("Query 20: otherOffer status has been updated");
   });
+
+  setTimeout(function(){db.close();}, 3000);
 });

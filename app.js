@@ -368,28 +368,87 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                 //insert myobj if its not already there.
                 var myobj = PreparedFile.resume;
 
-                dbo.collection("all").findOne(myobj, function(err, result) {
-                    if (err) throw err;
-                    //console.log(result);
-                    if (result == null){
-                        dbo.collection("all").insertOne(myobj, function(err, res) {
-                            if (err) throw err;
-                            //console.log("1 document inserted");
-                            //console.log(myobj._id);
-                            //db.close();
+                //console.log(resm.toLowerCase());
+                var profile = { hardworking:0, experience:0, intelligence: 0, leadership:0, organization:0};
+                var hardworking = ["challeng", "participat", "prepar", "attend", "adapt", "prepare",
+                                "help", "act", "associat", "support", "conduct", "energetic", "collab","hardwork", "hard work"
+                                   ];
+                var intelligence = ["intelligen", "knowledge", "understanding", "research",
+                                    "interesting", "learn", "think", "creativity", "creative",
+                                    "skill", "grow", "development", "review", "explore"];
+                var leadership = [ "leader", "motivation", "commit", "responsib", "discipline", "determin",
+                        "communicat", "respect", "winner", "succe", "dedicat", "willing", "achiev", "positive"];
+                var organization = ["organiz", "coordinat", "maintain", "writing", "write", "generat", "perform",
+                 "handl", "manag", "monitor", "train", "flexib", "format", "submi"];
 
-                            var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
-                            dbo.collection("all").updateOne({_id: myobj._id}, newValues , function(err, res) {
-                                                        if (err) throw err;
-                                                        //console.log("1 document inserted");
-                                                        //console.log(myobj._id);
-                                                      });
+                hardworking.forEach(function (item, index){
+                    for( var key in myobj){
+//                        console.log(myobj[key].toString());
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.hardworking += 1;
+                            continue;
+                        }
+                    }
+                })
+
+                for( var key in myobj){
+                    var str = myobj[key].toString()
+                    if (str.indexOf("year") !== -1){
+                        profile.experience += 12;
+                    }
+                    if (str.indexOf("month") !== -1){
+                        profile.experience += 1;
+                    }
+                }
+
+                intelligence.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.intelligence += 1;
+                            continue;
+                        }
+                    }
+                })
+                leadership.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.leadership += 1;
+                            continue;
+                        }
+                    }
+                })
+                organization.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.organization += 1;
+                            continue;
+                        }
+                    }
+                })
+        //console.log({profile: profile});
+
+                dbo.collection("practice").findOne(myobj, function(err, result) {
+                    if (err) throw err;
+                    if (result == null){
+                        dbo.collection("practice").insertOne(myobj, function(err, res) {
+                            if (err) throw err;
+
+                            var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
+                            dbo.collection("practice").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                                    if (err) throw err;
+                                    //console.log("1 document inserted");
+                                    //console.log(myobj._id);
+                                    db.close();
+                            });
                           });
                     }
                     else{
                     }
-
-            }); //end MongoClient.connect
+            }); //end findOne
         };
 
         parse(PreparedFile, function(Resume) {
