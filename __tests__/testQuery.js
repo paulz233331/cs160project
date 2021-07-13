@@ -75,6 +75,67 @@ describe("Testing with Jest", () => {
           }); //end connect
         }); //end test
 
+        test("Query 13", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+
+              // Find hired (true/false)
+              var query13 = { "hired" : true }; // or false
+              dbo.collection("applicants").find(query13).toArray(function(err, result) {
+                if (err) throw err;
+                console.log("Query 13: hired search complete");
+                expect(result[0].name).toEqual("M V");
+                db.close();
+              });
+          }); //end connect
+        }); //end test
+
+        test("Query 14", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+              // Find offered (true/false)
+              var query14 = { "offered" : true }; // or false
+              dbo.collection("applicants").find(query14).toArray(function(err, result) {
+                if (err) throw err;
+                console.log("Query 14: offered search complete");
+                expect(result[0].name).toEqual("M V");
+                db.close();
+              });
+          }); //end connect
+        }); //end test
+
+        test("Query 15", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+                // Find otherOffer (true/false)
+                var query15 = { "otherOffer" : true }; // or false
+                dbo.collection("applicants").find(query15).toArray(function(err, result) {
+                  if (err) throw err;
+                  console.log("Query 15: otherOffer search complete");
+                  expect(result[0].name).toEqual("M V");
+                  db.close();
+                });
+          }); //end connect
+        }); //end test
+
+        test("Query 16", () => {
+          MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
+              if (err) throw err;
+              var dbo = db.db("mydb");
+              // Find by position
+              var query16 = { "position" : "" };
+              dbo.collection("applicants").find(query16).toArray(function(err, result) {
+                if (err) throw err;
+                console.log("Query 16: position search complete");
+                expect(result[0].name).toEqual('Alex Dubinchyk');
+                db.close();
+              });
+          }); //end connect
+        }); //end test
+
         test("Query 17", () => {
           MongoClient.connect(url, function(err, db) { //{ useUnifiedTopology: true },
           if (err) throw err;
