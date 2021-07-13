@@ -7,13 +7,13 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
   
-/*
+
   // Find in education (e.g. University, College)
   var query1 = { "education" : { $regex : "university" , $options : "i" } };
   dbo.collection("applicants").find(query1).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 1: Search in education complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in summary (e.g. work, opportunity)
@@ -21,7 +21,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query2).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 2: Search in summary complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in objective (e.g. work, software, engineer)
@@ -29,7 +29,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query3).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 3: Search in objective complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in skills (e.g. HTML, web, JavaScript, SQL, PHP)
@@ -37,7 +37,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query4).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 4: Search in skills complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in experience (e.g. team)
@@ -45,7 +45,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query5).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 5: Search in experience complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in projects (e.g. www.)
@@ -53,7 +53,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query6).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 6: Search in projects complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in technology (e.g. Outlook, Office)
@@ -61,7 +61,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query7).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 7: Search in technology complete");
-    db.close();
+    // console.log(result);
   });
   
   // Find in languages (e.g. English)
@@ -69,7 +69,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query8).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 8: Search in languages complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find in entire resume (e.g. date like 01 “June 2017” or “Apr. 2017”, e.g. location like CA, California, e.g. LinkedIn or Github)
@@ -77,14 +77,13 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").createIndex(query9a, function(err, result) {
     if (err) throw err;
     console.log("Text index " + result + " created successfully");
-    db.close();
   });
   
   var query9b = { $text : { $search : "english" } };
   dbo.collection("applicants").find(query9b).toArray(function(err, result) {
     if (err) throw err;
     console.log("Text index search complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find the count of resumes with some text
@@ -93,7 +92,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query10).count(function(err, result) {
     if (err) throw err;
     console.log("Number of resumes with the text: " + result);
-    db.close();
   });
 
   // Find all names
@@ -101,7 +99,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find({}, query11a).toArray(function(err, result) {
     if (err) throw err;
     console.log("The names are:\n" + JSON.stringify(result));
-    db.close();
   });
 
   // Find all emails
@@ -109,7 +106,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find({}, query11b).toArray(function(err, result) {
     if (err) throw err;
     console.log("The emails are:\n" + JSON.stringify(result));
-    db.close();
   });
 
   // Find interviewed (true/false)
@@ -117,7 +113,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query12).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 12: interviewed search complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find hired (true/false)
@@ -125,7 +121,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query13).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 13: hired search complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find offered (true/false)
@@ -133,7 +129,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query14).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 14: offered search complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find otherOffer (true/false)
@@ -141,16 +137,15 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").find(query15).toArray(function(err, result) {
     if (err) throw err;
     console.log("Query 15: otherOffer search complete");
-    db.close();
+    // console.log(result);
   });
 
   // Find by position
   var query16 = { "position" : "" };
   dbo.collection("applicants").find(query16).toArray(function(err, result) {
     if (err) throw err;
-    console.log(result);
-    //console.log("Query 16: position search complete");
-    db.close();
+    console.log("Query 16: position search complete");
+    // console.log(result);
   });
 
   // Update interviewed status (true/false)
@@ -159,7 +154,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").updateOne(query17, update, function(err, result) {
     if (err) throw err;
     console.log("Query 17: interviewed status has been updated");
-    db.close();
   });
 
   // Update hired status (true/false)
@@ -168,7 +162,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").updateOne(query18, update, function(err, result) {
     if (err) throw err;
     console.log("Query 18: hired status has been updated");
-    db.close();
   });
 
   // Update offered status (true/false)
@@ -177,7 +170,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").updateOne(query19, update, function(err, result) {
     if (err) throw err;
     console.log("Query 19: offered status has been updated");
-    db.close();
   });
 
   // Update otherOffer status (true/false)
@@ -186,6 +178,5 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
   dbo.collection("applicants").updateOne(query20, update, function(err, result) {
     if (err) throw err;
     console.log("Query 20: otherOffer status has been updated");
-    db.close();
-  });*/
+  });
 });
