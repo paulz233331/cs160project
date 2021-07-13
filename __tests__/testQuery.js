@@ -40,10 +40,24 @@ describe("Testing with Jest", () => {
                 if (err) throw err;
                 console.log("Query 18: hired status has been updated");
                 dbo.collection("applicants").findOne(query18, function(err, result) {
-                                   //console.log(result);
-                                   expect(result.hired).toBeTruthy();
-                               });
+                       //console.log(result);
+                       expect(result.hired).toBeTruthy();
+                   });
               });
+
+            // Update offered status (true/false)
+            var query19 = { "name" : "M V" , "email" : "rajaktashinde2211@gmail.com" };
+            var update = { $set : { "offered" : true } }; // or false
+            dbo.collection("applicants").updateOne(query19, update, function(err, result) {
+              if (err) throw err;
+              console.log("Query 19: offered status has been updated");
+              dbo.collection("applicants").findOne(query19, function(err, result) {
+                     //console.log(result);
+                     expect(result.offered).toBeTruthy();
+                 });
+            });
+
+
         setTimeout(function(){ db.close(); }, 3000);
     }); //end connect
   }); //end test
