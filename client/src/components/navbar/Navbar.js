@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import logo from '../../assets/mainlogo.png';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import Apply from '../../pages/apply/Apply'
+
 const useStyles = makeStyles((theme) => ({
     content: {
       display: 'flex',
@@ -68,7 +70,7 @@ export default function Navbar() {
           <img  src={logo} alt="logo" />
           </IconButton>
           <div className={classes.buttonContainer}>
-          <Button  className={classes.applyButton} onClick={() => loginWithRedirect()}>Apply</Button>
+          <Button  className={classes.applyButton} onClick={() => Apply()}>Apply</Button>
           <applyButton />
           <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
           <loginButton />
