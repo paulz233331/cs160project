@@ -18,6 +18,7 @@ function App() {
             </li>
             </ul>
             </nav>
+            </div>
     <Router>
     <Switch>
     <Route path="/" exact>
