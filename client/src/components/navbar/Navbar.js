@@ -73,9 +73,13 @@ export default function Navbar() {
           <div className={classes.buttonContainer}>
           <Link to="/apply"><Button className={classes.loginButton}>Apply</Button></Link>
           <applyButton />
-          <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
+          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({
+                                                                                        redirect_uri: 'http://localhost:3000/apply'
+                                                                                      })}>Login</Button>
           <loginButton />
-          <Button className={classes.signupButton} onClick={() => loginWithRedirect()}>Sign up</Button>
+          <Button className={classes.signupButton} onClick={() => loginWithRedirect({
+                                                                                                                                                                            redirect_uri: 'http://localhost:3000/apply'
+                                                                                                                                                                          })}>Sign up</Button>
           </div>
         </Toolbar>
       </AppBar>
