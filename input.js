@@ -10,7 +10,7 @@ var app = require('./app');
 var mongo = require('mongodb');
 
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
+var url = "mongodb://54.205.24.189:27017/mydb"// "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 
 //console.log(__dirname);
@@ -31,6 +31,7 @@ expr.post('/test', function(req, res) {
 
         let rawdata = fs.readFileSync('compiled/resumeInput.json');
         let applicant = JSON.parse(rawdata);
+        console.log(rawdata);
         MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
           if (err) throw err;
           var dbo = db.db("mydb");
@@ -50,7 +51,7 @@ expr.post('/test', function(req, res) {
                 //html = html + JSON.stringify(result);
                 html = html +
                 `
-                <form action="http://localhost:3000/testCfm" method="POST">
+                <form action="http://localhost:3001/testCfm" method="POST">
                   <label for="name">Name:</label>
                   <textarea id="name" name="name" rows="2" cols="50">` + result.name + `</textarea><br><br>
                   <label for="email">Email:</label>
@@ -145,6 +146,6 @@ expr.post('/testCfm', function(req, res) {
 
 
 
-expr.listen(3000, function() {
-  console.log('App is running on 3000');
+expr.listen(3001, function() {
+  console.log('App is running on 3001');
 })
