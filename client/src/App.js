@@ -5,6 +5,8 @@ import Confirmation from './pages/Confirmation';
 
 function App() {
   return (
+   <ApplicationForm />
+   /*
     <Router>
     <Switch>
     <Route path="/" exact>
@@ -21,6 +23,7 @@ function App() {
     </Route>
     </Switch>
     </Router>
+    */
   );
 }
 
