@@ -71,7 +71,7 @@ export default function Navbar() {
           <img  src={logo} alt="logo" />
           </IconButton>
           <div className={classes.buttonContainer}>
-          <Link to="/apply" className={classes.applyButton}>Apply</Link>
+          <Link to="/apply"><Button className={classes.loginButton}>Apply</Button></Link>
           <applyButton />
           <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
           <loginButton />
