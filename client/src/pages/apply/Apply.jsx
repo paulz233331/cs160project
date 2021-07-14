@@ -1,8 +1,8 @@
 import React from 'react';
-import './home.css';
+import './apply.css';
 
     
-function Apply() => {
+function Apply() {
     return (
         <html>
         <head>
@@ -13,7 +13,7 @@ function Apply() => {
              <form action="http://localhost:3000/test" method="POST">
                  <label for="resume">Enter a resume:</label>
                  <textarea id="resume" class="resume-area" name="resume" rows="4" cols="50"></textarea>
-                 on type="submit" >Submit</butt<button>
+                 <button type="submit" >Submit</button>
              </form>
          </body>
         </html>
