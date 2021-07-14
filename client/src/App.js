@@ -6,20 +6,21 @@ import ApplicationForm from './pages/application/ApplicationForm';
 
 function App() {
   return (
-   <ApplicationForm />
-   <div>
-           <nav>
-             <ul>
-               <li>
-                 <Link to="/">Home</Link>
-               </li>
-            <li>
-              <Link to="/apply">Apply</Link>
-            </li>
-            </ul>
-            </nav>
-            </div>
+   //<ApplicationForm />
+
     <Router>
+       <div>
+               <nav>
+                 <ul>
+                   <li>
+                     <Link to="/">Home</Link>
+                   </li>
+                <li>
+                  <Link to="/apply">Apply</Link>
+                </li>
+                </ul>
+                </nav>
+                </div>
     <Switch>
     <Route path="/" exact>
     <Home />
