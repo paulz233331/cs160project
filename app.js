@@ -1,16 +1,22 @@
 var path = require('path');
-var fs = require('fs');
+//var fs = require('fs');
+const fs = require('graceful-fs');
 var _ = require('underscore');
 var textract = require('textract');
 var mime = require('mime');
 var request = require("request");
 var cheerio = require("cheerio");
+var mongo = require('mongodb');
 
 module.exports = {
   main
 };
 
 setTimeout(main, 2000);
+
+var MongoClient = mongo.MongoClient;
+var url = "mongodb://54.205.24.189:27017/mydb" //"mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
+
 
 function PreparedFile(file, raw) {
   this.path = file;
@@ -301,10 +307,6 @@ var extractText = async function(file, afterExtract) {
   });
 }
 
-
-
-
-
 function main() {
 
 
@@ -323,6 +325,9 @@ function main() {
   if (!fs.existsSync(pack)) {
     return console.error('no resume directory');
   }
+
+
+MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
 
   fs.readdir(pack, function(err, files) {
       files = files.map(function(file) {
@@ -351,7 +356,99 @@ function main() {
             if (!_.isFunction(onSaved)) {
               return console.error('onSaved should be a function');
             }
+            //save the resume output json.
             PreparedFile.saveResume(__dirname + '/compiled', onSaved);
+
+            //insert the json file to the database.
+            //console.log(PreparedFile.resume);
+
+              if (err) throw err;
+              var dbo = db.db("mydb");
+
+                //insert myobj if its not already there.
+                var myobj = PreparedFile.resume;
+
+                //console.log(resm.toLowerCase());
+                var profile = { hardworking:0, experience:0, intelligence: 0, leadership:0, organization:0};
+                var hardworking = ["challeng", "participat", "prepar", "attend", "adapt", "prepare",
+                                "help", "act", "associat", "support", "conduct", "energetic", "collab","hardwork", "hard work"
+                                   ];
+                var intelligence = ["intelligen", "knowledge", "understanding", "research",
+                                    "interesting", "learn", "think", "creativity", "creative",
+                                    "skill", "grow", "development", "review", "explore"];
+                var leadership = [ "leader", "motivation", "commit", "responsib", "discipline", "determin",
+                        "communicat", "respect", "winner", "succe", "dedicat", "willing", "achiev", "positive"];
+                var organization = ["organiz", "coordinat", "maintain", "writing", "write", "generat", "perform",
+                 "handl", "manag", "monitor", "train", "flexib", "format", "submi"];
+
+                hardworking.forEach(function (item, index){
+                    for( var key in myobj){
+//                        console.log(myobj[key].toString());
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.hardworking += 1;
+                            continue;
+                        }
+                    }
+                })
+
+                for( var key in myobj){
+                    var str = myobj[key].toString()
+                    if (str.indexOf("year") !== -1){
+                        profile.experience += 12;
+                    }
+                    if (str.indexOf("month") !== -1){
+                        profile.experience += 1;
+                    }
+                }
+
+                intelligence.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.intelligence += 1;
+                            continue;
+                        }
+                    }
+                })
+                leadership.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.leadership += 1;
+                            continue;
+                        }
+                    }
+                })
+                organization.forEach(function (item, index){
+                    for( var key in myobj){
+                        var str = myobj[key].toString()
+                        if (str.indexOf(item) !== -1) {
+                            profile.organization += 1;
+                            continue;
+                        }
+                    }
+                })
+        //console.log({profile: profile});
+
+                dbo.collection("practice").findOne(myobj, function(err, result) {
+                    if (err) throw err;
+                    if (result == null){
+                        dbo.collection("practice").insertOne(myobj, function(err, res) {
+                            if (err) throw err;
+
+                            var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
+                            dbo.collection("practice").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                                    if (err) throw err;
+                                    //console.log("1 document inserted");
+                                    //console.log(myobj._id);
+                                    db.close();
+                            });
+                          });
+                    }
+                    else{
+                    }
+            }); //end findOne
         };
 
         parse(PreparedFile, function(Resume) {
@@ -373,9 +470,11 @@ function main() {
             return console.error('preparedFile should be a function');
           }
         }, type);
-     });
-  });
-
-
     });
-}
+
+  });//end readdir
+    //db.close();
+ }); //end connect
+
+    }); //end promise
+} //main
