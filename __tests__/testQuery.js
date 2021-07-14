@@ -38,8 +38,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "summary": { $regex: "software", $options: "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query2 = { "summary": { $regex: "software", $options: "i" } };
+      dbo.collection("applicants").find(query2).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Alex Dubinchyk');
         expect(result[0].email).toEqual('alexs.dbk@gmail.com');
@@ -55,8 +55,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "objective": { $regex: "software", $options: "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query3 = { "objective": { $regex: "software", $options: "i" } };
+      dbo.collection("applicants").find(query3).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Alex Dubinchyk');
         expect(result[0].email).toEqual('alexs.dbk@gmail.com');
@@ -72,8 +72,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "skills" : { $regex : "html" , $options : "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query4 = { "skills" : { $regex : "html" , $options : "i" } };
+      dbo.collection("applicants").find(query4).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Alex Dubinchyk');
         expect(result[0].email).toEqual('alexs.dbk@gmail.com');
@@ -89,8 +89,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "experience" : { $regex : "team" , $options : "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query5= { "experience" : { $regex : "team" , $options : "i" } };
+      dbo.collection("applicants").find(query5).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Sunil Kumar');
         expect(result[0].email).toEqual('sunilkumarbt01@gmail.com');
@@ -106,8 +106,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "projects" : { $regex : "www." , $options : "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query6 = { "projects" : { $regex : "www." , $options : "i" } };
+      dbo.collection("applicants").find(query6).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Sunil Kumar');
         expect(result[0].email).toEqual('sunilkumarbt01@gmail.com');
@@ -123,8 +123,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "technology" : { $regex : "outlook" , $options : "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query7 = { "technology" : { $regex : "outlook" , $options : "i" } };
+      dbo.collection("applicants").find(query7).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Prem Prakash');
         expect(result[0].email).toEqual('premgautam958@gmail.com');
@@ -140,8 +140,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { "languages" : { $regex : "English" , $options : "i" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query8 = { "languages" : { $regex : "English" , $options : "i" } };
+      dbo.collection("applicants").find(query8).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Prem Prakash');
         expect(result[0].email).toEqual('premgautam958@gmail.com');
@@ -173,8 +173,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query = { $text : { $search : "professional" } };
-      dbo.collection("applicants").find(query).toArray(function (err, result) {
+      var query9b = { $text : { $search : "professional" } };
+      dbo.collection("applicants").find(query9b).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Prem Prakash');
         expect(result[0].email).toEqual('premgautam958@gmail.com');
