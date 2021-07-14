@@ -20,6 +20,17 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     marginRight: '5%'
   },
+
+  applyButton: {
+    borderRadius: '11px',
+    border: 'solid 2px rgb(102, 178, 240)',
+    padding: '10px',
+    paddingLeft: '3rem',
+    paddingRight: '3rem',
+    color: '#009FFD',
+    marginRight: '10px'
+  },
+
   loginButton: {
     borderRadius: '11px',
     border: 'solid 2px rgb(102, 178, 240)',
@@ -57,6 +68,8 @@ export default function Navbar() {
           <img  src={logo} alt="logo" />
           </IconButton>
           <div className={classes.buttonContainer}>
+          <Button  className={classes.applyButton} onClick={() => loginWithRedirect()}>Apply</Button>
+          <applyButton />
           <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
           <loginButton />
           <Button className={classes.signupButton} onClick={() => loginWithRedirect()}>Sign up</Button>
