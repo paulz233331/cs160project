@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest"
   },
-  "author": "Paul Zheng, Johann Kwon, Nav Sharan",
+  "author": "Paul Zheng, Johann Kwon, Nav Sharad",
   "license": "MIT",
   "devDependencies": {
     "jest": "^27.0.4"

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginButton: {
     borderRadius: '11px',
-    border: 'solid 2px #009FFD',
+    border: 'solid 2px rgb(102, 178, 240)',
     padding: '10px',
     paddingLeft: '3rem',
     paddingRight: '3rem',
@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
   signupButton: {
     borderRadius: '11px',
-    border: 'solid 2px #009FFD',
-    backgroundColor: '#009FFD',
+    border: 'solid 2px rgb(102, 178, 240)',
+    backgroundColor: 'rgb(102, 178, 240)',
     padding: '10px',
     paddingLeft: '3rem',
     paddingRight: '3rem',
-    color: '#EBF5EE'
+    color: 'white'
   },
   logo: {
     transform: 'scale(1.3)', 
@@ -59,7 +59,7 @@ export default function Navbar() {
           <div className={classes.buttonContainer}>
           <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
           <loginButton />
-          <Button className={classes.signupButton} onClick={() => loginWithRedirect()}>Sign up!</Button>
+          <Button className={classes.signupButton} onClick={() => loginWithRedirect()}>Sign up</Button>
           </div>
         </Toolbar>
       </AppBar>
