@@ -8,6 +8,7 @@ import logo from '../../assets/mainlogo.png';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Apply from '../../pages/apply/Apply'
+import { Link, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -55,13 +56,13 @@ const useStyles = makeStyles((theme) => ({
     transform: 'scale(1.3)', 
     marginLeft: '5%'
   },
-
 }));
 
 export default function Navbar() {
   const classes = useStyles();
   const { loginWithRedirect } = useAuth0();
 
+    const location = useLocation();
   return (
     <div className={classes.root}>
       <AppBar className={classes.bar} position="static">
@@ -70,7 +71,7 @@ export default function Navbar() {
           <img  src={logo} alt="logo" />
           </IconButton>
           <div className={classes.buttonContainer}>
-          <Button  className={classes.applyButton} onClick={() => Apply()}>Apply</Button>
+          <Link to="/apply" className={classes.applyButton}>Apply</Link>
           <applyButton />
           <Button  className={classes.loginButton} onClick={() => loginWithRedirect()}>Login</Button>
           <loginButton />
