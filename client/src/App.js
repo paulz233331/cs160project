@@ -5,20 +5,19 @@ import ApplicationForm from './pages/application/ApplicationForm'
 
 function App() {
   return (
-    <ApplicationForm />
-    // <Router>
-    //   <Switch>
-    //   <Route path="/" exact>
-    //     <Home />
-    //   </Route>
-    //   <Route path="/profile" exact>
-    //     test
-    //   </Route>
-    //   <Route path="/confirmation" exact>
-    //     <Confirmation />
-    //   </Route>
-    //   </Switch>
-    // </Router>
+    <Router>
+    <Switch>
+    <Route path="/" exact>
+    <Home />
+    </Route>
+    <Route path="/profile" exact>
+    test
+    </Route>
+    <Route path="/confirmation" exact>
+    <Confirmation />
+    </Route>
+    </Switch>
+    </Router>
   );
 }
 
