@@ -2,11 +2,22 @@ import Home from './pages/home/Home';
 import Apply from './pages/apply/Apply'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Confirmation from './pages/Confirmation';
+import ApplicationForm from './pages/application/ApplicationForm';
 
 function App() {
   return (
    <ApplicationForm />
-   /*
+   <div>
+           <nav>
+             <ul>
+               <li>
+                 <Link to="/">Home</Link>
+               </li>
+            <li>
+              <Link to="/apply">Apply</Link>
+            </li>
+            </ul>
+            </nav>
     <Router>
     <Switch>
     <Route path="/" exact>
