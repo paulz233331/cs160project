@@ -31,6 +31,81 @@ var url = "mongodb://54.205.24.189:27017/mydb"// "mongodb://appt:appt@127.17.0.1
 expr.use(bodyParser.urlencoded({ extended: true }));
 
 
+expr.post('/emp1', function(req, res) {
+    //console.log(req.body.fnd);
+    //console.log(req.body.sections);
+    var html = `
+        <html>
+            <head>
+                <script type="text/javascript">
+                </script>
+            </head>
+            <body topmargin="40" leftmargin="40">
+                Results: <br /><br />
+    `;
+    if (req.body.sections === "entire"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+
+          if (err) throw err;
+          var dbo = db.db("mydb");
+
+          var query10 = { $text : { $search : req.body.fnd } };
+
+          dbo.collection("applicants").find(query10).count(function(err, result) {
+            if (err) throw err;
+            //console.log(result);
+            html += result + ' resumes contain \"' + req.body.fnd + '\".<br /><br />';
+            //console.log(html);
+          });
+
+          dbo.collection("applicants").find(query10).limit(5).toArray(function (err, result) {
+              if (err) throw err;
+              html += ' Displaying top 5 results: <br />';
+              result.forEach(function(doc){
+                  //var tmp = JSON.stringify(doc);
+                  for (var key in doc){
+                    //console.log(key);
+                    //console.log(doc[key]);
+
+                    html += key + ": " + doc[key] + '<br />';
+                  }
+                  html += '<br />';
+                  //html += JSON.stringify(doc, null, "\n") + '<br />';
+              })
+              html += '<br/>'
+          });
+          //db.close();
+
+        });
+
+/*
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
+
+          var query9b = { $text : { $search : req.body.fnd } };
+          dbo.collection("applicants").find(query9b).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            expect(result[0].name).toEqual('Prem Prakash');
+            expect(result[0].email).toEqual('premgautam958@gmail.com');
+          });
+          db.close();
+        }); //end connect*/
+    }
+    else{
+
+    }
+    setTimeout(function(){
+        html = html + `
+                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                </body>
+            </html>
+        `;
+
+        res.status(200).send(html);
+    } , 3000);
+})
+
 expr.post('/test2', function(req, res) {
    try {
         if(!req.files) {
