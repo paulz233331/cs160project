@@ -291,6 +291,7 @@ var extractText = async function(file, afterExtract) {
         clearRows = [];
         if ( data )
             rows = data.split("\n");
+       if (rows )
       for (var i = 0; i < rows.length; i++) {
         clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
         if (clearRow) {
