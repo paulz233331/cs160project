@@ -10,7 +10,7 @@ function Employer() {
         </head>
         <body topmargin="40" leftmargin="40">
              This is the employer's page.
-             
+
          </body>
         </html>
     )
