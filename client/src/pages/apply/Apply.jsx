@@ -20,6 +20,8 @@ function Apply() {
                 <input type="file" id="resume2" name="resume2" /><br />
                 <input type="submit" value="Upload" />
              </form>
+             <br /> <br />
+             <a href="http://localhost:3000">Return to home page.</a>
          </body>
         </html>
     )
