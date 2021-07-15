@@ -1,8 +1,8 @@
 import Home from './pages/home/Home';
-import Apply from './pages/apply/Apply'
+import Apply from './pages/apply/Apply';
+import Employer from './pages/employer/Employer';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Confirmation from './pages/Confirmation';
-import ApplicationForm from './pages/application/ApplicationForm';
 
 function App() {
   return (
@@ -20,6 +20,9 @@ function App() {
     </Route>
     <Route path="/apply" exact>
     <Apply />
+    </Route>
+    <Route path="/employer" exact>
+    <Employer />
     </Route>
     </Switch>
     </Router>

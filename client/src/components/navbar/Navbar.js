@@ -8,7 +8,7 @@ import logo from '../../assets/mainlogo.png';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Apply from '../../pages/apply/Apply'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -62,7 +62,10 @@ export default function Navbar() {
   const classes = useStyles();
   const { loginWithRedirect } = useAuth0();
 
-    const location = useLocation();
+  const history = useHistory();
+  const goLogin = () => history.push('employer');
+  var location = useLocation();
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.bar} position="static">
@@ -72,14 +75,18 @@ export default function Navbar() {
           </IconButton>
           <div className={classes.buttonContainer}>
           <Link to="/apply"><Button className={classes.loginButton}>Apply</Button></Link>
-          <applyButton />
-          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({
-                                                                                        redirect_uri: 'http://localhost:3000/apply'
-                                                                                      })}>Login</Button>
-          <loginButton />
+          <Link to="/employer"><Button className={classes.loginButton}>Employer</Button></Link>
+          <Button  className={classes.loginButton} onClick={function(){
+                loginWithRedirect({
+                    redirect_uri : '/employer',
+                    appState: {target: '/employer'}
+                });
+                //goLogin();
+
+            } }> Login</Button>
           <Button className={classes.signupButton} onClick={() => loginWithRedirect({
-                                                                                                                                                                            redirect_uri: 'http://localhost:3000/apply'
-                                                                                                                                                                          })}>Sign up</Button>
+                appState: {target: 'http://localhost:3000/apply'}
+             })}>Sign up</Button>
           </div>
         </Toolbar>
       </AppBar>
