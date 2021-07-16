@@ -291,6 +291,7 @@ var extractText = async function(file, afterExtract) {
         clearRows = [];
         if ( data )
             rows = data.split("\n");
+       if (rows )
       for (var i = 0; i < rows.length; i++) {
         clearRow = rows[i].replace(/\r?\n|\r|\t|\n/g, '').trim();
         if (clearRow) {
@@ -431,18 +432,18 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                 })
         //console.log({profile: profile});
 
-                dbo.collection("practice").findOne(myobj, function(err, result) {
+                dbo.collection("applicants").findOne(myobj, function(err, result) {
                     if (err) throw err;
                     if (result == null){
-                        dbo.collection("practice").insertOne(myobj, function(err, res) {
+                        dbo.collection("applicants").insertOne(myobj, function(err, res) {
                             if (err) throw err;
 
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
-                            dbo.collection("practice").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                            dbo.collection("applicants").updateOne({_id: myobj._id}, newValues , function(err, res) {
                                     if (err) throw err;
                                     //console.log("1 document inserted");
                                     //console.log(myobj._id);
-                                    db.close();
+                                    //db.close();
                             });
                           });
                     }
