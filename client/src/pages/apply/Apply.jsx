@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../../components/navbar/Navbar';
 import './apply.css';
 
     
@@ -10,6 +11,10 @@ function Apply() {
         </script>
         </head>
         <body topmargin="40" leftmargin="40">
+        <div>
+            <Navbar employerNavBar={true} />
+            <h1>Applicant Dashboard</h1>
+        </div>
              <form action="http://localhost:3001/test" method="POST" >
                  <label for="resume">Enter a resume:</label>
                  <textarea id="resume" class="resume-area" name="resume" rows="4" cols="50"></textarea>

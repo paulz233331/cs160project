@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../../components/navbar/Navbar';
 import './employer.css';
 
 function Employer() {
@@ -9,6 +10,12 @@ function Employer() {
         </script>
         </head>
         <body>
+
+        <div>
+            <Navbar employerNavBar={true} />
+            <h1>Employer Dashboard</h1>
+        </div>
+
              This is the employer's page. <br /><br/>
              Resume Management <br /><br />
              <form action="http://localhost:3001/emp1" method="post">
