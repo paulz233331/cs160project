@@ -72,7 +72,7 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query4 = { "skills" : { $regex : "html" , $options : "i" } };
+      var query4 = { "skills": { $regex: "html", $options: "i" } };
       dbo.collection("applicants").find(query4).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Alex Dubinchyk');
@@ -89,7 +89,7 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query5= { "experience" : { $regex : "team" , $options : "i" } };
+      var query5 = { "experience": { $regex: "team", $options: "i" } };
       dbo.collection("applicants").find(query5).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Sunil Kumar');
@@ -106,7 +106,7 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query6 = { "projects" : { $regex : "www." , $options : "i" } };
+      var query6 = { "projects": { $regex: "www.", $options: "i" } };
       dbo.collection("applicants").find(query6).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Sunil Kumar');
@@ -123,7 +123,7 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query7 = { "technology" : { $regex : "outlook" , $options : "i" } };
+      var query7 = { "technology": { $regex: "outlook", $options: "i" } };
       dbo.collection("applicants").find(query7).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Prem Prakash');
@@ -140,7 +140,7 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query8 = { "languages" : { $regex : "English" , $options : "i" } };
+      var query8 = { "languages": { $regex: "English", $options: "i" } };
       dbo.collection("applicants").find(query8).toArray(function (err, result) {
         if (err) throw err;
         expect(result[0].name).toEqual('Prem Prakash');
@@ -157,8 +157,8 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query9a = {name:"text", email:"text", objective:"text", education:"text", experience:"text", technology:"text", skills:"text", languages:"text", projects:"text"};
-      dbo.collection("applicants").createIndex(query9a, function(err, result) {
+      var query9a = { name: "text", email: "text", objective: "text", education: "text", experience: "text", technology: "text", skills: "text", languages: "text", projects: "text" };
+      dbo.collection("applicants").createIndex(query9a, function (err, result) {
         if (err) throw err;
         expect(result).toEqual('name_text_email_text_objective_text_education_text_experience_text_technology_text_skills_text_languages_text_projects_text');
       });
@@ -173,11 +173,11 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query9b = { $text : { $search : "professional" } };
+      var query9b = { $text: { $search: "professional" } };
       dbo.collection("applicants").find(query9b).toArray(function (err, result) {
         if (err) throw err;
-        expect(result[0].name).toEqual('Prem Prakash');
-        expect(result[0].email).toEqual('premgautam958@gmail.com');
+        expect(result[0].name).toEqual('D A');
+        expect(result[0].email).toEqual('faiz.afthab@gmail.com');
       });
       db.close();
 
@@ -190,10 +190,10 @@ describe("Testing with Jest", () => {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      var query10 = { $text : { $search : "english" } };
-      dbo.collection("applicants").find(query10).count(function(err, result) {
+      var query10 = { $text: { $search: "english" } };
+      dbo.collection("applicants").find(query10).count(function (err, result) {
         if (err) throw err;
-        expect(result).toEqual(4);
+        expect(result).toEqual(5);
       });
       db.close();
 
@@ -370,6 +370,164 @@ describe("Testing with Jest", () => {
       });
     }); //end connect
   }); //end test
+
+
+  test("Query 21", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      var query21 = { projection: { _id: 0, name: 1, "profile.hardworking": 1 } };
+      var sort21 = { "profile.hardworking": -1 };
+      dbo.collection("test").find({}, query21).sort(sort21).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0].name).toEqual('L V');
+        expect(result[0].profile.hardworking).toEqual(15);
+        expect(result[1].name).toEqual('E\nName');
+        expect(result[1].profile.hardworking).toEqual(13);
+        expect(result[2].name).toEqual('Business Development');
+        expect(result[2].profile.hardworking).toEqual(13);
+        expect(result[3].name).toEqual('P\nR');
+        expect(result[3].profile.hardworking).toEqual(11);
+        expect(result[4].name).toEqual('Sinhgad Technical');
+        expect(result[4].profile.hardworking).toEqual(10);
+      });
+      db.close();
+    });
+  });
+
+  test("Query 22", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+      var sort22 = { "profile.experience": -1 };
+      dbo.collection("test").find({}, query22).sort(sort22).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0].name).toEqual('P\nR');
+        expect(result[0].profile.experience).toEqual(76);
+        expect(result[1].name).toEqual('Microsoft Word');
+        expect(result[1].profile.experience).toEqual(65);
+        expect(result[2].name).toEqual('E\nR');
+        expect(result[2].profile.experience).toEqual(52);
+        expect(result[3].name).toEqual('A R');
+        expect(result[3].profile.experience).toEqual(48);
+        expect(result[4].name).toEqual('E\nName');
+        expect(result[4].profile.experience).toEqual(36);
+      });
+      db.close();
+    });
+  });
+
+  test("Query 23", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      var query23 = { projection: { _id: 0, name: 1, "profile.intelligence": 1 } };
+      var sort23 = { "profile.intelligence": -1 };
+      dbo.collection("test").find({}, query23).sort(sort23).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0].name).toEqual('P\nR');
+        expect(result[0].profile.intelligence).toEqual(18);
+        expect(result[1].name).toEqual('Sunil Kumar');
+        expect(result[1].profile.intelligence).toEqual(11);
+        expect(result[2].name).toEqual('Core Competencies');
+        expect(result[2].profile.intelligence).toEqual(10);
+        expect(result[3].name).toEqual('A R');
+        expect(result[3].profile.intelligence).toEqual(9);
+        expect(result[4].name).toEqual('Business Development');
+        expect(result[4].profile.intelligence).toEqual(9);
+      });
+      db.close();
+    });
+  });
+
+  test("Query 24", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      var query24 = { projection: { _id: 0, name: 1, "profile.leadership": 1 } };
+      var sort24 = { "profile.leadership": -1 };
+      dbo.collection("test").find({}, query24).sort(sort24).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0].name).toEqual('P\nR');
+        expect(result[0].profile.leadership).toEqual(11);
+        expect(result[1].name).toEqual('Chakravarthy\nOperations');
+        expect(result[1].profile.leadership).toEqual(11);
+        expect(result[2].name).toEqual('L V');
+        expect(result[2].profile.leadership).toEqual(9);
+        expect(result[3].name).toEqual('Sample C');
+        expect(result[3].profile.leadership).toEqual(8);
+        expect(result[4].name).toEqual('Dilkhush Bharucha');
+        expect(result[4].profile.leadership).toEqual(7);
+      });
+      db.close();
+    });
+  });
+
+  test("Query 25", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      var query25 = { projection: { _id: 0, name: 1, "profile.organization": 1 } };
+      var sort25 = { "profile.organization": -1 };
+      dbo.collection("test").find({}, query25).sort(sort25).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0].name).toEqual('P\nR');
+        expect(result[0].profile.organization).toEqual(26);
+        expect(result[1].name).toEqual('Business Development');
+        expect(result[1].profile.organization).toEqual(19);
+        expect(result[2].name).toEqual('L V');
+        expect(result[2].profile.organization).toEqual(18);
+        expect(result[3].name).toEqual('L D');
+        expect(result[3].profile.organization).toEqual(17);
+        expect(result[4].name).toEqual('E\nName');
+        expect(result[4].profile.organization).toEqual(16);
+      });
+      db.close();
+    });
+  });
+
+  test("Query 26", () => {
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+
+      dbo.collection("test").aggregate([
+        {
+          "$group": {
+            _id: "$name",
+            score: {
+              $sum: {
+                $add: ["$profile.hardworking",
+                  "$profile.experience",
+                  "$profile.intelligence",
+                  "$profile.leadership",
+                  "$profile.organization"]
+              }
+            }
+          },
+        },
+        {
+          "$sort": {
+            "score": -1, name : 1
+          }
+        }
+      ]).toArray(function (err, result) {
+        if (err) throw err;
+        expect(result[0]).toEqual({ "_id": "H S", "score": 142 });
+        expect(result[1]).toEqual({ "_id": "P\nR", "score": 142 });
+        expect(result[2]).toEqual({ "_id": "M V", "score": 124 });
+        expect(result[3]).toEqual({ "_id": "E\nR", "score": 94 });
+        expect(result[4]).toEqual({ "_id": "Microsoft Word", "score": 87 });
+      });
+      db.close();
+    });
+  });
 
   // setTimeout(function(){ db.close(); }, 4000);
 }); //end describe

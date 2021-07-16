@@ -3,10 +3,9 @@ var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 var url = "mongodb://54.205.24.189:27017/mydb"//"mongodb://dbApp:dbApp@54.205.24.189:27017/mydb?authSource=admin" //"mongodb://54.205.24.189:27017/mydb";
 
-MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-
 
   // Find in education (e.g. University, College)
   var query1 = { "education" : { $regex : "university" , $options : "i" } };
@@ -63,7 +62,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     console.log("Query 7: Search in technology complete");
     // console.log(result);
   });
-  
+
   // Find in languages (e.g. English)
   var query8 = { "languages" : { $regex : "English" , $options : "i" } };
   dbo.collection("applicants").find(query8).toArray(function(err, result) {
@@ -78,8 +77,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     if (err) throw err;
     console.log("Text index " + result + " created successfully");
   });
-  
-  var query9b = { $text : { $search : "english" } };
+
+  // Search for a keyword in the text index created in 9a
+  var query9b = { $text : { $search : "professional" } };
   dbo.collection("applicants").find(query9b).toArray(function(err, result) {
     if (err) throw err;
     console.log("Text index search complete");
@@ -180,5 +180,89 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     console.log("Query 20: otherOffer status has been updated");
   });
 
-  setTimeout(function(){db.close();}, 3000);
+  // returns 5 applicants with the highest profile.hardworking
+  var query21 = { projection: { _id: 0, name: 1, "profile.hardworking": 1 } };
+  var sort21 = { "profile.hardworking": -1 };
+  dbo.collection("test").find({}, query21).sort(sort21).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest hardworking scores are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  // returns 5 applicants with the highest profile.experience
+  var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+  var sort22 = { "profile.experience": -1 };
+  dbo.collection("test").find({}, query22).sort(sort22).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest experience scores are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  // returns 5 applicants with the highest profile.intelligence
+  var query23 = { projection: { _id: 0, name: 1, "profile.intelligence": 1 } };
+  var sort23 = { "profile.intelligence": -1 };
+  dbo.collection("test").find({}, query23).sort(sort23).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest intelligence scores are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  // returns 5 applicants with the highest profile.leadership
+  var query24 = { projection: { _id: 0, name: 1, "profile.leadership": 1 } };
+  var sort24 = { "profile.leadership": -1 };
+  dbo.collection("test").find({}, query24).sort(sort24).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest leadership scores are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  // returns 5 applicants with the highest profile.organization
+  var query25 = { projection: { _id: 0, name: 1, "profile.organization": 1 } };
+  var sort25 = { "profile.organization": -1 };
+  dbo.collection("test").find({}, query25).sort(sort25).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest organization scores are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  // Query 26: returns 5 applicants with the highest total profile score
+  dbo.collection("test").aggregate([
+    {
+      "$group": {
+        _id: "$name",
+        score: {
+          $sum: {
+            $add: ["$profile.hardworking",
+              "$profile.experience",
+              "$profile.intelligence",
+              "$profile.leadership",
+              "$profile.organization"]
+          }
+        }
+      },
+    },
+    {
+      "$sort": {
+        "score": -1, name : 1
+      }
+    }
+  ]).toArray(function (err, result) {
+    if (err) throw err;
+    console.log("The 5 applicants with the highest profile score are: ");
+    for (let i = 0; i < 5; i++) {
+      console.log(JSON.stringify(result[i]));
+    }
+  });
+
+  setTimeout(function () { db.close(); }, 3000);
 });
