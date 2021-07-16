@@ -65,8 +65,9 @@ export default function Navbar({employerNavBar}) {
           {!IsEmployerNavbar ?
           <div>
           <Link to="/apply"><Button className={classes.signupButton}>Applicant Apply</Button></Link>
-          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer-dashboard"})}>Employer Login</Button>
-          <Button className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer-dashboard"})}> Employer Sign up</Button>
+          <Link to="/employer"><Button className={classes.loginButton}>Employer</Button></Link>
+          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer"})}>Employer Login</Button>
+          <Button className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer"})}> Employer Sign up</Button>
           </div>
           :
           <Button className={classes.signupButton} onClick={() => logout()}>log out</Button>
