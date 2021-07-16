@@ -10,6 +10,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
+
 //https://attacomsian.com/blog/uploading-files-nodejs-express
 expr.use(fileUpload({
     createParentPath: true
@@ -732,9 +733,11 @@ expr.post('/test', function(req, res) {
                         <head>
                             <script type="text/javascript">
                             </script>
+                            <style>
+                            </style>
                         </head>
                         <body topmargin="40" leftmargin="40">
-                            You are redirected here after submitting text input.
+                        <h1>Applicant Dashboard</h1>
         `;
         //html = html + JSON.stringify(result);
         html = html +
