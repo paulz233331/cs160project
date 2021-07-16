@@ -857,9 +857,9 @@ expr.post('/testCfm', function(req, res) {
                     }
                 });
 
-            var html = `<p>You submitted a resume</p>`
-            res.status(200).send(html);
-
+            //var html = `<p>You submitted a resume</p>`
+            //res.status(200).send(html);
+            res.redirect('http://localhost:3000/confirmation');
 
 
             })
