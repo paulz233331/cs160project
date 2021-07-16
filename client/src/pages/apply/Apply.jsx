@@ -13,7 +13,6 @@ function Apply() {
         <body topmargin="40" leftmargin="40">
         <div>
             <Navbar employerNavBar={true} />
-            <h1>Employer Dashboard</h1>
         </div>
              <form action="http://localhost:3001/test" method="POST" >
                  <label for="resume">Enter a resume:</label>
