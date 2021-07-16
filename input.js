@@ -816,6 +816,7 @@ expr.post('/test', function(req, res) {
           html = html + `
           <input type="submit" value="Submit">
         </form>
+        <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
         </body>
         </html>
         `;
