@@ -1,18 +1,13 @@
 import React from 'react';
 import './employer.css';
+import Navbar from '../../components/navbar/Navbar';
 
 function Employer() {
     return (
-        <html>
-        <head>
-            <script type="text/javascript">
-        </script>
-        </head>
-        <body topmargin="40" leftmargin="40">
-             This is the employer's page.
-
-         </body>
-        </html>
+        <div>
+            <Navbar employerNavBar={true} />
+            <h1>Employer Dashboard</h1>
+        </div>
     )
 }
 

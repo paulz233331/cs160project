@@ -21,7 +21,7 @@ function App() {
     <Route path="/apply" exact>
     <Apply />
     </Route>
-    <Route path="/employer" exact>
+    <Route path="/employer-dashboard" exact>
     <Employer />
     </Route>
     </Switch>

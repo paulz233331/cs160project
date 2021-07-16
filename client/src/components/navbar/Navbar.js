@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,60 +11,48 @@ import Apply from '../../pages/apply/Apply'
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-    content: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      background: '#EBF5EE',
-  },
-  bar: {
-    maxHeight: '15vh',
-    overflow: 'hidden'
-  },
-  buttonContainer: {
-    marginRight: '5%'
-  },
+  content: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    background: '#EBF5EE',
+},
+bar: {
+  maxHeight: '15vh',
+  overflow: 'hidden'
+},
+buttonContainer: {
+  marginRight: '5%'
+},
 
-  applyButton: {
-    borderRadius: '11px',
-    border: 'solid 2px rgb(102, 178, 240)',
-    padding: '10px',
-    paddingLeft: '3rem',
-    paddingRight: '3rem',
-    color: '#009FFD',
-    marginRight: '10px'
-  },
-
-  loginButton: {
-    borderRadius: '11px',
-    border: 'solid 2px rgb(102, 178, 240)',
-    padding: '10px',
-    paddingLeft: '3rem',
-    paddingRight: '3rem',
-    color: '#009FFD',
-    marginRight: '10px'
-  },
-  signupButton: {
-    borderRadius: '11px',
-    border: 'solid 2px rgb(102, 178, 240)',
-    backgroundColor: 'rgb(102, 178, 240)',
-    padding: '10px',
-    paddingLeft: '3rem',
-    paddingRight: '3rem',
-    color: 'white'
-  },
-  logo: {
-    transform: 'scale(1.3)', 
-    marginLeft: '5%'
-  },
+loginButton: {
+  borderRadius: '11px',
+  border: 'solid 2px rgb(102, 178, 240)',
+  padding: '10px',
+  paddingLeft: '3rem',
+  paddingRight: '3rem',
+  color: '#009FFD',
+  marginRight: '10px'
+},
+signupButton: {
+  borderRadius: '11px',
+  border: 'solid 2px rgb(102, 178, 240)',
+  backgroundColor: 'rgb(102, 178, 240)',
+  padding: '10px',
+  paddingLeft: '3rem',
+  paddingRight: '3rem',
+  color: 'white',
+  marginRight: '10px',
+},
+logo: {
+  transform: 'scale(1.3)', 
+  marginLeft: '5%'
+},
 }));
 
-export default function Navbar() {
+export default function Navbar({employerNavBar}) {
+  const [IsEmployerNavbar, setIsEmployerNavbar] = useState(employerNavBar);
   const classes = useStyles();
-  const { loginWithRedirect } = useAuth0();
-
-  const history = useHistory();
-  const goLogin = () => history.push('employer');
-  var location = useLocation();
+  const { loginWithRedirect, logout } = useAuth0();
 
   return (
     <div className={classes.root}>
@@ -74,23 +62,22 @@ export default function Navbar() {
           <img  src={logo} alt="logo" />
           </IconButton>
           <div className={classes.buttonContainer}>
-          <Link to="/apply"><Button className={classes.loginButton}>Apply</Button></Link>
-          <Link to="/employer"><Button className={classes.loginButton}>Employer</Button></Link>
-          <Button  className={classes.loginButton} onClick={function(){
-                loginWithRedirect({
-                    redirect_uri : '/employer',
-                    appState: {target: '/employer'}
-                });
-                //goLogin();
-
-            } }> Login</Button>
-          <Button className={classes.signupButton} onClick={() => loginWithRedirect({
-                appState: {target: 'http://localhost:3000/apply'}
-             })}>Sign up</Button>
+          {!IsEmployerNavbar ?
+          <div>
+          <Link to="/apply"><Button className={classes.signupButton}>Applicant Apply</Button></Link>
+          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer-dashboard"})}>Employer Login</Button>
+          <Button className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer-dashboard"})}> Employer Sign up</Button>
+          </div>
+          :
+          <Button className={classes.signupButton} onClick={() => logout()}>log out</Button>
+  }
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+
+
 

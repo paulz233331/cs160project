@@ -6,7 +6,7 @@ import video from '../../assets/video.mp4';
 const Home = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar employerNavBar={false} />
             <div className="home-container">
                 {/* Background video */}
                 <video src={video} muted loop autoPlay></video>
