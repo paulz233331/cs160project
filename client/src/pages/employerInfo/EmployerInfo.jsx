@@ -73,7 +73,7 @@ const EmployerInfo = () => {
     if (isLoading)
         return <div>Loading...</div>
     return (
-    <div>
+    <form className={classes.root} action="http://localhost:3001/empInf" method="POST">
      <div className={classes.applicationFormHeader}>
           <img src={logo} alt="" />
           <h2>Create a Company Profile.</h2>
@@ -81,7 +81,6 @@ const EmployerInfo = () => {
       </div>
 
       <div className={classes.formLayout}>
-        <form className={classes.root} action="http://localhost:3001/empInf" method="POST">
 
         <TextField id="standard-required" name="company" label="Company Name" />
         <TextField
@@ -98,10 +97,10 @@ const EmployerInfo = () => {
           label="Job Title"
         />
         <Button color="primary" className={classes.submitApplicationButton} type="submit">Submit</Button>
-        </form>
+
 
       </div>
-    </div>
+    </form>
     );
 }
 
