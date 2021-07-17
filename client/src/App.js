@@ -1,6 +1,7 @@
 import Home from './pages/home/Home';
 import Apply from './pages/apply/Apply';
 import Employer from './pages/employer/Employer';
+import EmployerInfo from './pages/employerInfo/EmployerInfo';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Confirmation from './pages/Confirmation';
 
@@ -23,6 +24,9 @@ function App() {
     </Route>
     <Route path="/employer" exact>
     <Employer />
+    </Route>
+    <Route path="/employerInfo" exact>
+    <EmployerInfo />
     </Route>
     </Switch>
     </Router>
