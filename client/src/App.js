@@ -25,7 +25,7 @@ function App() {
     <Route path="/employer" exact>
     <Employer />
     </Route>
-    <Route path="/employerInfo" exact>
+    <Route path="/employer-info" exact>
     <EmployerInfo />
     </Route>
     </Switch>
