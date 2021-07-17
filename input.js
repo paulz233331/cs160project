@@ -567,6 +567,15 @@ expr.post('/emp5', function(req, res) {
     } , 3000);
 })
 
+
+
+expr.post('/empInf', function(req, res) {
+    console.log(req.body.company);
+    console.log(req.body.email);
+    console.log(req.body.jobTitle);
+    //update employer database
+})
+
 expr.post('/test2', function(req, res) {
    try {
         if(!req.files) {

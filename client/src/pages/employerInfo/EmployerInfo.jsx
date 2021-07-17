@@ -73,30 +73,35 @@ const EmployerInfo = () => {
     if (isLoading)
         return <div>Loading...</div>
     return (
-    <form className={classes.root} noValidate autoComplete="off" action="http://localhost:3001/empInf">
-      <div className={classes.applicationFormHeader}>
+    <div>
+     <div className={classes.applicationFormHeader}>
           <img src={logo} alt="" />
           <h2>Create a Company Profile.</h2>
-      </div>
       <h2>{user} </h2>
+      </div>
 
       <div className={classes.formLayout}>
-        <TextField id="standard-required" label="Company Name" />
+        <form className={classes.root} action="http://localhost:3001/empInf" method="POST">
+
+        <TextField id="standard-required" name="company" label="Company Name" />
         <TextField
           required
           id="standard-email-input"
+          name = "email"
           label="Email"
           type="email"
           autoComplete="email"
         />
         <TextField
           id="outlined-multiline-static"
+          name = "jobTitle"
           label="Job Title"
         />
-        <Button color="primary" className={classes.submitApplicationButton}>Submit</Button>
+        <Button color="primary" className={classes.submitApplicationButton} type="submit">Submit</Button>
+        </form>
+
       </div>
-      
-    </form>
+    </div>
     );
 }
 
