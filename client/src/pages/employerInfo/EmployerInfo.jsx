@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import logo from '../../assets/mainlogo.png';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +46,8 @@ skillsInput: {
 },
 submitApplicationButton: {
   border: '1px solid skyblue',
-  marginTop: '50px'
+  marginTop: '50px',
+  width: '100%'
 }
 }));
 
@@ -65,6 +67,11 @@ const EmployerInfo = () => {
 
     const handleAddition = tag => {
         setTags([...Tags, tag]);
+    }
+
+    // temporary submit function
+    const handleSubmit = () => {
+      localStorage.clear();
     }
 
     const { user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
@@ -96,8 +103,7 @@ const EmployerInfo = () => {
           name = "jobTitle"
           label="Job Title"
         />
-        <Button color="primary" className={classes.submitApplicationButton} type="submit">Submit</Button>
-
+        <Link to="/employer"><Button color="primary" className={classes.submitApplicationButton} onClick={handleSubmit} type="submit">Submit</Button></Link>
 
       </div>
     </form>

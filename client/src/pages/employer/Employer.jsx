@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import './employer.css';
+import { Redirect } from 'react-router';
 
 function Employer() {
+    const isFirstTimeUser = localStorage.getItem("firstTimeUser");
+
+    if (isFirstTimeUser === "yes") return <Redirect to="/employer-info" />
+    
     return (
         <html>
         <head>
@@ -78,6 +83,8 @@ function Employer() {
                   <input type="submit" value="Update" />
                   <br /><br />
                   <a href="http://localhost:3000">Return to home page.</a>
+                  <br/>
+                  <a href="http://localhost:3000/employer-info">Edit Employer Info</a>
               </form>
          </body>
         </html>

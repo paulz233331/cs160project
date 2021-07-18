@@ -49,10 +49,21 @@ logo: {
 },
 }));
 
-export default function Navbar({employerNavBar}) {
+export default function Navbar({employerNavBar, isFirstTimeUser}) {
+  localStorage.clear()
   const [IsEmployerNavbar, setIsEmployerNavbar] = useState(employerNavBar);
   const classes = useStyles();
   const { loginWithRedirect, logout } = useAuth0();
+
+  const handleSignup = () => {
+    localStorage.setItem("firstTimeUser", "yes");
+    loginWithRedirect();
+  }
+
+  const handleLogin = () => {
+    localStorage.setItem("firstTimeUser", "no");
+    loginWithRedirect();
+  }
 
   return (
     <div className={classes.root}>
@@ -65,8 +76,8 @@ export default function Navbar({employerNavBar}) {
           {!IsEmployerNavbar ?
           <div>
           <Link to="/apply"><Button className={classes.signupButton}>Applicant Apply</Button></Link>
-          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer"})}>Employer Login</Button>
-          <Button className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer-info"})}> Employer Sign up</Button>
+          <Button  className={classes.loginButton} onClick={() => handleLogin()}>Employer Login</Button>
+          <Button className={classes.loginButton} onClick={() => handleSignup()}> Employer Sign up</Button>
           </div>
           :
           <Button className={classes.signupButton} onClick={() => logout()}>log out</Button>
