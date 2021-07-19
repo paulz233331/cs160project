@@ -20,7 +20,7 @@ function Employer() {
             <Navbar employerNavBar={true} />
             <h1>Employer Dashboard</h1>
         </div>
-
+            <br/>
              This is the employer's page. <br /><br/>
              Resume Management <br /><br />
              <form action="http://localhost:3001/emp1" method="post">
@@ -82,10 +82,24 @@ function Employer() {
                   </select> &nbsp;&nbsp;
                   <input type="submit" value="Update" />
                   <br /><br />
-                  <a href="http://localhost:3000">Return to home page.</a>
-                  <br/>
-                  <a href="http://localhost:3000/employer-info">Edit Employer Info</a>
               </form>
+
+             <form action="http://localhost:3001/emp6" method="post">
+               <label for="prof">6) Find the best applicants by their profile: &nbsp;&nbsp; </label>
+                Score:&nbsp;&nbsp;<select name="profileValue" id="profileValue">
+                  <option value="overall">overall</option>
+                  <option value="hardworking">hardworking</option>
+                  <option value="experience">experience</option>
+                  <option value="intelligence">intelligence</option>
+                  <option value="leadership">leadership</option>
+                  <option value="organization">organization</option>
+                </select> &nbsp;&nbsp;
+                <input type="submit" value="Submit" />
+                <br /><br />
+                <a href="http://localhost:3000">Return to home page.</a>
+                <br/><br />
+                <a href="http://localhost:3000/employer-info">Edit Employer Info</a>
+            </form>
          </body>
         </html>
     )

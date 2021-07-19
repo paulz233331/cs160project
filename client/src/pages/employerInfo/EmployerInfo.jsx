@@ -104,7 +104,7 @@ const EmployerInfo = () => {
           label="Job Title"
         />
         <Link to="/employer"><Button color="primary" className={classes.submitApplicationButton} onClick={handleSubmit} type="submit">Submit</Button></Link>
-
+        <br /> <a href="http://localhost:3000">Return to home page.</a>
       </div>
     </form>
     );

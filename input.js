@@ -567,7 +567,74 @@ expr.post('/emp5', function(req, res) {
     } , 3000);
 })
 
+expr.post('/emp6', function(req, res) {
+    var html = `
+        <html>
+            <head>
+                <script type="text/javascript">
+                </script>
+            </head>
+            <body topmargin="40" leftmargin="40">
+                Results: <br /><br />
+    `;
 
+    if (req.body.profileValue === "overall"){
+
+    }
+    else if (req.body.profileValue === "hardworking"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
+
+          //var query21 = { projection: { _id: 0, name: 1, "profile.hardworking": 1 } };
+          var sort21 = { "profile.hardworking": -1 };
+          dbo.collection("test").find({}).sort(sort21).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+
+              html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === 'profile'){
+                        console.log(key);
+                        console.log(doc[key]);
+
+                        html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>'
+          });
+              //db.close();
+        }); //end connect
+
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
+
+            res.status(200).send(html);
+        } , 3000);
+    }
+    else if (req.body.profileValue === "experience"){
+
+    }
+    else if (req.body.profileValue === "intelligence"){
+
+    }
+    else if (req.body.profileValue === "leadership"){
+
+    }
+    else if (req.body.profileValue === "organization"){
+
+    }
+})
 
 expr.post('/empInf', function(req, res) {
     console.log(req.body.company);
