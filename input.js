@@ -579,7 +579,81 @@ expr.post('/emp6', function(req, res) {
     `;
 
     if (req.body.profileValue === "overall"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
+          dbo.collection("test").aggregate([
+            {
+              "$group": {
+                _id: {_id: "$_id", name: "$name", email: "$email", summary: "$summary", experience: "$experience", projects: "$projects",
+                 languages: "$languages", education: "$education", hired: "$hired", interviewed: "$interviewed",
+                 offered:"$offered", otherOffer: "$otherOffer", position: "$position", profile:"$profile"},
+                score: {
+                  $sum: {
+                    $add: ["$profile.hardworking",
+                      "$profile.experience",
+                      "$profile.intelligence",
+                      "$profile.leadership",
+                      "$profile.organization"]
+                  }
+                }
+              },
+            },
+            {
+              "$sort": {
+                "score": -1, name : 1
+              }
+            }
+          ]).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === '_id'){
+                        html += "name: " + doc[key].name + '<br />';
+                        html += "email: " + doc[key].email + '<br />';
+                        if (doc[key].summary)
+                            html += "summary: " + doc[key].summary + '<br />';
+                        if (doc[key].experience)
+                            html += "experience: " + doc[key].experience + '<br />';
+                        if (doc[key].projects)
+                            html += "otherOffer: " + doc[key].projects + '<br />';
+                        if (doc[key].languages)
+                            html += "languages: " + doc[key].languages + '<br />';
+                        if (doc[key].education)
+                            html += "education: " + doc[key].education + '<br />';
+                        if (doc[key].hired)
+                            html += "hired: " + doc[key].hired + '<br />';
+                        if (doc[key].interviewed)
+                            html += "interviewed: " + doc[key].interviewed + '<br />';
+                        if (doc[key].offered)
+                            html += "offered: " + doc[key].offered + '<br />';
+                        if (doc[key].otherOffer)
+                            html += "otherOffer: " + doc[key].otherOffer + '<br />';
+                        if (doc[key].position)
+                            html += "position: " + doc[key].position + '<br />';
+                        if (doc[key].summary)
+                            html += "profile: " + JSON.stringify(doc[key].profile) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>';
+          });
+        }); //end connect
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
 
+            res.status(200).send(html);
+        } , 3000);
     }
     else if (req.body.profileValue === "hardworking"){
         MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -596,9 +670,6 @@ expr.post('/emp6', function(req, res) {
               result.forEach(function(doc){
                   for (var key in doc){
                     if (key === 'profile'){
-                        console.log(key);
-                        console.log(doc[key]);
-
                         html += key + ": " + JSON.stringify(doc[key]) + '<br />';
                     }
                     else{
@@ -623,16 +694,144 @@ expr.post('/emp6', function(req, res) {
         } , 3000);
     }
     else if (req.body.profileValue === "experience"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
 
+          //var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+          var sort22 = { "profile.experience": -1 };
+          dbo.collection("test").find({}).sort(sort22).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === 'profile'){
+                        html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>'
+          });
+        });
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
+
+            res.status(200).send(html);
+        } , 3000);
     }
     else if (req.body.profileValue === "intelligence"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
 
+          //var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+          var sort23 = { "profile.intelligence": -1 };
+          dbo.collection("test").find({}).sort(sort23).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === 'profile'){
+                        html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>'
+          });
+        });
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
+
+            res.status(200).send(html);
+        } , 3000);
     }
     else if (req.body.profileValue === "leadership"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
 
+          //var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+          var sort24 = { "profile.leadership": -1 };
+          dbo.collection("test").find({}).sort(sort24).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === 'profile'){
+                        html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>'
+          });
+        });
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
+
+            res.status(200).send(html);
+        } , 3000);
     }
     else if (req.body.profileValue === "organization"){
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
 
+          //var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
+          var sort25 = { "profile.organization": -1 };
+          dbo.collection("test").find({}).sort(sort24).limit(5).toArray(function (err, result) {
+            if (err) throw err;
+            html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+                      'Results: <br /> <br />';
+              result.forEach(function(doc){
+                  for (var key in doc){
+                    if (key === 'profile'){
+                        html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+                    }
+                    else{
+                        html += key + ": " + doc[key] + '<br />';
+                    }
+                  }
+                  html += '<br />';
+              })
+              html += '<br/>'
+          });
+        });
+        setTimeout(function(){
+            html = html + `
+                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </body>
+                </html>
+            `;
+
+            res.status(200).send(html);
+        } , 3000);
     }
 })
 
