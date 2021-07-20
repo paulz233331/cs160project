@@ -969,6 +969,10 @@ expr.post('/test2', function(req, res) {
                 </textarea>`;
               }
               html = html + `
+                 <label for="jobTitle">Job Title:</label>
+                 <textarea id="jobTitle" name="jobTitle" rows="4" cols="50">
+                 </textarea>`;
+              html = html + `
               <input type="submit" value="Submit">
             </form>
             </body>
@@ -1088,9 +1092,29 @@ expr.post('/test', function(req, res) {
             </textarea>`;
           }
           html = html + `
-          <label for="jobTitle">Job Title:</label>
-          <textarea id="jobTitle" name="jobTitle" rows="4" cols="50">
-          </textarea>`;
+          <label for="jobTitle">Job Title:</label>`;
+
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
+          dbo.collection("employers").find().toArray(function (err, result) {
+                if (err) throw err;
+             html = html + `
+             <select name="jobTitle" id="jobTitle">`;
+              result.forEach(function(doc){
+                   html = html + `
+                   <option value=\" `
+                   +
+                   doc["job_title"] + `
+                   \"> ` +
+                   doc["job_title"] + `</option>`;
+                   //html += JSON.stringify(doc, null, "\n") + '<br />';
+              })
+              html = html + "</select>";
+          }) //end find
+        }); //end connect
+        
+        setTimeout(function(){
           html = html + `
           <input type="submit" value="Submit">
         </form>
@@ -1099,6 +1123,7 @@ expr.post('/test', function(req, res) {
         </html>
         `;
         res.status(200).send(html);
+        }, 3000);
     }, 3000 ) ;
 
 })
