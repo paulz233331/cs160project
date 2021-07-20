@@ -858,6 +858,7 @@ expr.post('/empInf', function (req, res) {
     });
   });
   setTimeout(function(){
+
       res.redirect("http://localhost:3000"); //create a Confirmation page.
   }, 3000);
 })
@@ -913,7 +914,7 @@ expr.post('/test2', function(req, res) {
                                 </script>
                             </head>
                             <body topmargin="40" leftmargin="40">
-                                You are redirected here after submitting text input.
+                                You are redirected here after uploading a resume.
             `;
             //html = html + JSON.stringify(result);
             html = html +
@@ -998,7 +999,7 @@ expr.post('/test2', function(req, res) {
                 if (err) throw err;
              html = html + '<select name="position" id="position">';
               result.forEach(function(doc){
-                   html = html + '<option value=\"' + doc["job_title"] + '\">' + doc["job_title"] + '</option>';
+                   html = html + '<option value=\"'+ JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
               })
               html = html + "</select>";
           }) //end find
@@ -1141,7 +1142,7 @@ expr.post('/test', function(req, res) {
              html = html + `
              <select name="position" id="position">`;
               result.forEach(function(doc){
-                   html = html + '<option value=\"' + doc["job_title"] + '\">' + doc["job_title"] + '</option>';
+                   html = html + '<option value=\"'+ JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
               })
               html = html + "</select>";
           }) //end find
@@ -1162,8 +1163,19 @@ expr.post('/test', function(req, res) {
 
 })
 
+//https://stackoverflow.com/questions/29020931/add-quotation-marks-to-json-object-attributes
+function JSONify(obj){
+  var o = {};
+  for(var i in obj){
+    o['"'+i+'"'] = obj[i]; // make the quotes
+  }
+  return o;
+}
+
 expr.post('/testCfm', function(req, res) {
       var resm = req.body;
+      resm.position = resm.position.replace('{','{\"').replace(/:/g,'\":\"').replace(/,/g,'\",\"').replace('}', '\"}');
+      resm.position = JSON.parse(resm.position);
         setTimeout(function(){
             MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
               if (err) throw err;

@@ -67,7 +67,7 @@ function Apply() {
              <form action="http://localhost:3001/test2" method="post" enctype="multipart/form-data" className={classes.root} >
 
                <div className={classes.applicationFormHeader}>
-             Upload a resume<br /><br />
+             <label for="resume2">Upload a resume:</label>
                 <input type="file" id="resume2" name="resume2" /><br />
                 <input type="submit" value="Upload" />
                 <br />
