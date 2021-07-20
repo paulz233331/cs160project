@@ -38,12 +38,6 @@ applicationFormHeader: {
         justifySelf: 'center'
     }
 },
-skillsInput: {
-    margin: '500px',
-    '& input[type=text]': {
-        height: '500px'
-    }
-},
 submitApplicationButton: {
   border: '1px solid skyblue',
   marginTop: '50px',
