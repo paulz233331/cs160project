@@ -876,7 +876,7 @@ expr.post('/test2', function(req, res) {
 
      app.main();
     var fileName = 'compiled/' + req.files.resume2.name.split('.').slice(0, -1).join('.') + ".json";
-        setTimeout( function () {
+      setTimeout( function () {
             let rawdata = fs.readFileSync(fileName);
             let applicant = JSON.parse(rawdata);
             /*console.log(applicant);
@@ -968,18 +968,35 @@ expr.post('/test2', function(req, res) {
                     ` + (applicant.positions ? applicant.positions : "") + `
                 </textarea>`;
               }
-              html = html + `
-                 <label for="jobTitle">Job Title:</label>
-                 <textarea id="jobTitle" name="jobTitle" rows="4" cols="50">
-                 </textarea>`;
+          html = html + `
+          <label for="jobTitle">Job Title:</label>`;
+
+        MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+          if (err) throw err;
+          var dbo = db.db("mydb");
+          dbo.collection("employers").find().toArray(function (err, result) {
+                if (err) throw err;
+             html = html + '<select name="position" id="position">';
+              result.forEach(function(doc){
+                   html = html + '<option value=\"' + doc["job_title"] + '\">' + doc["job_title"] + '</option>';
+              })
+              html = html + "</select>";
+          }) //end find
+        }); //end connect
+
+
+        setTimeout(function(){
               html = html + `
               <input type="submit" value="Submit">
             </form>
+        <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
             </body>
             </html>
             `;
             res.status(200).send(html);
-        }, 3000 ) ;
+        }, 3000);
+
+     }, 3000 ) ;
 
 });
 
@@ -1094,26 +1111,23 @@ expr.post('/test', function(req, res) {
           html = html + `
           <label for="jobTitle">Job Title:</label>`;
 
+
+        setTimeout(function(){
         MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
           if (err) throw err;
           var dbo = db.db("mydb");
           dbo.collection("employers").find().toArray(function (err, result) {
                 if (err) throw err;
              html = html + `
-             <select name="jobTitle" id="jobTitle">`;
+             <select name="position" id="position">`;
               result.forEach(function(doc){
-                   html = html + `
-                   <option value=\" `
-                   +
-                   doc["job_title"] + `
-                   \"> ` +
-                   doc["job_title"] + `</option>`;
-                   //html += JSON.stringify(doc, null, "\n") + '<br />';
+                   html = html + '<option value=\"' + doc["job_title"] + '\">' + doc["job_title"] + '</option>';
               })
               html = html + "</select>";
           }) //end find
         }); //end connect
-        
+        },1000);
+
         setTimeout(function(){
           html = html + `
           <input type="submit" value="Submit">
@@ -1149,9 +1163,9 @@ expr.post('/testCfm', function(req, res) {
                         });
                     }
                     else{
-                        dbo.collection("applicants").updateOne(result, {$set : resm }, function(err, result) {
+                        dbo.collection("applicants").updateMany(result, {$set : resm }, function(err, result) {
                             if (err) throw err;
-                            console.log("1 document updated");
+                            console.log("Updated document(s)");
                             db.close();
                         });
                     }
