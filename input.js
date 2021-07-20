@@ -849,18 +849,17 @@ expr.post('/empInf', function (req, res) {
 
     dbo.collection("employers").findOne(jobListing, function (err, result) {
       if (err) throw err;
-      //db.close();
-      console.log(result);
       if (result == null) {
         dbo.collection("employers").insertOne(jobListing, function (err, res) {
           if (err) throw err;
-          console.log(jobListing.jobTitle + " at " + jobListing.employer + " inserted!");
-          db.close();
+          //console.log(jobListing.job_title + " at " + jobListing.employer + " inserted!");
         });
       }
-      db.close();
     });
   });
+  setTimeout(function(){
+      res.redirect("http://localhost:3000"); //create a Confirmation page.
+  }, 3000);
 })
 
 expr.post('/test2', function(req, res) {

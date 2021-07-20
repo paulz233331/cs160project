@@ -82,7 +82,7 @@ const EmployerInfo = () => {
       </div>
 
       <div className={classes.formLayout}>
-
+        <form action="http://localhost:3001/empInf" method="POST">
         <TextField id="standard-required" name="company" label="Company Name" />
         <TextField
           required
@@ -97,7 +97,8 @@ const EmployerInfo = () => {
           name = "jobTitle"
           label="Job Title"
         />
-        <Link to="/employer"><Button color="primary" className={classes.submitApplicationButton} onClick={handleSubmit} type="submit">Submit</Button></Link>
+        <Button color="primary" className={classes.submitApplicationButton} type="submit">Submit</Button>
+        </form>
         <br /> <a href="http://localhost:3000">Return to home page.</a>
       </div>
     </form>
