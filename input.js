@@ -835,11 +835,32 @@ expr.post('/emp6', function(req, res) {
     }
 })
 
-expr.post('/empInf', function(req, res) {
-    console.log(req.body.company);
-    console.log(req.body.email);
-    console.log(req.body.jobTitle);
-    //update employer database
+expr.post('/empInf', function (req, res) {
+  // console.log(req.body.company);
+  // console.log(req.body.email);
+  // console.log(req.body.jobTitle);
+  //update employer database
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+
+    //insert myobj if its not already there.
+    var jobListing = { employer: req.body.company , email: req.body.email , job_title: req.body.jobTitle };
+
+    dbo.collection("employers").findOne(jobListing, function (err, result) {
+      if (err) throw err;
+      //db.close();
+      console.log(result);
+      if (result == null) {
+        dbo.collection("employers").insertOne(jobListing, function (err, res) {
+          if (err) throw err;
+          console.log(jobListing.jobTitle + " at " + jobListing.employer + " inserted!");
+          db.close();
+        });
+      }
+      db.close();
+    });
+  });
 })
 
 expr.post('/test2', function(req, res) {
