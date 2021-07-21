@@ -483,7 +483,7 @@ expr.post('/emp4', function(req, res) {
     MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
           if (err) throw err;
           var dbo = db.db("mydb");
-          var query16 = { "position": req.body.psn };
+          var query16 = { "position.job_title": req.body.psn };
           dbo.collection("test").find(query16).count(function(err, result) {
             if (err) throw err;
             //console.log(result);
