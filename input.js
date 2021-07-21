@@ -51,14 +51,14 @@ expr.post('/emp1', function(req, res) {
 
           var query10 = { $text : { $search : req.body.fnd } };
 
-          dbo.collection("applicants").find(query10).count(function(err, result) {
+          dbo.collection("test").find(query10).count(function(err, result) {
             if (err) throw err;
             //console.log(result);
             html += result + ' resumes contain \"' + req.body.fnd + '\".<br /><br />';
             //console.log(html);
           });
 
-          dbo.collection("applicants").find(query10).limit(5).toArray(function (err, result) {
+          dbo.collection("test").find(query10).limit(5).toArray(function (err, result) {
               if (err) throw err;
               html += ' Displaying top 5 results: <br />';
               result.forEach(function(doc){
@@ -84,7 +84,7 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query9b = { $text : { $search : req.body.fnd } };
-          dbo.collection("applicants").find(query9b).limit(5).toArray(function (err, result) {
+          dbo.collection("test").find(query9b).limit(5).toArray(function (err, result) {
             if (err) throw err;
             expect(result[0].name).toEqual('Prem Prakash');
             expect(result[0].email).toEqual('premgautam958@gmail.com');
@@ -98,14 +98,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "education": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the education section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -124,14 +124,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "summary": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the summary section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -150,14 +150,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "objective": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the objective section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -176,14 +176,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "skills": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the skills section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -202,14 +202,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "experience": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the experience section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -228,14 +228,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "projects": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the projects section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -254,14 +254,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "technology": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the technology section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -280,14 +280,14 @@ expr.post('/emp1', function(req, res) {
           var dbo = db.db("mydb");
 
           var query1 = { "languages": { $regex: req.body.fnd, $options: "i" } };
-          dbo.collection("applicants").find(query1).count(function(err, result) {
+          dbo.collection("test").find(query1).count(function(err, result) {
               if (err) throw err;
               //console.log(result);
               html += result + ' resumes contain \"' + req.body.fnd + '\" in the languages section.<br /><br />';
               //console.log(html);
             });
 
-            dbo.collection("applicants").find(query1).limit(5).toArray(function (err, result) {
+            dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                 result.forEach(function(doc){
@@ -328,7 +328,7 @@ expr.post('/emp2', function(req, res) {
           var dbo = db.db("mydb");
 
           var query11a = { projection: { _id: 0, "name": 1 } };
-          dbo.collection("applicants").find({}, query11a).toArray(function (err, result) {
+          dbo.collection("test").find({}, query11a).toArray(function (err, result) {
               if (err) throw err;
               html += ' Displaying list of names: ';
                 result.forEach(function(doc){
@@ -340,7 +340,7 @@ expr.post('/emp2', function(req, res) {
           });
 
           var query11b = { projection: { _id: 0, "email": 1 } };
-          dbo.collection("applicants").find({}, query11b).toArray(function (err, result) {
+          dbo.collection("test").find({}, query11b).toArray(function (err, result) {
               if (err) throw err;
               html += ' Displaying list of emails: ';
               result.forEach(function(doc){
@@ -379,13 +379,13 @@ expr.post('/emp3', function(req, res) {
           var dbo = db.db("mydb");
           if (req.body.status === "interviewed"){
             var query12 = { "interviewed": true }; // or false
-              dbo.collection("applicants").find(query12).count(function(err, result) {
+              dbo.collection("test").find(query12).count(function(err, result) {
                 if (err) throw err;
                 //console.log(result);
                 html += result + ' applicants have been \"' + req.body.status + '\".<br /><br />';
                 //console.log(html);
               });
-              dbo.collection("applicants").find(query12).limit(5).toArray(function (err, result) {
+              dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                   result.forEach(function(doc){
@@ -399,13 +399,13 @@ expr.post('/emp3', function(req, res) {
           }
           else if (req.body.status === "hired"){
             var query12 = { "hired": true }; // or false
-              dbo.collection("applicants").find(query12).count(function(err, result) {
+              dbo.collection("test").find(query12).count(function(err, result) {
                 if (err) throw err;
                 //console.log(result);
                 html += result + ' applicants have been \"' + req.body.status + '\".<br /><br />';
                 //console.log(html);
               });
-              dbo.collection("applicants").find(query12).limit(5).toArray(function (err, result) {
+              dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                   result.forEach(function(doc){
@@ -419,11 +419,11 @@ expr.post('/emp3', function(req, res) {
           }
           else if (req.body.status === "offered"){
             var query12 = { "offered": true }; // or false
-              dbo.collection("applicants").find(query12).count(function(err, result) {
+              dbo.collection("test").find(query12).count(function(err, result) {
                 if (err) throw err;
                 html += result + ' applicants have been "offered" this job.<br /><br />';
               });
-              dbo.collection("applicants").find(query12).limit(5).toArray(function (err, result) {
+              dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                   result.forEach(function(doc){
@@ -437,11 +437,11 @@ expr.post('/emp3', function(req, res) {
           }
           else if (req.body.status === "otherOffer"){
             var query12 = { "otherOffer": true }; // or false
-              dbo.collection("applicants").find(query12).count(function(err, result) {
+              dbo.collection("test").find(query12).count(function(err, result) {
                 if (err) throw err;
                 html += result + ' applicants have another offer.<br /><br />';
               });
-              dbo.collection("applicants").find(query12).limit(5).toArray(function (err, result) {
+              dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
                 if (err) throw err;
                 html += ' Displaying top 5 results: <br />';
                   result.forEach(function(doc){
@@ -484,13 +484,13 @@ expr.post('/emp4', function(req, res) {
           if (err) throw err;
           var dbo = db.db("mydb");
           var query16 = { "position": req.body.psn };
-          dbo.collection("applicants").find(query16).count(function(err, result) {
+          dbo.collection("test").find(query16).count(function(err, result) {
             if (err) throw err;
             //console.log(result);
             html += result + ' applicants have applied for \"' + req.body.psn + '\".<br /><br />';
             //console.log(html);
           });
-          dbo.collection("applicants").find(query16).limit(5).toArray(function (err, result) {
+          dbo.collection("test").find(query16).limit(5).toArray(function (err, result) {
             if (err) throw err;
             html += ' Displaying top 5 results: <br />';
               result.forEach(function(doc){
@@ -547,7 +547,7 @@ expr.post('/emp5', function(req, res) {
             update = { $set: { "otherOffer": req.body.statusValue } };
           }
 
-          dbo.collection("applicants").updateMany(query17, update, function (err, result) {
+          dbo.collection("test").updateMany(query17, update, function (err, result) {
             if (err) throw err;
             //console.log(result);
             html += result.matchedCount + ' applicants are named \"' + req.body.stu + '\".' +
@@ -1180,14 +1180,14 @@ expr.post('/testCfm', function(req, res) {
             MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
               if (err) throw err;
               var dbo = db.db("mydb");
-                dbo.collection("applicants").findOne({name: resm.name, email: resm.email}, function(err, result) {
+                dbo.collection("test").findOne({name: resm.name, email: resm.email}, function(err, result) {
                     if (err) throw err;
                     if (result == null){
-                        dbo.collection("applicants").insertOne(resm, function(err, res) {
+                        dbo.collection("test").insertOne(resm, function(err, res) {
                             if (err) throw err;
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
                             console.log(resm);
-                            dbo.collection("applicants").updateOne({_id: resm._id}, newValues , function(err, res) {
+                            dbo.collection("test").updateOne({_id: resm._id}, newValues , function(err, res) {
                                                         if (err) throw err;
                                                       });
                             console.log("1 document inserted");
@@ -1195,7 +1195,7 @@ expr.post('/testCfm', function(req, res) {
                         });
                     }
                     else{
-                        dbo.collection("applicants").updateMany(result, {$set : resm }, function(err, result) {
+                        dbo.collection("test").updateMany(result, {$set : resm }, function(err, result) {
                             if (err) throw err;
                             console.log("Updated document(s)");
                             db.close();

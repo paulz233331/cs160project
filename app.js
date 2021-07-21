@@ -432,14 +432,14 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                 })
         //console.log({profile: profile});
 
-                dbo.collection("applicants").findOne(myobj, function(err, result) {
+                dbo.collection("test").findOne(myobj, function(err, result) {
                     if (err) throw err;
                     if (result == null){
-                        dbo.collection("applicants").insertOne(myobj, function(err, res) {
+                        dbo.collection("test").insertOne(myobj, function(err, res) {
                             if (err) throw err;
 
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
-                            dbo.collection("applicants").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                            dbo.collection("test").updateOne({_id: myobj._id}, newValues , function(err, res) {
                                     if (err) throw err;
                                     //console.log("1 document inserted");
                                     //console.log(myobj._id);
