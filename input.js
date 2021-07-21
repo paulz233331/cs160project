@@ -979,7 +979,7 @@ expr.post('/test2', function(req, res) {
                     <label for="languages">Languages:</label>
                           <textarea id="languages" name="languages" rows="4" cols="50">
                               ` + (applicant.languages ? applicant.languages : "") + `
-                          </textarea>
+                          </textarea><br><br>
                 `;
               }
               if (applicant.positions){
@@ -987,7 +987,7 @@ expr.post('/test2', function(req, res) {
               <label for="positions">Languages:</label>
                 <textarea id="positions" name="positions" rows="4" cols="50">
                     ` + (applicant.positions ? applicant.positions : "") + `
-                </textarea>`;
+                </textarea><br><br>`;
               }
           html = html + `
           <label for="jobTitle">Job Title:</label>`;
@@ -1119,7 +1119,7 @@ expr.post('/test', function(req, res) {
                 <label for="languages">Languages:</label>
                       <textarea id="languages" name="languages" rows="4" cols="50">
                           ` + (applicant.languages ? applicant.languages : "") + `
-                      </textarea>
+                      </textarea><br><br>
             `;
           }
           if (applicant.positions){
@@ -1127,7 +1127,7 @@ expr.post('/test', function(req, res) {
           <label for="positions">Languages:</label>
             <textarea id="positions" name="positions" rows="4" cols="50">
                 ` + (applicant.positions ? applicant.positions : "") + `
-            </textarea>`;
+            </textarea><br><br>`;
           }
           html = html + `
           <label for="jobTitle">Job Title:</label>`;
