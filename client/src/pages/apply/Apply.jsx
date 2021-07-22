@@ -52,7 +52,7 @@ function Apply() {
         </head>
         <body topmargin="40" leftmargin="40">
         <div>
-            <Navbar employerNavBar={true} />
+            <Navbar employerNavBar={true} applyNavBar={true} />
         </div>
             <center>    <h1>Applicant Dashboard</h1></center><br />
              <form action="http://localhost:3001/test" method="POST" className={classes.root} >

@@ -49,7 +49,7 @@ logo: {
 },
 }));
 
-export default function Navbar({employerNavBar, isFirstTimeUser}) {
+export default function Navbar({employerNavBar, isFirstTimeUser, applyNavBar}) {
   localStorage.clear()
   const [IsEmployerNavbar, setIsEmployerNavbar] = useState(employerNavBar);
   const classes = useStyles();
@@ -75,11 +75,12 @@ export default function Navbar({employerNavBar, isFirstTimeUser}) {
           <div className={classes.buttonContainer}>
           {!IsEmployerNavbar ?
           <div>
-          <Link to="/apply"><Button className={classes.signupButton}>Applicant Apply</Button></Link>
-          <Button  className={classes.loginButton} onClick={() => handleLogin()}>Employer Login</Button>
-          <Button className={classes.loginButton} onClick={() => handleSignup()}> Employer Sign up</Button>
+          <Link to="/apply"><Button data-testid="navbar-apply-button" className={classes.signupButton}>Applicant Apply</Button></Link>
+          <Button data-testid="navbar-login-button" className={classes.loginButton} onClick={() => handleLogin()}>Employer Login</Button>
+          <Button data-testid="navbar-signup-button" className={classes.loginButton} onClick={() => handleSignup()}> Employer Sign up</Button>
           </div>
           :
+          !applyNavBar && 
           <Button className={classes.signupButton} onClick={() => logout()}>log out</Button>
   }
           </div>
