@@ -1186,19 +1186,19 @@ expr.post('/testCfm', function(req, res) {
                         dbo.collection("test").insertOne(resm, function(err, res) {
                             if (err) throw err;
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false } };
-                            console.log(resm);
+                            //console.log(resm);
                             dbo.collection("test").updateOne({_id: resm._id}, newValues , function(err, res) {
                                                         if (err) throw err;
                                                       });
                             console.log("1 document inserted");
-                            db.close();
+                            //db.close();
                         });
                     }
                     else{
                         dbo.collection("test").updateMany(result, {$set : resm }, function(err, result) {
                             if (err) throw err;
                             console.log("Updated document(s)");
-                            db.close();
+                            //db.close();
                         });
                     }
                 });
