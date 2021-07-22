@@ -537,16 +537,16 @@ expr.post('/emp5', function (req, res) {
     //console.log(req.body.stu)
     var update;
     if (req.body.sts == "interviewed") {
-      update = { $set: { "interviewed": req.body.statusValue } };
+      update = { $set: { "interviewed": ( (req.body.statusValue === "true") ? true: false ) } };
     }
     else if (req.body.sts == "hired") {
-      update = { $set: { "hired": req.body.statusValue } };
+      update = { $set: { "hired": ( (req.body.statusValue === "true") ? true: false ) } };
     }
     else if (req.body.sts == "offered") {
-      update = { $set: { "offered": req.body.statusValue } };
+      update = { $set: { "offered": ( (req.body.statusValue === "true") ? true: false ) } };
     }
     else if (req.body.sts == "otherOffer") {
-      update = { $set: { "otherOffer": req.body.statusValue } };
+      update = { $set: { "otherOffer": ( (req.body.statusValue === "true") ? true: false ) } };
     }
 
     dbo.collection("test").updateMany(query17, update, function (err, result) {
