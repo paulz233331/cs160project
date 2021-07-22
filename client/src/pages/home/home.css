@@ -60,7 +60,7 @@ section {
 
 /* Mobile Responsiveness */
 
-@media all and (max-width: 780px) {
+@media all and (max-width: 825px) {
     .logo img{
         transform: scale(0.7);
         left: 20px;
