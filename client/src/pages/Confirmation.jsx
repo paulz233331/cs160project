@@ -43,7 +43,7 @@ const Confirmation = () => {
             Your application has been processed!
           </Typography>
           <Typography variant="h5" component="h2" className={classes.confirmationMessage}>
-            Thank you for using Lucent, your application has been received.
+            Thank you for using Lucent ATS, your application has been received.
             The company will review it and contact you if they are interested.
             An email confirmation of this job application has been sent to your email.
           </Typography>
