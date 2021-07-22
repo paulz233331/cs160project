@@ -28,8 +28,8 @@ loginButton: {
   borderRadius: '11px',
   border: 'solid 2px rgb(102, 178, 240)',
   padding: '10px',
-  paddingLeft: '3rem',
-  paddingRight: '3rem',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
   color: '#009FFD',
   marginRight: '10px'
 },
@@ -38,8 +38,8 @@ signupButton: {
   border: 'solid 2px rgb(102, 178, 240)',
   backgroundColor: 'rgb(102, 178, 240)',
   padding: '10px',
-  paddingLeft: '3rem',
-  paddingRight: '3rem',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
   color: 'white',
   marginRight: '10px',
 },
@@ -75,7 +75,7 @@ export default function Navbar({employerNavBar, isFirstTimeUser, applyNavBar}) {
           <div className={classes.buttonContainer}>
           {!IsEmployerNavbar ?
           <div>
-          <Link to="/apply"><Button data-testid="navbar-apply-button" className={classes.signupButton}>Applicant Apply</Button></Link>
+          <Link to="/apply" style={{ textDecoration: 'none' }}><Button data-testid="navbar-apply-button" className={classes.signupButton}>Applicant Apply</Button></Link>
           <Button data-testid="navbar-login-button" className={classes.loginButton} onClick={() => handleLogin()}>Employer Login</Button>
           <Button data-testid="navbar-signup-button" className={classes.loginButton} onClick={() => handleSignup()}> Employer Sign up</Button>
           </div>
