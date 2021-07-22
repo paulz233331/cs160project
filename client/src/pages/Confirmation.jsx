@@ -43,8 +43,8 @@ const Confirmation = () => {
             Your application has been processed!
           </Typography>
           <Typography variant="h5" component="h2" className={classes.confirmationMessage}>
-            Dear 'insert user name here', your application has been received.
-            'Insert company name here' will review it and contact you if they are interested.
+            Thank you for using Lucent, your application has been received.
+            The company will review it and contact you if they are interested.
             An email confirmation of this job application has been sent to your email.
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
