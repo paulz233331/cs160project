@@ -67,10 +67,12 @@ expr.post('/emp1', function (req, res) {
         result.forEach(function (doc) {
           //var tmp = JSON.stringify(doc);
           for (var key in doc) {
-            //console.log(key);
-            //console.log(doc[key]);
-
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
           //html += JSON.stringify(doc, null, "\n") + '<br />';
@@ -112,7 +114,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -138,7 +145,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -164,7 +176,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -190,7 +207,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -216,7 +238,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -242,7 +269,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -268,7 +300,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -294,7 +331,12 @@ expr.post('/emp1', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -392,7 +434,12 @@ expr.post('/emp3', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -412,7 +459,12 @@ expr.post('/emp3', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -430,7 +482,12 @@ expr.post('/emp3', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -448,7 +505,12 @@ expr.post('/emp3', function (req, res) {
         html += ' Displaying top 5 results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
           }
           html += '<br />';
         })
@@ -497,7 +559,12 @@ expr.post('/emp4', function (req, res) {
       html += ' Displaying top 5 results: <br />';
       result.forEach(function (doc) {
         for (var key in doc) {
-          html += key + ": " + doc[key] + '<br />';
+            if (key === 'profile' || key === "position" ) {
+              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+            }
+            else {
+              html += key + ": " + doc[key] + '<br />';
+            }
         }
         html += '<br />';
       })
@@ -673,7 +740,7 @@ expr.post('/emp6', function (req, res) {
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            if (key === 'profile') {
+            if (key === 'profile' || key === "position" ) {
               html += key + ": " + JSON.stringify(doc[key]) + '<br />';
             }
             else {
@@ -710,7 +777,7 @@ expr.post('/emp6', function (req, res) {
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            if (key === 'profile') {
+            if (key === 'profile' || key === "position" ) {
               html += key + ": " + JSON.stringify(doc[key]) + '<br />';
             }
             else {
@@ -745,7 +812,7 @@ expr.post('/emp6', function (req, res) {
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            if (key === 'profile') {
+            if (key === 'profile' || key === "position" ) {
               html += key + ": " + JSON.stringify(doc[key]) + '<br />';
             }
             else {
@@ -780,7 +847,7 @@ expr.post('/emp6', function (req, res) {
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            if (key === 'profile') {
+            if (key === 'profile' || key === "position" ) {
               html += key + ": " + JSON.stringify(doc[key]) + '<br />';
             }
             else {
@@ -815,7 +882,7 @@ expr.post('/emp6', function (req, res) {
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
-            if (key === 'profile') {
+            if (key === 'profile' || key === "position" ) {
               html += key + ": " + JSON.stringify(doc[key]) + '<br />';
             }
             else {
@@ -911,19 +978,6 @@ expr.post('/test2', function (req, res) {
       //console.log(resm);
       //Use the mv() method to place the file in upload directory (i.e. "uploads")
       resm.mv('./public/' + resm.name);
-
-      /*
-                      //send response
-                      res.send({
-                          status: true,
-                          message: 'File is uploaded',
-                          data: {
-                              name: resm.name,
-                              mimetype: resm.mimetype,
-                              size: resm.size
-                          }
-                      });
-      */
     }
   } catch (err) {
     res.status(500).send(err);
@@ -934,12 +988,6 @@ expr.post('/test2', function (req, res) {
   setTimeout(function () {
     let rawdata = fs.readFileSync(fileName);
     let applicant = JSON.parse(rawdata);
-    /*console.log(applicant);
-    console.log(applicant.name);
-    console.log(applicant.email);
-            console.log(applicant.objective);
-                    console.log(applicant.education);
-                    */
 
     var html = `
                     <html>
@@ -1197,26 +1245,24 @@ expr.post('/test', function (req, res) {
 
 })
 
-//https://stackoverflow.com/questions/29020931/add-quotation-marks-to-json-object-attributes
-function JSONify(obj) {
-  var o = {};
-  for (var i in obj) {
-    o['"' + i + '"'] = obj[i]; // make the quotes
-  }
-  return o;
-}
-
 expr.post('/testCfm', function (req, res) {
   var resm = req.body;
-  resm.position = resm.position.replace('{', '{\"').replace(/:/g, '\":\"').replace(/,/g, '\",\"').replace('}', '\"}');
-  resm.position = JSON.parse(resm.position);
+  if (resm.position){
+    resm.position = resm.position.replace('{', '{\"').replace(/:/g, '\":\"').replace(/,/g, '\",\"').replace('}', '\"}');
+    resm.position = JSON.parse(resm.position);
+  }
+
+  console.log(resm);
+
   var posEmp;
   setTimeout(function () {
     MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
       if (err) throw err;
       var dbo = db.db("mydb");
-      dbo.collection("test").findOne({ name: resm.name, email: resm.email }, function (err, result) {
+
+      dbo.collection("test").findOne({ email: resm.email }, function (err, result) {
         if (err) throw err;
+        console.log(result);
         if (result == null) {
           dbo.collection("test").insertOne(resm, function (err, res) {
             if (err) throw err;
@@ -1224,19 +1270,20 @@ expr.post('/testCfm', function (req, res) {
             console.log(resm);
             dbo.collection("test").updateOne({ _id: resm._id }, newValues, function (err, res) {
               if (err) throw err;
+              db.close();
             });
             console.log("1 document inserted");
-
           });
         }
         else {
-          dbo.collection("test").updateMany(result, { $set: resm }, function (err, result) {
+          dbo.collection("test").updateMany({ email: resm.email }, { $set: resm }, function (err, result) {
             if (err) throw err;
+            db.close();
             console.log("Updated document(s)");
-
           });
         }
       });
+
 
       //var html = `<p>You submitted a resume</p>`
       //res.status(200).send(html);

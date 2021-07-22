@@ -357,8 +357,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
             if (!_.isFunction(onSaved)) {
               return console.error('onSaved should be a function');
             }
-            //save the resume output json.
-            PreparedFile.saveResume(__dirname + '/compiled', onSaved);
 
             //insert the json file to the database.
             //console.log(PreparedFile.resume);
@@ -432,23 +430,32 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                 })
         //console.log({profile: profile});
 
+                PreparedFile.resume.profile = profile;
+                PreparedFile.saveResume(__dirname + '/compiled', onSaved);
+
                 dbo.collection("test").findOne(myobj, function(err, result) {
                     if (err) throw err;
                     if (result == null){
                         dbo.collection("test").insertOne(myobj, function(err, res) {
                             if (err) throw err;
-
+                            //console.log(profile);
                             var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
                             dbo.collection("test").updateOne({_id: myobj._id}, newValues , function(err, res) {
-                                    if (err) throw err;
-                                    //console.log("1 document inserted");
-                                    //console.log(myobj._id);
-                                    //db.close();
+                                if (err) throw err;
+                                //console.log("1 document inserted");
+                                //console.log(myobj._id);
+                                db.close();
                             });
                           });
                     }
                     else{
+                        var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
+                        dbo.collection("test").updateOne({_id: myobj._id}, newValues , function(err, res) {
+                            if (err) throw err;
+                            db.close();
+                        });
                     }
+
             }); //end findOne
         };
 
@@ -474,7 +481,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     });
 
   });//end readdir
-    //db.close();
  }); //end connect
 
     }); //end promise
