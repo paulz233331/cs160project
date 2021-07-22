@@ -4,6 +4,7 @@ import Employer from './pages/employer/Employer';
 import EmployerInfo from './pages/employerInfo/EmployerInfo';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Confirmation from './pages/Confirmation';
+import JobListingConfirmation from './pages/JobListingConfirmation';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
     </Route>
     <Route path="/confirmation" exact>
     <Confirmation />
+    </Route>
+    <Route path ="/joblistingconfirmation" exact>
+    <JobListingConfirmation />
     </Route>
     <Route path="/apply" exact>
     <Apply />
