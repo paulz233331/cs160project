@@ -1220,7 +1220,7 @@ expr.post('/testCfm', function (req, res) {
         if (result == null) {
           dbo.collection("test").insertOne(resm, function (err, res) {
             if (err) throw err;
-            var newValues = { $set: { hired: false, offered: false, interviewed: false, position: "", otherOffer: false } };
+            var newValues = { $set: { hired: false, offered: false, interviewed: false, otherOffer: false } };
             console.log(resm);
             dbo.collection("test").updateOne({ _id: resm._id }, newValues, function (err, res) {
               if (err) throw err;
