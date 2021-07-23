@@ -157,3 +157,137 @@ exports.findAllEmails = (req, res) => {
       });
     });
 };
+
+// Update a Tutorial by the id in the request
+exports.update = (req, res) => {
+  const name = req.query.name;
+  var condition;
+
+  if (req.body.interviewed != null){
+    condition = {"$set" : { "interviewed" : req.body.interviewed } };  
+  }
+  else if (req.body.hired != null){
+    condition = {$set : { "hired" : req.body.hired } };  
+  }
+  else if (req.body.offered != null){
+    condition = {$set : { "offered" : req.body.offered } };  
+  }
+  else if (req.body.otherOffer != null){
+    condition = {$set : { "otherOffer" : req.body.otherOffer } };  
+  }
+
+  //console.log(condition);
+
+  Test.findOneAndUpdate(name, condition, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Employer with id=${id}. Maybe Employer was not found!`
+        });
+      } else res.send({ message: "Employer was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Employer with id=" + id
+      });
+    });
+};
+
+exports.findByScores = (req, res) => {
+  //console.log(req.query);
+  if (req.query.overall === ""){
+    Test.aggregate([{
+      "$group": {
+        "_id": {
+              _id: "$_id", name: "$name", email: "$email", summary: "$summary", experience: "$experience", projects: "$projects",
+              languages: "$languages", education: "$education", hired: "$hired", interviewed: "$interviewed",
+              offered: "$offered", otherOffer: "$otherOffer", position: "$position", profile: "$profile"
+            },
+        score: {
+          $sum: {
+            $add: ["$profile.hardworking",
+              "$profile.experience",
+              "$profile.intelligence",
+              "$profile.leadership",
+              "$profile.organization"]
+          }
+        }
+      }},
+      {
+        "$sort": {
+          "score": -1, name: 1
+      }
+    }])
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+  }
+  else {
+    if (req.query.hardworking === ""){
+      Test.find({}, null, {sort:{ "profile.hardworking": -1 }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+    }
+    else if (req.query.experience === ""){
+      Test.find({}, null, {sort:{ "profile.experience": -1 }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+    }
+    else if (req.query.intelligence === ""){
+      Test.find({}, null, {sort:{ "profile.intelligence": -1 }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+    }
+    else if (req.query.organization === ""){
+      Test.find({}, null, {sort:{ "profile.organization": -1 }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+    }
+    else if (req.query.leadership === ""){
+      Test.find({}, null, {sort:{ "profile.leadership": -1 }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+    }
+  }
+};
