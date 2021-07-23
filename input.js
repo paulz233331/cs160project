@@ -547,7 +547,7 @@ expr.post('/emp4', function (req, res) {
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
     if (err) throw err;
     var dbo = db.db("mydb");
-    var query16 = { "position.job_title": req.body.psn };
+    var query16 = { "position.job_title": { $regex: req.body.psn, $options: "i" } };
     dbo.collection("test").find(query16).count(function (err, result) {
       if (err) throw err;
       //console.log(result);
@@ -600,7 +600,7 @@ expr.post('/emp5', function (req, res) {
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
     if (err) throw err;
     var dbo = db.db("mydb");
-    var query17 = { "name": req.body.stu };
+    var query17 = { "name": { $regex: req.body.stu, $options: "i" } };
     //console.log(req.body.stu)
     var update;
     if (req.body.sts == "interviewed") {
