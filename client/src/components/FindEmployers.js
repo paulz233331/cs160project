@@ -14,6 +14,8 @@ class FindEmployers extends Component {
     const response = axios.get('http://localhost:8080/api/employers')
       .then( (response) => {
         if ( response.data ){
+
+          //console.log(response.data);
           this.setState({
             employers : response.data
           })
@@ -27,7 +29,8 @@ class FindEmployers extends Component {
     let { employers } = this.state;
     var jobs = "";
     employers.map(item => {
-      jobs = jobs + item.employer + ' - ' + item.job_title;
+      jobs = jobs + item.employer + ' - ' + item.job_title + ', ';
+      //console.log(jobs);
     } );
     return(
       <div>
