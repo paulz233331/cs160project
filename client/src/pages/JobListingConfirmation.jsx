@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     },
   });
 
-const Confirmation = () => {
+const JobListingConfirmation = () => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
   
@@ -40,12 +40,12 @@ const Confirmation = () => {
         <img src={logo}></img>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Your application has been processed!
+            Your job listing has been created!
           </Typography>
           <Typography variant="h5" component="h2" className={classes.confirmationMessage}>
-            Thank you for using Lucent ATS, your application has been received.
-            The company will review it and contact you if they are interested.
-            An email confirmation of this job application has been sent to your email.
+            Thank you for using Lucent ATS, your job listing has been created.
+            Applicants can now apply to that position using Lucent ATS.
+            An email confirmation of this job listing creation has been sent to your email.
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             You may now exit the page
@@ -58,4 +58,4 @@ const Confirmation = () => {
     );
 }
 
-export default Confirmation;
+export default JobListingConfirmation;

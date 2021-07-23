@@ -28,8 +28,8 @@ loginButton: {
   borderRadius: '11px',
   border: 'solid 2px rgb(102, 178, 240)',
   padding: '10px',
-  paddingLeft: '3rem',
-  paddingRight: '3rem',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
   color: '#009FFD',
   marginRight: '10px'
 },
@@ -38,8 +38,8 @@ signupButton: {
   border: 'solid 2px rgb(102, 178, 240)',
   backgroundColor: 'rgb(102, 178, 240)',
   padding: '10px',
-  paddingLeft: '3rem',
-  paddingRight: '3rem',
+  paddingLeft: '1rem',
+  paddingRight: '1rem',
   color: 'white',
   marginRight: '10px',
 },
@@ -49,10 +49,21 @@ logo: {
 },
 }));
 
-export default function Navbar({employerNavBar}) {
+export default function Navbar({employerNavBar, isFirstTimeUser, applyNavBar}) {
+  localStorage.clear()
   const [IsEmployerNavbar, setIsEmployerNavbar] = useState(employerNavBar);
   const classes = useStyles();
   const { loginWithRedirect, logout } = useAuth0();
+
+  const handleSignup = () => {
+    localStorage.setItem("firstTimeUser", "yes");
+    loginWithRedirect();
+  }
+
+  const handleLogin = () => {
+    localStorage.setItem("firstTimeUser", "no");
+    loginWithRedirect();
+  }
 
   return (
     <div className={classes.root}>
@@ -64,11 +75,12 @@ export default function Navbar({employerNavBar}) {
           <div className={classes.buttonContainer}>
           {!IsEmployerNavbar ?
           <div>
-          <Link to="/apply"><Button className={classes.signupButton}>Applicant Apply</Button></Link>
-          <Button  className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer"})}>Employer Login</Button>
-          <Button className={classes.loginButton} onClick={() => loginWithRedirect({url: "http://localhost:3000/employer"})}> Employer Sign up</Button>
+          <Link to="/apply" style={{ textDecoration: 'none' }}><Button data-testid="navbar-apply-button" className={classes.signupButton}>Applicant Apply</Button></Link>
+          <Button data-testid="navbar-login-button" className={classes.loginButton} onClick={() => handleLogin()}>Employer Login</Button>
+          <Button data-testid="navbar-signup-button" className={classes.loginButton} onClick={() => handleSignup()}> Employer Sign up</Button>
           </div>
           :
+          !applyNavBar && 
           <Button className={classes.signupButton} onClick={() => logout()}>log out</Button>
   }
           </div>
