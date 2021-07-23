@@ -1284,9 +1284,6 @@ expr.post('/testCfm', function (req, res) {
         }
       });
 
-
-      //var html = `<p>You submitted a resume</p>`
-      //res.status(200).send(html);
       var transport = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -1301,9 +1298,9 @@ expr.post('/testCfm', function (req, res) {
         // Instead of resm.email we can use:
         // JSON.stringify(result).slice(10, len), which takes the email from the database
         subject: 'Application Confirmation Email',
-        text: 'Dear ' + resm.name + ', \n\nYour application for ' +
-          resm.email + ' has been submitted. ' + // add result.position.employer
-          'We appreciate your interest in our team!\n\nIf you are selected for a follow-up interview, a representative will contact you for further information.\n\nThanks, \n' + result.employer +
+        text: 'Dear ' + resm.name + ', \n\nYour application for the ' +
+          resm.position.job_title + ' job listing at ' + resm.position.employer + ' has been submitted. ' + // add result.position.employer
+          'We appreciate your interest in our team!\n\nIf you are selected for a follow-up interview, a representative will contact you for further information.\n\nThanks, \n' + resm.position.employer +
           '\n\nPlease do not reply to this email.'
       };
     
@@ -1317,6 +1314,9 @@ expr.post('/testCfm', function (req, res) {
           console.log('Applicant email confirmation was not sent. ' + info.response);
         }
       });
+      //var html = `<p>You submitted a resume</p>`
+      //res.status(200).send(html);
+
       res.redirect('http://localhost:3000/confirmation');
       setTimeout(function () { db.close(); }, 3000);
     })
