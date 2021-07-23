@@ -27,7 +27,7 @@ module.exports = mongoose => {
               {
                 employer: String,
                 email: String,
-                job_title: Boolean
+                job_title: String
               }),
         profile: new mongoose.Schema( 
               {
@@ -41,7 +41,7 @@ module.exports = mongoose => {
         skills: String, 
         summary: String, 
         technology: String
-      }, {collection: "test"}
+      }, {collection: "test", versionKey: false}
     )
   );
 

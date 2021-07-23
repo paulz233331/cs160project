@@ -3,16 +3,10 @@ const Employer = db.employers;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-  // Validate request
-  if (!req.body.title) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
-  }
-
   // Create a Tutorial
   const employer = new Employer({
-    employer: req.body.title,
-    email: req.body.description,
+    employer: req.body.employer,
+    email: req.body.email,
     job_title: req.body.job_title
   });
 
@@ -32,9 +26,22 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-  const job_title = req.query.job_title;
-  var condition = job_title ? { job_title: { $regex: new RegExp(job_title), $options: "i" } } : {};
+  //console.log(req.query);
+  var key, condition;
+  if (req.query.job_title){
+    key = req.query.job_title;
+    condition = key ? { job_title : { $regex: new RegExp(key), $options: "i" } } : {};
+  }
+  else if (req.query.employer){
+    key = req.query.employer;
+    condition = key ? { employer : { $regex: new RegExp(key), $options: "i" } } : {};
+  }
+  else if (req.query.email){
+    key = req.query.email;
+    condition = key ? { email : { $regex: new RegExp(key), $options: "i" } } : {};
+  }
 
+//  console.log(condition);
   Employer.find(condition)
     .then(data => {
       res.send(data);

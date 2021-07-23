@@ -7,6 +7,9 @@ module.exports = mongoose => {
         employer: String,
         email: String,
         job_title: String
+      },
+      {
+          versionKey: false
       }
     )
   );
