@@ -1252,7 +1252,7 @@ expr.post('/testCfm', function (req, res) {
     resm.position = JSON.parse(resm.position);
   }
 
-  console.log(resm);
+  //console.log(resm);
 
   var posEmp;
   setTimeout(function () {
@@ -1262,15 +1262,15 @@ expr.post('/testCfm', function (req, res) {
 
       dbo.collection("test").findOne({ email: resm.email }, function (err, result) {
         if (err) throw err;
-        console.log(result);
+        //console.log(result);
         if (result == null) {
           dbo.collection("test").insertOne(resm, function (err, res) {
             if (err) throw err;
             var newValues = { $set: { hired: false, offered: false, interviewed: false, otherOffer: false } };
-            console.log(resm);
+            //console.log(resm);
             dbo.collection("test").updateOne({ _id: resm._id }, newValues, function (err, res) {
               if (err) throw err;
-              db.close();
+              //db.close();
             });
             console.log("1 document inserted");
           });
@@ -1278,7 +1278,7 @@ expr.post('/testCfm', function (req, res) {
         else {
           dbo.collection("test").updateMany({ email: resm.email }, { $set: resm }, function (err, result) {
             if (err) throw err;
-            db.close();
+            //db.close();
             console.log("Updated document(s)");
           });
         }
@@ -1318,7 +1318,7 @@ expr.post('/testCfm', function (req, res) {
       //res.status(200).send(html);
 
       res.redirect('http://localhost:3000/confirmation');
-      setTimeout(function () { db.close(); }, 3000);
+      //setTimeout(function () { db.close(); }, 3000);
     })
   }, 3000);
 
