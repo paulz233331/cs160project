@@ -15,10 +15,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     background: '#EBF5EE',
+    
+    
 },
 bar: {
   maxHeight: '15vh',
-  overflow: 'hidden'
+  overflow: 'hidden',
+  
 },
 buttonContainer: {
   marginRight: '5%'
@@ -69,9 +72,9 @@ export default function Navbar({employerNavBar, isFirstTimeUser, applyNavBar}) {
     <div className={classes.root}>
       <AppBar className={classes.bar} position="static">
         <Toolbar className={classes.content}>
-          <IconButton className={classes.logo}>
+          <Link to="/"><IconButton className={classes.logo} >
           <img  src={logo} alt="logo" />
-          </IconButton>
+          </IconButton></Link>
           <div className={classes.buttonContainer}>
           {!IsEmployerNavbar ?
           <div>

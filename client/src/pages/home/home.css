@@ -1,5 +1,9 @@
+html {
+    scroll-behavior: smooth;
+}
 .home-container {
-    height: 85vh;
+    height: 100vh;
+    padding-top: 40px;
 }
 
 * {
@@ -12,7 +16,7 @@ video {
     position: absolute;
     top: 0;
     z-index: -1;
-    height: 100vh;
+    height: 115vh;
     width: 100vw;
     object-fit: cover;
     opacity: 0.5;
@@ -24,7 +28,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 85vh;
+    height: 100vh;
 }
 
 .text {
@@ -58,6 +62,40 @@ section {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* Scrolling home page css */
+
+.scrollnavbar {
+    height: 50px;
+    width: 100vw;
+    background-color: rgb(102, 178, 240);
+    
+}
+
+.scrollnavbarlinks {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+.scrollnavbarlinkslink {
+    color: white;
+    text-decoration: none;
+}
+
+.scrollnavbarlinksitem {
+    cursor: pointer;
+}
+
+.scrollnavbarlinksitem:hover {
+    color: lightgrey;
+    transition: 0.3s ease-in-out;
+}
 /* Mobile Responsiveness */
 
 @media all and (max-width: 825px) {
