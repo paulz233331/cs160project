@@ -102,7 +102,6 @@ function Apply() {
                 <input type="file" id="resume2" name="resume2" /><br />
                 <input className={classes.formButton} type="submit" value="Upload" />
                 <br />
-                <a href="http://localhost:3000">Return to home page.</a>
                </div>
              </form>
              <br /> <br />

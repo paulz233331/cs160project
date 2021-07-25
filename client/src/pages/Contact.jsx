@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import logo from '../assets/mainlogo.png';
 import { Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles({
     root: {
@@ -29,6 +30,15 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+    submitButton: {
+        borderRadius: '11px',
+        border: 'solid 2px rgb(102, 178, 240)',
+        padding: '10px',
+        paddingLeft: '1rem',
+        paddingRight: '1rem',
+        color: '#009FFD',
+        marginRight: '10px'
+      },
   });
 
 const Contact = () => {
@@ -37,10 +47,28 @@ const Contact = () => {
   
     return (
       <Card className={classes.root}>
-        <Typography style={{paddingBottom: '150px'}} variant="h3" component="h2">
+        <Typography style={{paddingBottom: '20px'}} variant="h3" component="h2">
             Contact Us
           </Typography>
-            put content here
+          <TextField required id="standard-required" label="Full Name" style={{width: '30vw'}} />
+        <TextField
+          required
+          id="standard-email-input"
+          label="Email"
+          type="email"
+          style={{width: '30vw'}}
+          autoComplete="email"
+        />
+        <TextField
+        required
+          id="outlined-multiline-static"
+          label="Message"
+          multiline
+          rows={4}
+          style={{width: '30vw', marginTop: '25px'}}
+          variant="outlined"
+        /> 
+        <Button style={{width: '30vw', marginTop: '25px'}} className={classes.submitButton}>Submit</Button>
       </Card>
     );
 }

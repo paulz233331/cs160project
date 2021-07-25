@@ -96,6 +96,47 @@ section {
     color: lightgrey;
     transition: 0.3s ease-in-out;
 }
+
+/* Pricing Page */
+
+.pricingCards {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    width: 100%;
+}
+
+.pricingCard {
+    height: 500px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 5px 5px 12px black;
+    border-radius: 10px;
+    background: rgb(13,133,210);
+    background: linear-gradient(180deg, rgba(13,133,210,1) 0%, rgba(238,238,238,1) 100%);
+}
+
+.pricingCard2 {
+    height: 500px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 5px 5px 12px black;
+    border-radius: 10px;
+    background: rgb(212,241,231);
+    background: linear-gradient(0deg, rgba(212,241,231,1) 0%, rgba(6,134,228,1) 100%);
+}
+
+.pricingList {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: mintcream;
+    list-style: circle;
+    font-size: 1.2rem;
+    list-style: none;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 8px;
+}
+
 /* Mobile Responsiveness */
 
 @media all and (max-width: 825px) {
