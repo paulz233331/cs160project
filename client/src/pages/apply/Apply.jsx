@@ -85,7 +85,7 @@ function Apply() {
             <Navbar employerNavBar={true} applyNavBar={true} />
         </div>
           <Card className={classes.card}>
-            <center style={{paddingTop: '5%', fontFamily: 'verdana'}}>    <h1>Applicant Resume Submission</h1></center><br />
+            <center style={{paddingTop: '5%', fontFamily: 'verdana'}}>    <h1>Applicant Dashboard</h1></center><br />
              <form style={{display: 'flex', height: '20vh', flexDirection: 'column', justifyContent: 'space-evenly'}} action="http://localhost:3001/test" method="POST" className={classes.root} >
 
                 <div className={classes.applicationFormHeader}>
