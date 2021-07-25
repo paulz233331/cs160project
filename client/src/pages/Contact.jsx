@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import logo from '../assets/mainlogo.png';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
+import emailjs from 'emailjs-com';
 
 const useStyles = makeStyles({
     root: {
@@ -44,31 +45,49 @@ const useStyles = makeStyles({
 const Contact = () => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
-  
+      
+    function sendEmail(e) {
+      e.preventDefault();
+
+      emailjs.sendForm('service_ixzpq2b', 'template_ndeicis', e.target, 'user_KFRJ434zsQFvVZIM43ZS5')
+        .then((result) => {
+            window.location.reload();
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
+
     return (
       <Card className={classes.root}>
         <Typography style={{paddingBottom: '20px'}} variant="h3" component="h2">
             Contact Us
           </Typography>
-          <TextField required id="standard-required" label="Full Name" style={{width: '30vw'}} />
+
+        <form action="#" onSubmit={sendEmail}>
+          <TextField required id="standard-required" name="name" label="Full Name" style={{width: '30vw'}} />
+        <br />
         <TextField
           required
           id="standard-email-input"
+          name="email"
           label="Email"
           type="email"
           style={{width: '30vw'}}
           autoComplete="email"
-        />
+        /><br />
         <TextField
         required
           id="outlined-multiline-static"
+          name="message"
           label="Message"
           multiline
           rows={4}
           style={{width: '30vw', marginTop: '25px'}}
           variant="outlined"
         /> 
-        <Button style={{width: '30vw', marginTop: '25px'}} className={classes.submitButton}>Submit</Button>
+        <br />
+        <button type="submit" style={{width: '30vw', marginTop: '25px'}} className={classes.submitButton}>Submit</button>
+        </form>
       </Card>
     );
 }
