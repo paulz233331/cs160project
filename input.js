@@ -984,8 +984,9 @@ expr.post('/test2', function (req, res) {
   }
 
   app.main();
-  var fileName = 'compiled/' + req.files.resume2.name.split('.').slice(0, -1).join('.') + ".json";
   setTimeout(function () {
+
+    var fileName = 'compiled/' + req.files.resume2.name.split('.').slice(0, -1).join('.') + ".json";
     let rawdata = fs.readFileSync(fileName);
     let applicant = JSON.parse(rawdata);
 
