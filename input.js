@@ -1072,6 +1072,50 @@ expr.post('/test2', function (req, res) {
                     ` + (applicant.positions ? applicant.positions : "") + `
                 </textarea><br><br>`;
     }
+
+    if (applicant.awards) {
+      html = html + `
+          <label for="awards">Awards:</label>
+            <textarea id="awards" name="awards" rows="4" cols="50">
+                ` + (applicant.awards ? applicant.awards : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.certification) {
+      html = html + `
+          <label for="certification">Certifications:</label>
+            <textarea id="certification" name="certification" rows="4" cols="50">
+                ` + (applicant.certification ? applicant.certification : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.contacts) {
+      html = html + `
+          <label for="contacts">Contacts:</label>
+            <textarea id="contacts" name="contacts" rows="4" cols="50">
+                ` + (applicant.contacts ? applicant.contacts : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.courses) {
+      html = html + `
+          <label for="courses">courses:</label>
+            <textarea id="courses" name="courses" rows="4" cols="50">
+                ` + (applicant.courses ? applicant.courses : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.honors) {
+      html = html + `
+          <label for="honors">honors:</label>
+            <textarea id="honors" name="honors" rows="4" cols="50">
+                ` + (applicant.honors ? applicant.honors : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.interests) {
+      html = html + `
+          <label for="interests">Contacts:</label>
+            <textarea id="interests" name="interests" rows="4" cols="50">
+                ` + (applicant.interests ? applicant.interests : "") + `
+            </textarea><br><br>`;
+    }
+
     html = html + `
           <label for="jobTitle">Job Title:</label>`;
 
@@ -1205,13 +1249,57 @@ expr.post('/test', function (req, res) {
                       </textarea><br><br>
             `;
     }
+
     if (applicant.positions) {
       html = html + `
-          <label for="positions">Languages:</label>
+          <label for="positions">Positions:</label>
             <textarea id="positions" name="positions" rows="4" cols="50">
                 ` + (applicant.positions ? applicant.positions : "") + `
             </textarea><br><br>`;
     }
+    if (applicant.awards) {
+      html = html + `
+          <label for="awards">Awards:</label>
+            <textarea id="awards" name="awards" rows="4" cols="50">
+                ` + (applicant.awards ? applicant.awards : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.certification) {
+      html = html + `
+          <label for="certification">Certifications:</label>
+            <textarea id="certification" name="certification" rows="4" cols="50">
+                ` + (applicant.certification ? applicant.certification : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.contacts) {
+      html = html + `
+          <label for="contacts">Contacts:</label>
+            <textarea id="contacts" name="contacts" rows="4" cols="50">
+                ` + (applicant.contacts ? applicant.contacts : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.courses) {
+      html = html + `
+          <label for="courses">courses:</label>
+            <textarea id="courses" name="courses" rows="4" cols="50">
+                ` + (applicant.courses ? applicant.courses : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.honors) {
+      html = html + `
+          <label for="honors">honors:</label>
+            <textarea id="honors" name="honors" rows="4" cols="50">
+                ` + (applicant.honors ? applicant.honors : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.interests) {
+      html = html + `
+          <label for="interests">Contacts:</label>
+            <textarea id="interests" name="interests" rows="4" cols="50">
+                ` + (applicant.interests ? applicant.interests : "") + `
+            </textarea><br><br>`;
+    }
+
     html = html + `
           <label for="jobTitle">Job Title:</label>`;
 
