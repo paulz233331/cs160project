@@ -51,7 +51,12 @@ const Contact = () => {
 
       emailjs.sendForm('service_ixzpq2b', 'template_ndeicis', e.target, 'user_KFRJ434zsQFvVZIM43ZS5')
         .then((result) => {
-            window.location.reload();
+          emailjs.sendForm('service_ixzpq2b', 'template_jndggaq', e.target, 'user_KFRJ434zsQFvVZIM43ZS5')
+          .then((result) => {
+              window.location.reload();
+          }, (error) => {
+              console.log(error.text);
+          });
         }, (error) => {
             console.log(error.text);
         });

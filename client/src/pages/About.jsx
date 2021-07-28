@@ -40,7 +40,7 @@ const About = () => {
         <Typography style={{paddingBottom: '150px'}} variant="h3" component="h2">
             About Us
           </Typography>
-            put content here
+            Lucent Applicant Tracking System simplifies the hiring process for both applicants and employers. Employers save time, save money, and find the best candidates.
       </Card>
     );
 }
