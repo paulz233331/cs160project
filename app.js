@@ -328,7 +328,7 @@ function main() {
   }
 
 
-MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
+//MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
 
   fs.readdir(pack, function(err, files) {
       files = files.map(function(file) {
@@ -362,7 +362,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
             //console.log(PreparedFile.resume);
 
               if (err) throw err;
-              var dbo = db.db("mydb");
+              //var dbo = db.db("mydb");
 
                 //insert myobj if its not already there.
                 var myobj = PreparedFile.resume;
@@ -432,7 +432,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
 
                 PreparedFile.resume.profile = profile;
                 PreparedFile.saveResume(__dirname + '/compiled', onSaved);
-
+/*
                 dbo.collection("test").findOne(myobj, function(err, result) {
                     if (err) throw err;
                     if (result == null){
@@ -444,7 +444,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                                 if (err) throw err;
                                 //console.log("1 document inserted");
                                 //console.log(myobj._id);
-                                db.close();
+                                //db.close();
                             });
                           });
                     }
@@ -452,11 +452,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
                         var newValues = { $set: {hired: false, offered: false, interviewed: false, position : "", otherOffer : false, profile: profile } };
                         dbo.collection("test").updateOne({_id: myobj._id}, newValues , function(err, res) {
                             if (err) throw err;
-                            db.close();
+                            //db.close();
                         });
                     }
 
-            }); //end findOne
+            }); //end findOne */
         };
 
         parse(PreparedFile, function(Resume) {
@@ -481,7 +481,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     });
 
   });//end readdir
- }); //end connect
+ //}); //end connect
 
     }); //end promise
 } //main

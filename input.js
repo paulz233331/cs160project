@@ -63,7 +63,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query10).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           //var tmp = JSON.stringify(doc);
           for (var key in doc) {
@@ -111,7 +111,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -142,7 +142,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -173,7 +173,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -204,7 +204,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -235,7 +235,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -266,7 +266,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -297,7 +297,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -328,7 +328,7 @@ expr.post('/emp1', function (req, res) {
 
       dbo.collection("test").find(query1).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -431,7 +431,7 @@ expr.post('/emp3', function (req, res) {
       });
       dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -456,7 +456,7 @@ expr.post('/emp3', function (req, res) {
       });
       dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -479,7 +479,7 @@ expr.post('/emp3', function (req, res) {
       });
       dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -502,7 +502,7 @@ expr.post('/emp3', function (req, res) {
       });
       dbo.collection("test").find(query12).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += ' Displaying top 5 results: <br />';
+        html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -556,7 +556,7 @@ expr.post('/emp4', function (req, res) {
     });
     dbo.collection("test").find(query16).limit(5).toArray(function (err, result) {
       if (err) throw err;
-      html += ' Displaying top 5 results: <br />';
+      html += ' Displaying top 5 (or fewer) results: <br />';
       result.forEach(function (doc) {
         for (var key in doc) {
             if (key === 'profile' || key === "position" ) {
@@ -677,7 +677,7 @@ expr.post('/emp6', function (req, res) {
         }
       ]).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -736,7 +736,7 @@ expr.post('/emp6', function (req, res) {
       dbo.collection("test").find({}).sort(sort21).limit(5).toArray(function (err, result) {
         if (err) throw err;
 
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -773,7 +773,7 @@ expr.post('/emp6', function (req, res) {
       var sort22 = { "profile.experience": -1 };
       dbo.collection("test").find({}).sort(sort22).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -808,7 +808,7 @@ expr.post('/emp6', function (req, res) {
       var sort23 = { "profile.intelligence": -1 };
       dbo.collection("test").find({}).sort(sort23).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -843,7 +843,7 @@ expr.post('/emp6', function (req, res) {
       var sort24 = { "profile.leadership": -1 };
       dbo.collection("test").find({}).sort(sort24).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -876,9 +876,9 @@ expr.post('/emp6', function (req, res) {
 
       //var query22 = { projection: { _id: 0, name: 1, "profile.experience": 1 } };
       var sort25 = { "profile.organization": -1 };
-      dbo.collection("test").find({}).sort(sort24).limit(5).toArray(function (err, result) {
+      dbo.collection("test").find({}).sort(sort25).limit(5).toArray(function (err, result) {
         if (err) throw err;
-        html += 'The top 5 applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
+        html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
           for (var key in doc) {
@@ -983,9 +983,11 @@ expr.post('/test2', function (req, res) {
     res.status(500).send(err);
   }
 
-  app.main();
-  setTimeout(function () {
+  setTimeout(function(){ 
+    app.main();
+  }, 500);
 
+  setTimeout(function () {
     var fileName = 'compiled/' + req.files.resume2.name.split('.').slice(0, -1).join('.') + ".json";
     let rawdata = fs.readFileSync(fileName);
     let applicant = JSON.parse(rawdata);
@@ -1349,7 +1351,7 @@ expr.post('/testCfm', function (req, res) {
       if (err) throw err;
       var dbo = db.db("mydb");
 
-      dbo.collection("test").findOne({ email: resm.email }, function (err, result) {
+      dbo.collection("test").findOne({ name: resm.name, email: resm.email }, function (err, result) {
         if (err) throw err;
         //console.log(result);
         if (result == null) {
@@ -1365,7 +1367,7 @@ expr.post('/testCfm', function (req, res) {
           });
         }
         else {
-          dbo.collection("test").updateMany({ email: resm.email }, { $set: resm }, function (err, result) {
+          dbo.collection("test").updateMany({ name: resm.name,  email: resm.email }, { $set: resm }, function (err, result) {
             if (err) throw err;
             //db.close();
             console.log("Updated document(s)");
