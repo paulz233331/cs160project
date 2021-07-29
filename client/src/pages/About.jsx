@@ -40,7 +40,13 @@ const About = () => {
         <Typography style={{paddingBottom: '150px'}} variant="h3" component="h2">
             About Us
           </Typography>
-            Lucent Applicant Tracking System simplifies the hiring process for both applicants and employers. Employers save time, save money, and find the best candidates.
+            Lucent is an applicant tracking system for both applicants and employers. It parses resumes and stores them in a database, allowing employers to easily access and manage applicant data. It was created to simplify the job process for employers and applicants alike.
+            Features include:
+          <u1>
+            <li>Applicant resume parser</li>
+            <li>Applicant storage in database</li>
+            <li>Employer dashboard for applicant management</li>
+          </u1>
       </Card>
     );
 }

@@ -1,12 +1,13 @@
 .idea
 node_modules
-resume.json
 dbApp.ppk
 public/28_MOHAMMED_AFTHAB_M.json
 public/resume.html
 public/resumeInput.json
 sentAppCfm.json
+sentJobCfm.json
 sentEmail.json
 testReadline.js
 email.js
 extra
+resume.json

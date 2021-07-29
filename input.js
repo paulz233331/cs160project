@@ -1383,19 +1383,37 @@ expr.post('/testCfm', function (req, res) {
         }
       });
     
-      var email = {
+      var email = { // sending email to applicant
         from: transport.user,
         to: resm.email, // applicant.email
-        // Instead of resm.email we can use:
-        // JSON.stringify(result).slice(10, len), which takes the email from the database
         subject: 'Application Confirmation Email',
         text: 'Dear ' + resm.name + ', \n\nYour application for the ' +
-          resm.position.job_title + ' job listing at ' + resm.position.employer + ' has been submitted. ' + // add result.position.employer
+          resm.position.job_title + ' job listing at ' + resm.position.employer + ' has been submitted. ' + 
           'We appreciate your interest in our team!\n\nIf you are selected for a follow-up interview, a representative will contact you for further information.\n\nThanks, \n' + resm.position.employer +
+          '\n\nPlease do not reply to this email.'
+      };
+
+      var email2 = { // sending email to lucent
+        from: transport.user,
+        to: resm.position.email, // applicant.email
+        subject: resm.position.job_title + ' Job Listing Application Received',
+        text: 'Dear ' + resm.position.employer + ', \n\n' +
+          resm.name + ' has applied to your ' + resm.position.job_title + ' job listing.' + '\n\nThanks, \nLucent ATS' +
           '\n\nPlease do not reply to this email.'
       };
     
       transport.sendMail(email, function (err, info) {
+        if (err) throw err;
+        if (info.response.slice(0, 3) == "250") { // add 550
+          let data = JSON.stringify(email);
+          fs.writeFileSync('sentAppCfm.json', data);
+          console.log('Applicant email confirmation has been sent. ' + info.response);
+        } else {
+          console.log('Applicant email confirmation was not sent. ' + info.response);
+        }
+      });
+
+      transport.sendMail(email2, function (err, info) {
         if (err) throw err;
         if (info.response.slice(0, 3) == "250") { // add 550
           let data = JSON.stringify(email);
