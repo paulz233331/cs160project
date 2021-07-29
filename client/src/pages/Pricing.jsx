@@ -38,6 +38,7 @@ const useStyles = makeStyles({
         paddingLeft: '1rem',
         paddingRight: '1rem',
         color: 'white',
+        zIndex: '1'
       },
   });
 

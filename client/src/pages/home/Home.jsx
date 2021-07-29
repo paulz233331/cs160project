@@ -9,7 +9,7 @@ import Contact from '../Contact';
 const Home = () => {
     return (
         <div>
-            <div style={{position: 'fixed'}} className="scrollnav">
+            <div style={{position: 'fixed', zIndex: '3'}} className="scrollnav">
             <Navbar employerNavBar={false} />
             <div className="scrollnavbar">
                 <ul className="scrollnavbarlinks">
