@@ -54,6 +54,7 @@ const Pricing = () => {
             <div className="pricingCard">
                 <h1 style={{marginTop: '35px', fontFamily: 'didot', color: 'white', marginBottom: '60px'}}>Basic Tier</h1>
                 <ul>
+                  Free
                     <li className="pricingList">- Up to 1000 job applicants</li>
                     <li className="pricingList">- Up to 5 job listings</li>
                     <li className="pricingList">- Up to 50 queries per month</li>
@@ -64,6 +65,7 @@ const Pricing = () => {
             <div className="pricingCard2">
                 <h1 style={{marginTop: '35px', fontFamily: 'didot', color: 'white', marginBottom: '60px'}}>Premium Tier</h1>
                 <ul>
+                  $199/year
                     <li className="pricingList">- Unlimited job applicants √</li>
                     <li className="pricingList">- Unlimited job listings √</li>
                     <li className="pricingList">- Unlimited queries √</li>
