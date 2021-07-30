@@ -100,7 +100,7 @@ function Employer() {
              <form action="http://localhost:3001/emp1" method="post" className={classes.root} >
             <h1 style={{marginTop: '30px', fontSize: '3rem', fontFamily: 'verdana'}}>Employer Dashboard</h1>
               <br /><br />
-             <div style={{height: '10px', width: '80px', backgroundColor: 'dodgerblue', marginBottom: '30px'}}></div>
+             <div style={{height: '7px', width: '80px', backgroundColor: 'dodgerblue', marginBottom: '30px'}}></div>
                 <h1 style={{marginBottom: '30px', fontSize: '2rem', fontFamily: 'verdana'}}>Resume Management</h1>
                 <div className={classes.applicationFormHeader}>
                  <label className={classes.queryTitle} for="fnd">1) Text search: &nbsp;&nbsp;</label>

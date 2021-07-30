@@ -1183,19 +1183,21 @@ expr.post('/test', function (req, res) {
                             </style>
                         </head>
                         <body topmargin="40" leftmargin="40">
-                        <h1>Applicant Dashboard</h1>
+                        <div style="background-color:#EBF5EE;height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:center;justify-self:center;margin-bottom:30px">
+                        <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
+                        <div style="z-index: 10;height:7px; width:80px; background-color:dodgerblue; margin-bottom:50px;margin-top:40px"></div>
         `;
     //html = html + JSON.stringify(result);
     html = html +
       `
         <form action="http://localhost:3001/testCfm" method="POST">
-          <label for="name">Name:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="name">Name:</label></br>
           <textarea id="name" name="name" rows="2" cols="50">` + (applicant.name ? applicant.name : "") + `</textarea><br><br>
-          <label for="email">Email:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="email">Email:</label></br>
           <textarea id="email" name="email" rows="2" cols="50">` + (applicant.email ? applicant.email : "") + `</textarea><br><br>`;
     if (applicant.objective) {
       html = html + `
-             <label for="objective">Objective:</label>
+             <label style="color:gray;font-size: 1.5rem;" for="objective">Objective:</label></br>
                          <textarea id="objective" name="objective" rows="4" cols="50">
                          ` + (applicant.objective ? applicant.objective : "") + `
                          </textarea>
@@ -1203,7 +1205,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.summary) {
       html = html + `
-               <label for="summary">Summary:</label>
+               <label style="color:gray;font-size: 1.5rem;" for="summary">Summary:</label></br>
                            <textarea id="summary" name="summary" rows="4" cols="50">
                            ` + (applicant.summary ? applicant.summary : "") + `
                            </textarea>
@@ -1212,7 +1214,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.technology) {
       html = html + `
-            <label for="technology">Technology:</label>
+            <label style="color:gray;font-size: 1.5rem;" for="technology">Technology:</label></br>
                           <textarea id="technology" name="technology" rows="4" cols="50">
                           ` + (applicant.technology ? applicant.name : "") + `
                           </textarea>
@@ -1221,7 +1223,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.skills) {
       html = html + `
-           <label for="skills">Skills:</label>
+           <label style="color:gray;font-size: 1.5rem;" for="skills">Skills:</label></br>
                  <textarea id="skills" name="skills" rows="4" cols="50">
                  ` + (applicant.skills ? applicant.skills : "") + `
                  </textarea>
@@ -1229,7 +1231,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.experience) {
       html = html + `
-          <label for="experience">Experience:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="experience">Experience:</label></br>
               <textarea id="experience" name="experience" rows="4" cols="50">
               ` + (applicant.experience ? applicant.experience : "") + `
               </textarea>
@@ -1237,7 +1239,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.education) {
       html = html + `
-          <label for="education">Education:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="education">Education:</label></br>
                 <textarea id="education" name="education" rows="4" cols="50">
                 ` + (applicant.education ? applicant.education : "") + `
                 </textarea>
@@ -1245,7 +1247,7 @@ expr.post('/test', function (req, res) {
     }
     if (applicant.languages) {
       html = html + `
-                <label for="languages">Languages:</label>
+                <label style="color:gray;font-size: 1.5rem;" for="languages">Languages:</label></br>
                       <textarea id="languages" name="languages" rows="4" cols="50">
                           ` + (applicant.languages ? applicant.languages : "") + `
                       </textarea><br><br>
@@ -1254,56 +1256,56 @@ expr.post('/test', function (req, res) {
 
     if (applicant.positions) {
       html = html + `
-          <label for="positions">Positions:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="positions">Positions:</label></br>
             <textarea id="positions" name="positions" rows="4" cols="50">
                 ` + (applicant.positions ? applicant.positions : "") + `
             </textarea><br><br>`;
     }
     if (applicant.awards) {
       html = html + `
-          <label for="awards">Awards:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="awards">Awards:</label></br>
             <textarea id="awards" name="awards" rows="4" cols="50">
                 ` + (applicant.awards ? applicant.awards : "") + `
             </textarea><br><br>`;
     }
     if (applicant.certification) {
       html = html + `
-          <label for="certification">Certifications:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="certification">Certifications:</label></br>
             <textarea id="certification" name="certification" rows="4" cols="50">
                 ` + (applicant.certification ? applicant.certification : "") + `
             </textarea><br><br>`;
     }
     if (applicant.contacts) {
       html = html + `
-          <label for="contacts">Contacts:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="contacts">Contacts:</label></br>
             <textarea id="contacts" name="contacts" rows="4" cols="50">
                 ` + (applicant.contacts ? applicant.contacts : "") + `
             </textarea><br><br>`;
     }
     if (applicant.courses) {
       html = html + `
-          <label for="courses">courses:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="courses">courses:</label></br>
             <textarea id="courses" name="courses" rows="4" cols="50">
                 ` + (applicant.courses ? applicant.courses : "") + `
             </textarea><br><br>`;
     }
     if (applicant.honors) {
       html = html + `
-          <label for="honors">honors:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="honors">honors:</label></br>
             <textarea id="honors" name="honors" rows="4" cols="50">
                 ` + (applicant.honors ? applicant.honors : "") + `
             </textarea><br><br>`;
     }
     if (applicant.interests) {
       html = html + `
-          <label for="interests">Contacts:</label>
+          <label style="color:gray;font-size: 1.5rem;" for="interests">Contacts:</label></br>
             <textarea id="interests" name="interests" rows="4" cols="50">
                 ` + (applicant.interests ? applicant.interests : "") + `
             </textarea><br><br>`;
     }
 
     html = html + `
-          <label for="jobTitle">Job Title:</label>`;
+          <label style="color:gray;font-size: 1.5rem;" for="jobTitle">Job Title:</label></br>`;
 
 
     setTimeout(function () {
@@ -1324,9 +1326,10 @@ expr.post('/test', function (req, res) {
 
     setTimeout(function () {
       html = html + `
-          <input type="submit" value="Submit">
+          <input style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;" type="submit" value="Submit">
         </form>
         <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
+        </div>
         </body>
         </html>
         `;
