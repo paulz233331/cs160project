@@ -209,7 +209,7 @@ function Employer() {
                 
                 <a  href="http://localhost:3000/employer-info">
                     <div style={{position: 'fixed', bottom : '100px', right: '100px', height: '120px', width: '120px', backgroundColor: 'rgb(102, 178, 240)', borderRadius: '10px', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', textAlign: 'center', color: 'white', fontSize: '1rem', flexDirection: 'column', fontFamily: 'verdana' }}>
-                        <CreateIcon />Edit Employer Info</div></a>
+                        <CreateIcon />Create New Job Listing</div></a>
             </form>
             </Card>
          </body>
