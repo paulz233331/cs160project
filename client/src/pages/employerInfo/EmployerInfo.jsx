@@ -77,7 +77,7 @@ const EmployerInfo = () => {
     <form className={classes.root} action="http://localhost:3001/empInf" method="POST">
      <div className={classes.applicationFormHeader}>
           <img src={logo} alt="" />
-          <h2>Create a Company Profile.</h2>
+          <h2>Create a New Job Listing</h2>
       <h2>{user} </h2>
       </div>
 
