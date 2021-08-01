@@ -31,13 +31,22 @@ var MongoClient = mongo.MongoClient;
 var url = "mongodb://54.205.24.189:27017/mydb" // <-- AWS url
 // DOCKER URL = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
-// created 'compiled' folder
-const folder = './compiled';
-fs.access(folder, fs.constants.F_OK, (err) => {
+// create 'compiled' folder
+fs.access('./compiled', fs.constants.F_OK, (err) => {
   if (err) { // if compiled does not exist
       fs.mkdir(path.join(__dirname, 'compiled'), (err) => { // create compiled
           if (err) throw err;
-          console.log("Creating 'compiled' folder");
+          console.log("'compiled' folder created!");
+      });
+    }
+});
+
+// create 'public' folder
+fs.access('./public', fs.constants.F_OK, (err) => {
+  if (err) { // if compiled does not exist
+      fs.mkdir(path.join(__dirname, 'public'), (err) => { // create compiled
+          if (err) throw err;
+          console.log("'public' folder created!");
       });
     }
 });
