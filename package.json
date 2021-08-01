@@ -4,8 +4,6 @@
   "description": "resume parser for CS160 Project",
   "main": "app.js",
   "scripts": {
-    "start": "node input.js",
-    "dev": "(cd client && npm run start) & npm run start",
     "test": "jest"
   },
   "author": "Paul Zheng, Johann Kwon, Nav Sharan",
