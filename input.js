@@ -1202,10 +1202,10 @@ expr.post('/test', function (req, res) {
                             <style>
                             </style>
                         </head>
-                        <body topmargin="40" leftmargin="40">
-                        <div style="background-color:#EBF5EE;height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:center;justify-self:center;margin-bottom:30px">
+                        <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
+                        <div style="box-shadow: 5px 5px 10px #888888;background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
                         <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
-                        <div style="z-index: 10;height:7px; width:80px; background-color:dodgerblue; margin-bottom:50px;margin-top:40px"></div>
+                        <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; "></div>
         `;
     //html = html + JSON.stringify(result);
     html = html +
