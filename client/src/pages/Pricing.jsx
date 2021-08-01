@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import logo from '../assets/mainlogo.png';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles({
     root: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles({
 const Pricing = () => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
+    const { loginWithRedirect } = useAuth0();
   
     return (
       <Card className={classes.root}>
@@ -55,23 +57,23 @@ const Pricing = () => {
             <div className="pricingCard">
                 <h1 style={{marginTop: '35px', fontFamily: 'didot', color: 'white', marginBottom: '60px'}}>Basic Tier</h1>
                 <ul>
-                  Free
                     <li className="pricingList">- Up to 1000 job applicants</li>
                     <li className="pricingList">- Up to 5 job listings</li>
                     <li className="pricingList">- Up to 50 queries per month</li>
                 </ul>
-                <Button style={{width: '17vw', marginTop: '105px'}} className={classes.submitButton}>Try For Free!</Button>
+                <h2 style={{paddingTop: '20px', color: 'white', fontFamily: 'verdana'}}>$60/mo per user</h2>
+                <Button style={{maxWidth: '17vw', marginTop: '105px'}} className={classes.submitButton} onClick={() => loginWithRedirect()}>Try For Free!</Button>
 
             </div>
             <div className="pricingCard2">
                 <h1 style={{marginTop: '35px', fontFamily: 'didot', color: 'white', marginBottom: '60px'}}>Premium Tier</h1>
                 <ul>
-                  $199/year
                     <li className="pricingList">- Unlimited job applicants √</li>
                     <li className="pricingList">- Unlimited job listings √</li>
                     <li className="pricingList">- Unlimited queries √</li>
                 </ul>
-                <Button style={{width: '17vw', marginTop: '105px'}} className={classes.submitButton}>More Info</Button>
+                <h2 style={{paddingTop: '20px', color: 'white', fontFamily: 'verdana'}}>$100/mo per user</h2>
+                <Button style={{maxWidth: '17vw', marginTop: '105px'}} className={classes.submitButton} onClick={() => loginWithRedirect()}>More Info</Button>
             </div>
         </div>
       </Card>

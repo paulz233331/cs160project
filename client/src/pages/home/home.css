@@ -107,23 +107,29 @@ section {
 }
 
 .pricingCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 500px;
-    width: 300px;
+    width: 500px;
     background-color: white;
     box-shadow: 5px 5px 12px black;
     border-radius: 10px;
     background: rgb(13,133,210);
-    background: linear-gradient(180deg, rgba(13,133,210,1) 0%, rgba(238,238,238,1) 100%);
+    background: linear-gradient(180deg, rgb(86, 90, 93) 0%, rgba(238,238,238,1) 100%);
 }
 
 .pricingCard2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 500px;
-    width: 300px;
+    width: 500px;
     background-color: white;
     box-shadow: 5px 5px 12px black;
     border-radius: 10px;
     background: rgb(212,241,231);
-    background: linear-gradient(0deg, rgba(212,241,231,1) 0%, rgba(6,134,228,1) 100%);
+    background: linear-gradient(0deg, rgba(212,241,231,1) 0%, rgb(120, 202, 168) 100%);
 }
 
 .pricingList {
