@@ -1,4 +1,6 @@
-'use strict';
+// ~~~~~~~~~~~~~~~~~~~~~~ NEW CODE
+  
+  'use strict';
 
 const express = require('express');
 const path = require('path');
@@ -62,9 +64,18 @@ expr.post('/emp1', function (req, res) {
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
   if (req.body.sections === "entire") {
     MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -85,36 +96,19 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          //var tmp = JSON.stringify(doc);
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
-          //html += JSON.stringify(doc, null, "\n") + '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
-      //db.close();
-
     }); //end connect
-
-    /*
-            MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
-              if (err) throw err;
-              var dbo = db.db("mydb");
-              var query9b = { $text : { $search : req.body.fnd } };
-              dbo.collection("test").find(query9b).limit(5).toArray(function (err, result) {
-                if (err) throw err;
-                expect(result[0].name).toEqual('Prem Prakash');
-                expect(result[0].email).toEqual('premgautam958@gmail.com');
-              });
-              db.close();
-            }); //end connect*/
   }
   else if (req.body.sections === "education") {
     MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -133,17 +127,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -164,17 +158,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -195,17 +189,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -226,17 +220,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -257,17 +251,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -288,17 +282,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -319,17 +313,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -350,17 +344,17 @@ expr.post('/emp1', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });//end connect*/
   }
@@ -368,7 +362,8 @@ expr.post('/emp1', function (req, res) {
   setTimeout(function () {
     html = html + `
                     <a href="http://localhost:3000/employer">Return to employer page</a>
-                </body>
+                    </div>
+                    </body>
             </html>
         `;
 
@@ -377,16 +372,25 @@ expr.post('/emp1', function (req, res) {
 })
 
 expr.post('/emp2', function (req, res) {
-  var html = `
+var html = `
         <html>
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
-
+  
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
     if (err) throw err;
     var dbo = db.db("mydb");
@@ -419,7 +423,8 @@ expr.post('/emp2', function (req, res) {
   setTimeout(function () {
     html = html + `
                     <a href="http://localhost:3000/employer">Return to employer page</a>
-                </body>
+            </div>    
+            </body>
             </html>
         `;
 
@@ -428,14 +433,23 @@ expr.post('/emp2', function (req, res) {
 })
 
 expr.post('/emp3', function (req, res) {
-  var html = `
+var html = `
         <html>
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
 
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -453,17 +467,17 @@ expr.post('/emp3', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     }
     else if (req.body.status === "hired") {
@@ -478,17 +492,17 @@ expr.post('/emp3', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     }
     else if (req.body.status === "offered") {
@@ -501,17 +515,17 @@ expr.post('/emp3', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     }
     else if (req.body.status === "otherOffer") {
@@ -524,24 +538,25 @@ expr.post('/emp3', function (req, res) {
         if (err) throw err;
         html += ' Displaying top 5 (or fewer) results: <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     }
   }); //end connect
   setTimeout(function () {
     html = html + `
                     <a href="http://localhost:3000/employer">Return to employer page</a>
-                </body>
+              </div>  
+              </body>
             </html>
         `;
 
@@ -559,9 +574,18 @@ expr.post('/emp4', function (req, res) {
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
 
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -578,23 +602,24 @@ expr.post('/emp4', function (req, res) {
       if (err) throw err;
       html += ' Displaying top 5 (or fewer) results: <br />';
       result.forEach(function (doc) {
-        for (var key in doc) {
+        html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
-        }
-        html += '<br />';
+          }
+          html += '</table><br /><br />';
       })
-      html += '<br/>'
     });
   }); //end connect
   setTimeout(function () {
     html = html + `
                     <a href="http://localhost:3000/employer">Return to employer page</a>
-                </body>
+              </div>
+              </body>
             </html>
         `;
 
@@ -607,14 +632,23 @@ expr.post('/emp5', function (req, res) {
     res.redirect("localhost:3000/employer");
     return;
   }
-  var html = `
+var html = `
         <html>
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
 
   MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
@@ -648,7 +682,8 @@ expr.post('/emp5', function (req, res) {
   setTimeout(function () {
     html = html + `
                     <a href="http://localhost:3000/employer">Return to employer page</a>
-                </body>
+              </div>
+              </body>
             </html>
         `;
 
@@ -657,16 +692,25 @@ expr.post('/emp5', function (req, res) {
 })
 
 expr.post('/emp6', function (req, res) {
-  var html = `
+var html = `
         <html>
             <head>
                 <script type="text/javascript">
                 </script>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                  font-weight:normal;
+                }
+                </style>
             </head>
-            <body topmargin="40" leftmargin="40">
-                Results: <br /><br />
+            <body topmargin="40" leftmargin="40" >
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+                <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
+                <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
-
+  
   if (req.body.profileValue === "overall") {
     MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
       if (err) throw err;
@@ -739,7 +783,8 @@ expr.post('/emp6', function (req, res) {
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
-                    </body>
+                  </div>
+                  </body>
                 </html>
             `;
 
@@ -759,17 +804,17 @@ expr.post('/emp6', function (req, res) {
         html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
       //db.close();
     }); //end connect
@@ -777,7 +822,8 @@ expr.post('/emp6', function (req, res) {
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
-                    </body>
+                  </div>
+                  </body>
                 </html>
             `;
 
@@ -796,22 +842,23 @@ expr.post('/emp6', function (req, res) {
         html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
+                    </div>
                     </body>
                 </html>
             `;
@@ -831,23 +878,24 @@ expr.post('/emp6', function (req, res) {
         html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
-                    </body>
+                  </div>  
+                  </body>
                 </html>
             `;
 
@@ -866,23 +914,24 @@ expr.post('/emp6', function (req, res) {
         html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
-                    </body>
+                  </div>
+                  </body>
                 </html>
             `;
 
@@ -901,23 +950,24 @@ expr.post('/emp6', function (req, res) {
         html += 'The top 5 (or fewer) applicants with highest scores for \"' + req.body.profileValue + '\".<br /><br />' +
           'Results: <br /> <br />';
         result.forEach(function (doc) {
-          for (var key in doc) {
+          html += '<table style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
+          for (var key in doc) { 
             if (key === 'profile' || key === "position" ) {
-              html += key + ": " + JSON.stringify(doc[key]) + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + JSON.stringify(doc[key]) + '</th></tr>';
             }
             else {
-              html += key + ": " + doc[key] + '<br />';
+              html += "<tr><th>" + key + "</th><th>" + doc[key] + '</th></tr>';
             }
           }
-          html += '<br />';
+          html += '</table><br /><br />';
         })
-        html += '<br/>'
       });
     });
     setTimeout(function () {
       html = html + `
                         <a href="http://localhost:3000/employer">Return to employer page</a>
-                    </body>
+                  </div>
+                  </body>
                 </html>
             `;
 
@@ -1013,169 +1063,160 @@ expr.post('/test2', function (req, res) {
     let applicant = JSON.parse(rawdata);
 
     var html = `
-                <html>
-                        <head>
-                            <script type="text/javascript">
-                            </script>
-                            <style>
-                            body {
-                              position: absolute; 
-                              top: 0
-                            }
-                            </style>
-                        </head>
-                        <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
-                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
-                        <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
-        `;
-html = html +
+                    <html>
+                            <head>
+                                <script type="text/javascript">
+                                </script>
+                            </head>
+                            <body topmargin="40" leftmargin="40">
+                                You are redirected here after uploading a resume.
+            `;
+    //html = html + JSON.stringify(result);
+    html = html +
       `
-        <form action="http://localhost:3001/testCfm" method="POST">
-          <label style="color:gray;font-size: 1.5rem;" for="name">Name:</label></br>
-          <textarea id="name" name="name" rows="2" cols="50">` + (applicant.name ? applicant.name : "") + `</textarea><br><br>
-          <label style="color:gray;font-size: 1.5rem;" for="email">Email:</label></br>
-          <textarea id="email" name="email" rows="2" cols="50">` + (applicant.email ? applicant.email : "") + `</textarea><br><br>`;
+            <form action="http://localhost:3001/testCfm" method="POST">
+              <label for="name">Name:</label>
+              <textarea id="name" name="name" rows="2" cols="50">` + (applicant.name ? applicant.name : "") + `</textarea><br><br>
+              <label for="email">Email:</label>
+              <textarea id="email" name="email" rows="2" cols="50">` + (applicant.email ? applicant.email : "") + `</textarea><br><br>`;
     if (applicant.objective) {
       html = html + `
-             <label style="color:gray;font-size: 1.5rem;" for="objective">Objective:</label></br>
-                         <textarea id="objective" name="objective" rows="4" cols="50">
-                         ` + (applicant.objective ? applicant.objective : "") + `
-                         </textarea>
-                        <br><br>`;
+                 <label for="objective">Objective:</label>
+                             <textarea id="objective" name="objective" rows="4" cols="50">
+                             ` + (applicant.objective ? applicant.objective : "") + `
+                             </textarea>
+                            <br><br>`;
     }
     if (applicant.summary) {
       html = html + `
-               <label style="color:gray;font-size: 1.5rem;" for="summary">Summary:</label></br>
-                           <textarea id="summary" name="summary" rows="4" cols="50">
-                           ` + (applicant.summary ? applicant.summary : "") + `
-                           </textarea>
-                       <br><br>`;
+                   <label for="summary">Summary:</label>
+                               <textarea id="summary" name="summary" rows="4" cols="50">
+                               ` + (applicant.summary ? applicant.summary : "") + `
+                               </textarea>
+                           <br><br>`;
 
     }
     if (applicant.technology) {
       html = html + `
-            <label style="color:gray;font-size: 1.5rem;" for="technology">Technology:</label></br>
-                          <textarea id="technology" name="technology" rows="4" cols="50">
-                          ` + (applicant.technology ? applicant.name : "") + `
-                          </textarea>
-                    <br><br>
-            `;
+                <label for="technology">Technology:</label>
+                              <textarea id="technology" name="technology" rows="4" cols="50">
+                              ` + (applicant.technology ? applicant.name : "") + `
+                              </textarea>
+                        <br><br>
+                `;
     }
     if (applicant.skills) {
       html = html + `
-           <label style="color:gray;font-size: 1.5rem;" for="skills">Skills:</label></br>
-                 <textarea id="skills" name="skills" rows="4" cols="50">
-                 ` + (applicant.skills ? applicant.skills : "") + `
-                 </textarea>
-         <br><br>`;
+               <label for="skills">Skills:</label>
+                     <textarea id="skills" name="skills" rows="4" cols="50">
+                     ` + (applicant.skills ? applicant.skills : "") + `
+                     </textarea>
+             <br><br>`;
     }
     if (applicant.experience) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="experience">Experience:</label></br>
-              <textarea id="experience" name="experience" rows="4" cols="50">
-              ` + (applicant.experience ? applicant.experience : "") + `
-              </textarea>
-              <br><br>`;
+              <label for="experience">Experience:</label>
+                  <textarea id="experience" name="experience" rows="4" cols="50">
+                  ` + (applicant.experience ? applicant.experience : "") + `
+                  </textarea>
+                  <br><br>`;
     }
     if (applicant.education) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="education">Education:</label></br>
-                <textarea id="education" name="education" rows="4" cols="50">
-                ` + (applicant.education ? applicant.education : "") + `
-                </textarea>
-                <br><br> `;
+              <label for="education">Education:</label>
+                    <textarea id="education" name="education" rows="4" cols="50">
+                    ` + (applicant.education ? applicant.education : "") + `
+                    </textarea>
+                    <br><br> `;
     }
     if (applicant.languages) {
       html = html + `
-                <label style="color:gray;font-size: 1.5rem;" for="languages">Languages:</label></br>
-                      <textarea id="languages" name="languages" rows="4" cols="50">
-                          ` + (applicant.languages ? applicant.languages : "") + `
-                      </textarea><br><br>
-            `;
+                    <label for="languages">Languages:</label>
+                          <textarea id="languages" name="languages" rows="4" cols="50">
+                              ` + (applicant.languages ? applicant.languages : "") + `
+                          </textarea><br><br>
+                `;
     }
-
     if (applicant.positions) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="positions">Positions:</label></br>
-            <textarea id="positions" name="positions" rows="4" cols="50">
-                ` + (applicant.positions ? applicant.positions : "") + `
-            </textarea><br><br>`;
+              <label for="positions">Languages:</label>
+                <textarea id="positions" name="positions" rows="4" cols="50">
+                    ` + (applicant.positions ? applicant.positions : "") + `
+                </textarea><br><br>`;
     }
+
     if (applicant.awards) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="awards">Awards:</label></br>
+          <label for="awards">Awards:</label>
             <textarea id="awards" name="awards" rows="4" cols="50">
                 ` + (applicant.awards ? applicant.awards : "") + `
             </textarea><br><br>`;
     }
     if (applicant.certification) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="certification">Certifications:</label></br>
+          <label for="certification">Certifications:</label>
             <textarea id="certification" name="certification" rows="4" cols="50">
                 ` + (applicant.certification ? applicant.certification : "") + `
             </textarea><br><br>`;
     }
     if (applicant.contacts) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="contacts">Contacts:</label></br>
+          <label for="contacts">Contacts:</label>
             <textarea id="contacts" name="contacts" rows="4" cols="50">
                 ` + (applicant.contacts ? applicant.contacts : "") + `
             </textarea><br><br>`;
     }
     if (applicant.courses) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="courses">courses:</label></br>
+          <label for="courses">courses:</label>
             <textarea id="courses" name="courses" rows="4" cols="50">
                 ` + (applicant.courses ? applicant.courses : "") + `
             </textarea><br><br>`;
     }
     if (applicant.honors) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="honors">honors:</label></br>
+          <label for="honors">honors:</label>
             <textarea id="honors" name="honors" rows="4" cols="50">
                 ` + (applicant.honors ? applicant.honors : "") + `
             </textarea><br><br>`;
     }
     if (applicant.interests) {
       html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="interests">Contacts:</label></br>
+          <label for="interests">Contacts:</label>
             <textarea id="interests" name="interests" rows="4" cols="50">
                 ` + (applicant.interests ? applicant.interests : "") + `
             </textarea><br><br>`;
     }
 
     html = html + `
-          <label style="color:gray;font-size: 1.5rem;" for="jobTitle">Job Title:</label></br>`;
+          <label for="jobTitle">Job Title:</label>`;
 
-
-    setTimeout(function () {
-      MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo.collection("employers").find().toArray(function (err, result) {
         if (err) throw err;
-        var dbo = db.db("mydb");
-        dbo.collection("employers").find().toArray(function (err, result) {
-          if (err) throw err;
-          html = html + `
-             <select name="position" id="position">`;
-          result.forEach(function (doc) {
-            html = html + '<option value=\"' + JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
-          })
-          html = html + "</select>";
-        }) //end find
-      }); //end connect
-    }, 1000);
+        html = html + '<select name="position" id="position">';
+        result.forEach(function (doc) {
+          html = html + '<option value=\"' + JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
+        })
+        html = html + "</select>";
+      }) //end find
+    }); //end connect
+
 
     setTimeout(function () {
       html = html + `
-          <input style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;" type="submit" value="Submit">
-        </form>
+              <input type="submit" value="Submit">
+            </form>
         <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
-        </div>
-        </body>
-        </html>
-        `;
+            </body>
+            </html>
+            `;
       res.status(200).send(html);
     }, 3000);
-  }, 4000);
+
+  }, 3000);
 
 });
 
@@ -1212,8 +1253,9 @@ expr.post('/test', function (req, res) {
                             </style>
                         </head>
                         <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
-                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
+                        <div style="box-shadow: 5px 5px 10px #888888;background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
                         <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
+                        <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; "></div>
         `;
     //html = html + JSON.stringify(result);
     html = html +
