@@ -1,6 +1,6 @@
 // ~~~~~~~~~~~~~~~~~~~~~~ NEW CODE
   
-  'use strict';
+'use strict';
 
 const express = require('express');
 const path = require('path');
@@ -73,7 +73,7 @@ expr.post('/emp1', function (req, res) {
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -361,7 +361,7 @@ expr.post('/emp1', function (req, res) {
 
   setTimeout(function () {
     html = html + `
-                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                    <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;" href="http://localhost:3000/employer">Return to employer page</a>
                     </div>
                     </body>
             </html>
@@ -386,7 +386,7 @@ var html = `
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -398,11 +398,13 @@ var html = `
     var query11a = { projection: { _id: 0, "name": 1 } };
     dbo.collection("test").find({}, query11a).toArray(function (err, result) {
       if (err) throw err;
-      html += ' Displaying list of names: ';
+      html += ' <h2>Displaying list of names: </h2>';
       result.forEach(function (doc) {
+        html += '<div style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
         for (var key in doc) {
-          html += doc[key] + ', ';
+          html += doc[key]
         }
+        html += '</div><br /><br />';
       })
       html += '<br/><br />'
     });
@@ -410,11 +412,13 @@ var html = `
     var query11b = { projection: { _id: 0, "email": 1 } };
     dbo.collection("test").find({}, query11b).toArray(function (err, result) {
       if (err) throw err;
-      html += ' Displaying list of emails: ';
+      html += ' <h2>Displaying list of emails: </h2>';
       result.forEach(function (doc) {
+        html += '<div style="max-width:80%;font-size:1rem;font-family:verdana;font-weight: normal;">';
         for (var key in doc) {
-          html += doc[key] + ', ';
+          html += doc[key];
         }
+        html += '</div><br /><br />';
       })
       html += '<br/><br />'
     });
@@ -422,7 +426,7 @@ var html = `
   }); //end connect
   setTimeout(function () {
     html = html + `
-                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                    <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
             </div>    
             </body>
             </html>
@@ -447,7 +451,7 @@ var html = `
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -554,7 +558,7 @@ var html = `
   }); //end connect
   setTimeout(function () {
     html = html + `
-                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                    <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
               </div>  
               </body>
             </html>
@@ -583,7 +587,7 @@ expr.post('/emp4', function (req, res) {
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -617,7 +621,7 @@ expr.post('/emp4', function (req, res) {
   }); //end connect
   setTimeout(function () {
     html = html + `
-                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                    <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
               </div>
               </body>
             </html>
@@ -646,7 +650,7 @@ var html = `
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -681,7 +685,7 @@ var html = `
 
   setTimeout(function () {
     html = html + `
-                    <a href="http://localhost:3000/employer">Return to employer page</a>
+                    <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
               </div>
               </body>
             </html>
@@ -706,7 +710,7 @@ var html = `
                 </style>
             </head>
             <body topmargin="40" leftmargin="40" >
-            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE;">
+            <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;background-color: #EBF5EE; padding:20px;border-radius:5px; box-shadow:5px 5px 10px #888888;">
                 <h1 style="font-size:3rem;font-family:verdana;">Results</h1> <br /><br />
                 <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; margin-bottom: 18px; "></div>
     `;
@@ -782,7 +786,7 @@ var html = `
     }); //end connect
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                   </div>
                   </body>
                 </html>
@@ -821,7 +825,7 @@ var html = `
 
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                   </div>
                   </body>
                 </html>
@@ -857,7 +861,7 @@ var html = `
     });
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                     </div>
                     </body>
                 </html>
@@ -893,7 +897,7 @@ var html = `
     });
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                   </div>  
                   </body>
                 </html>
@@ -929,7 +933,7 @@ var html = `
     });
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                   </div>
                   </body>
                 </html>
@@ -965,7 +969,7 @@ var html = `
     });
     setTimeout(function () {
       html = html + `
-                        <a href="http://localhost:3000/employer">Return to employer page</a>
+                        <a style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;align-self:center;align-self:center;"  href="http://localhost:3000/employer">Return to employer page</a>
                   </div>
                   </body>
                 </html>
@@ -1063,199 +1067,20 @@ expr.post('/test2', function (req, res) {
     let applicant = JSON.parse(rawdata);
 
     var html = `
-                    <html>
-                            <head>
-                                <script type="text/javascript">
-                                </script>
-                            </head>
-                            <body topmargin="40" leftmargin="40">
-                                You are redirected here after uploading a resume.
-            `;
-    //html = html + JSON.stringify(result);
-    html = html +
-      `
-            <form action="http://localhost:3001/testCfm" method="POST">
-              <label for="name">Name:</label>
-              <textarea id="name" name="name" rows="2" cols="50">` + (applicant.name ? applicant.name : "") + `</textarea><br><br>
-              <label for="email">Email:</label>
-              <textarea id="email" name="email" rows="2" cols="50">` + (applicant.email ? applicant.email : "") + `</textarea><br><br>`;
-    if (applicant.objective) {
-      html = html + `
-                 <label for="objective">Objective:</label>
-                             <textarea id="objective" name="objective" rows="4" cols="50">
-                             ` + (applicant.objective ? applicant.objective : "") + `
-                             </textarea>
-                            <br><br>`;
-    }
-    if (applicant.summary) {
-      html = html + `
-                   <label for="summary">Summary:</label>
-                               <textarea id="summary" name="summary" rows="4" cols="50">
-                               ` + (applicant.summary ? applicant.summary : "") + `
-                               </textarea>
-                           <br><br>`;
-
-    }
-    if (applicant.technology) {
-      html = html + `
-                <label for="technology">Technology:</label>
-                              <textarea id="technology" name="technology" rows="4" cols="50">
-                              ` + (applicant.technology ? applicant.name : "") + `
-                              </textarea>
-                        <br><br>
-                `;
-    }
-    if (applicant.skills) {
-      html = html + `
-               <label for="skills">Skills:</label>
-                     <textarea id="skills" name="skills" rows="4" cols="50">
-                     ` + (applicant.skills ? applicant.skills : "") + `
-                     </textarea>
-             <br><br>`;
-    }
-    if (applicant.experience) {
-      html = html + `
-              <label for="experience">Experience:</label>
-                  <textarea id="experience" name="experience" rows="4" cols="50">
-                  ` + (applicant.experience ? applicant.experience : "") + `
-                  </textarea>
-                  <br><br>`;
-    }
-    if (applicant.education) {
-      html = html + `
-              <label for="education">Education:</label>
-                    <textarea id="education" name="education" rows="4" cols="50">
-                    ` + (applicant.education ? applicant.education : "") + `
-                    </textarea>
-                    <br><br> `;
-    }
-    if (applicant.languages) {
-      html = html + `
-                    <label for="languages">Languages:</label>
-                          <textarea id="languages" name="languages" rows="4" cols="50">
-                              ` + (applicant.languages ? applicant.languages : "") + `
-                          </textarea><br><br>
-                `;
-    }
-    if (applicant.positions) {
-      html = html + `
-              <label for="positions">Languages:</label>
-                <textarea id="positions" name="positions" rows="4" cols="50">
-                    ` + (applicant.positions ? applicant.positions : "") + `
-                </textarea><br><br>`;
-    }
-
-    if (applicant.awards) {
-      html = html + `
-          <label for="awards">Awards:</label>
-            <textarea id="awards" name="awards" rows="4" cols="50">
-                ` + (applicant.awards ? applicant.awards : "") + `
-            </textarea><br><br>`;
-    }
-    if (applicant.certification) {
-      html = html + `
-          <label for="certification">Certifications:</label>
-            <textarea id="certification" name="certification" rows="4" cols="50">
-                ` + (applicant.certification ? applicant.certification : "") + `
-            </textarea><br><br>`;
-    }
-    if (applicant.contacts) {
-      html = html + `
-          <label for="contacts">Contacts:</label>
-            <textarea id="contacts" name="contacts" rows="4" cols="50">
-                ` + (applicant.contacts ? applicant.contacts : "") + `
-            </textarea><br><br>`;
-    }
-    if (applicant.courses) {
-      html = html + `
-          <label for="courses">courses:</label>
-            <textarea id="courses" name="courses" rows="4" cols="50">
-                ` + (applicant.courses ? applicant.courses : "") + `
-            </textarea><br><br>`;
-    }
-    if (applicant.honors) {
-      html = html + `
-          <label for="honors">honors:</label>
-            <textarea id="honors" name="honors" rows="4" cols="50">
-                ` + (applicant.honors ? applicant.honors : "") + `
-            </textarea><br><br>`;
-    }
-    if (applicant.interests) {
-      html = html + `
-          <label for="interests">Contacts:</label>
-            <textarea id="interests" name="interests" rows="4" cols="50">
-                ` + (applicant.interests ? applicant.interests : "") + `
-            </textarea><br><br>`;
-    }
-
-    html = html + `
-          <label for="jobTitle">Job Title:</label>`;
-
-    MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
-      if (err) throw err;
-      var dbo = db.db("mydb");
-      dbo.collection("employers").find().toArray(function (err, result) {
-        if (err) throw err;
-        html = html + '<select name="position" id="position">';
-        result.forEach(function (doc) {
-          html = html + '<option value=\"' + JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
-        })
-        html = html + "</select>";
-      }) //end find
-    }); //end connect
-
-
-    setTimeout(function () {
-      html = html + `
-              <input type="submit" value="Submit">
-            </form>
-        <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
-            </body>
-            </html>
-            `;
-      res.status(200).send(html);
-    }, 3000);
-
-  }, 3000);
-
-});
-
-expr.post('/test', function (req, res) {
-  var resm = req.body.resume;
-  //console.log(resm);
-  if (resm == null || resm === "") {
-    res.redirect("localhost:3000/apply");
-    return;
-  }
-
-  fs.writeFile('public/resumeInput.txt', resm, function (err) {
-    if (err) return console.log(err);
-    console.log('Resume > public/resumeInput.txt');
-  });
-
-  app.main();
-
-  setTimeout(function () {
-    let rawdata = fs.readFileSync('compiled/resumeInput.json');
-    let applicant = JSON.parse(rawdata);
-    /*console.log(applicant);
-    console.log(applicant.name);
-    console.log(applicant.email);
-            console.log(applicant.objective);
-                    console.log(applicant.education);
-*/
-    var html = `
-                <html>
+                 <html>
                         <head>
                             <script type="text/javascript">
                             </script>
                             <style>
+                            body {
+                              position: absolute; 
+                              top: 0
+                            }
                             </style>
                         </head>
                         <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
-                        <div style="box-shadow: 5px 5px 10px #888888;background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
+                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
                         <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
-                        <div style="z-index: 10;height:12px; width:80px; background-color:dodgerblue; "></div>
         `;
     //html = html + JSON.stringify(result);
     html = html +
@@ -1406,7 +1231,197 @@ expr.post('/test', function (req, res) {
       res.status(200).send(html);
     }, 3000);
   }, 4000);
+});
 
+expr.post('/test', function (req, res) {
+  var resm = req.body.resume;
+  //console.log(resm);
+  if (resm == null || resm === "") {
+    res.redirect("localhost:3000/apply");
+    return;
+  }
+
+  fs.writeFile('public/resumeInput.txt', resm, function (err) {
+    if (err) return console.log(err);
+    console.log('Resume > public/resumeInput.txt');
+  });
+
+  app.main();
+
+  setTimeout(function () {
+    let rawdata = fs.readFileSync('compiled/resumeInput.json');
+    let applicant = JSON.parse(rawdata);
+    /*console.log(applicant);
+    console.log(applicant.name);
+    console.log(applicant.email);
+            console.log(applicant.objective);
+                    console.log(applicant.education);
+*/
+    var html = `
+                 <html>
+                        <head>
+                            <script type="text/javascript">
+                            </script>
+                            <style>
+                            body {
+                              position: absolute; 
+                              top: 0
+                            }
+                            </style>
+                        </head>
+                        <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
+                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
+                        <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
+        `;
+    //html = html + JSON.stringify(result);
+    html = html +
+      `
+        <form action="http://localhost:3001/testCfm" method="POST">
+          <label style="color:gray;font-size: 1.5rem;" for="name">Name:</label></br>
+          <textarea id="name" name="name" rows="2" cols="50">` + (applicant.name ? applicant.name : "") + `</textarea><br><br>
+          <label style="color:gray;font-size: 1.5rem;" for="email">Email:</label></br>
+          <textarea id="email" name="email" rows="2" cols="50">` + (applicant.email ? applicant.email : "") + `</textarea><br><br>`;
+    if (applicant.objective) {
+      html = html + `
+             <label style="color:gray;font-size: 1.5rem;" for="objective">Objective:</label></br>
+                         <textarea id="objective" name="objective" rows="4" cols="50">
+                         ` + (applicant.objective ? applicant.objective : "") + `
+                         </textarea>
+                        <br><br>`;
+    }
+    if (applicant.summary) {
+      html = html + `
+               <label style="color:gray;font-size: 1.5rem;" for="summary">Summary:</label></br>
+                           <textarea id="summary" name="summary" rows="4" cols="50">
+                           ` + (applicant.summary ? applicant.summary : "") + `
+                           </textarea>
+                       <br><br>`;
+
+    }
+    if (applicant.technology) {
+      html = html + `
+            <label style="color:gray;font-size: 1.5rem;" for="technology">Technology:</label></br>
+                          <textarea id="technology" name="technology" rows="4" cols="50">
+                          ` + (applicant.technology ? applicant.name : "") + `
+                          </textarea>
+                    <br><br>
+            `;
+    }
+    if (applicant.skills) {
+      html = html + `
+           <label style="color:gray;font-size: 1.5rem;" for="skills">Skills:</label></br>
+                 <textarea id="skills" name="skills" rows="4" cols="50">
+                 ` + (applicant.skills ? applicant.skills : "") + `
+                 </textarea>
+         <br><br>`;
+    }
+    if (applicant.experience) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="experience">Experience:</label></br>
+              <textarea id="experience" name="experience" rows="4" cols="50">
+              ` + (applicant.experience ? applicant.experience : "") + `
+              </textarea>
+              <br><br>`;
+    }
+    if (applicant.education) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="education">Education:</label></br>
+                <textarea id="education" name="education" rows="4" cols="50">
+                ` + (applicant.education ? applicant.education : "") + `
+                </textarea>
+                <br><br> `;
+    }
+    if (applicant.languages) {
+      html = html + `
+                <label style="color:gray;font-size: 1.5rem;" for="languages">Languages:</label></br>
+                      <textarea id="languages" name="languages" rows="4" cols="50">
+                          ` + (applicant.languages ? applicant.languages : "") + `
+                      </textarea><br><br>
+            `;
+    }
+
+    if (applicant.positions) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="positions">Positions:</label></br>
+            <textarea id="positions" name="positions" rows="4" cols="50">
+                ` + (applicant.positions ? applicant.positions : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.awards) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="awards">Awards:</label></br>
+            <textarea id="awards" name="awards" rows="4" cols="50">
+                ` + (applicant.awards ? applicant.awards : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.certification) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="certification">Certifications:</label></br>
+            <textarea id="certification" name="certification" rows="4" cols="50">
+                ` + (applicant.certification ? applicant.certification : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.contacts) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="contacts">Contacts:</label></br>
+            <textarea id="contacts" name="contacts" rows="4" cols="50">
+                ` + (applicant.contacts ? applicant.contacts : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.courses) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="courses">courses:</label></br>
+            <textarea id="courses" name="courses" rows="4" cols="50">
+                ` + (applicant.courses ? applicant.courses : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.honors) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="honors">honors:</label></br>
+            <textarea id="honors" name="honors" rows="4" cols="50">
+                ` + (applicant.honors ? applicant.honors : "") + `
+            </textarea><br><br>`;
+    }
+    if (applicant.interests) {
+      html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="interests">Contacts:</label></br>
+            <textarea id="interests" name="interests" rows="4" cols="50">
+                ` + (applicant.interests ? applicant.interests : "") + `
+            </textarea><br><br>`;
+    }
+
+    html = html + `
+          <label style="color:gray;font-size: 1.5rem;" for="jobTitle">Job Title:</label></br>`;
+
+
+    setTimeout(function () {
+      MongoClient.connect(url, function (err, db) { //{ useUnifiedTopology: true },
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.collection("employers").find().toArray(function (err, result) {
+          if (err) throw err;
+          html = html + `
+             <select name="position" id="position">`;
+          result.forEach(function (doc) {
+            html = html + '<option value=\"' + JSON.stringify(doc).replace(/["']/g, "") + '\">' + doc["employer"] + " - " + doc["job_title"] + '</option>';
+          })
+          html = html + "</select>";
+        }) //end find
+      }); //end connect
+    }, 1000);
+
+    setTimeout(function () {
+      html = html + `
+          <input style="padding:20px;border-radius:11px;border:solid 3px rgb(102, 178, 240);background-color:#EBF5EE;margin-left:15px;color:#009FFD;cursor:pointer;" type="submit" value="Submit">
+        </form>
+        <a href="http://localhost:3000/apply">Return to the applicant apply page.</a>
+        </div>
+        </body>
+        </html>
+        `;
+      res.status(200).send(html);
+    }, 3000);
+  }, 4000);
 })
 
 expr.post('/testCfm', function (req, res) {
