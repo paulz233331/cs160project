@@ -1071,15 +1071,10 @@ expr.post('/test2', function (req, res) {
                         <head>
                             <script type="text/javascript">
                             </script>
-                            <style>
-                            body {
-                              position: absolute; 
-                              top: 0
-                            }
-                            </style>
+  
                         </head>
                         <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
-                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
+                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;overflow:scroll;">
                         <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
         `;
     //html = html + JSON.stringify(result);
@@ -1262,15 +1257,9 @@ expr.post('/test', function (req, res) {
                         <head>
                             <script type="text/javascript">
                             </script>
-                            <style>
-                            body {
-                              position: absolute; 
-                              top: 0
-                            }
-                            </style>
                         </head>
                         <body topmargin="40" leftmargin="40" style="display:flex; justify-content:center;align-items:center;">
-                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;">
+                        <div style="box-shadow: 5px 5px 10px #888888; margin-top: auto; margin-bottom: auto; background-color:#EBF5EE;height:85vh; width: 60vw; display:flex;flex-direction:column;align-items:center;align-self:center;justify-self:center;padding-bottom:30px;padding-top:20px;overflow:scroll;">
                         <h1 style="font-size:3rem;font-family:verdana;">Applicant Dashboard</h1>
         `;
     //html = html + JSON.stringify(result);
