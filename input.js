@@ -28,7 +28,7 @@ var mongo = require('mongodb');
 const { result } = require('underscore');
 
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://54.205.24.189:27017/mydb"// "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
+var url = "1";// "mongodb://54.205.24.189:27017/mydb"// "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 
 //console.log(__dirname);
@@ -935,7 +935,7 @@ expr.post('/empInf', function (req, res) {
       service: 'gmail',
       auth: {
         user: "lucentats@gmail.com",
-        pass: "aA123456789!"
+        pass: "############"
       }
     });
 
