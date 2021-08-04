@@ -30,7 +30,7 @@ var mongo = require('mongodb');
 const { result } = require('underscore');
 
 var MongoClient = mongo.MongoClient;
-var url = "mongodb://54.205.24.189:27017/mydb" // <-- AWS url
+var url = "1";//"mongodb://54.205.24.189:27017/mydb" // <-- AWS url
 // DOCKER URL = "mongodb://appt:appt@127.17.0.1:27017/mydb?authSource=admin"
 
 // create 'compiled' folder
@@ -1009,7 +1009,7 @@ expr.post('/empInf', function (req, res) {
       service: 'gmail',
       auth: {
         user: "lucentats@gmail.com",
-        pass: "aA123456789!"
+        pass: "#############"
       }
     });
 
